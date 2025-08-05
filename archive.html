@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nexus - Archive</title>
+    
+    <!-- Performance: Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        window.tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'primary': ['Inter', 'system-ui', 'sans-serif'],
+                            'headings': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                            'code': ['JetBrains Mono', 'SF Mono', 'Monaco', 'monospace']
+                        },
+                        colors: {
+                            'primary': '#3B82F6',
+                            'primary-dark': '#1E40AF',
+                            'success': '#10B981',
+                            'warning': '#F59E0B', 
+                            'danger': '#EF4444',
+                            'purple': '#8B5CF6',
+                            'cyan': '#06B6D4',
+                            'slate-950': '#0A0F1C',
+                            'slate-900': '#1A202C',
+                            'slate-800': '#2D3748',
+                            'slate-700': '#4A5568',
+                            'slate-600': '#718096',
+                            'slate-300': '#CBD5E1',
+                            'slate-400': '#94A3B8'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <!-- Performance: Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Enhanced visual effects styles -->
+    <style>
+        /* Archive-themed background */
+        .neural-network-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.5), transparent);
+            animation: data-flow-vertical 6s ease-in-out infinite;
+        }
+        
+        @keyframes data-flow-vertical {
+            0% { transform: translateY(-100px); opacity: 0; }
+            25% { opacity: 1; }
+            75% { opacity: 1; }
+            100% { transform: translateY(calc(100vh + 100px)); opacity: 0; }
+        }
+        
+        .archive-grid {
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grid-pulse 10s ease-in-out infinite;
+        }
+        
+        @keyframes grid-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white font-primary">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'primary': ['Inter', 'system-ui', 'sans-serif'],
+                        'headings': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        'code': ['JetBrains Mono', 'SF Mono', 'Monaco', 'monospace']
+                    },
+                    colors: {
+                        'primary': '#3B82F6',
+                        'primary-dark': '#1E40AF',
+                        'success': '#10B981',
+                        'warning': '#F59E0B', 
+                        'danger': '#EF4444',
+                        'purple': '#8B5CF6',
+                        'cyan': '#06B6D4',
+                        'slate-950': '#0A0F1C',
+                        'slate-900': '#1A202C',
+                        'slate-800': '#2D3748',
+                        'slate-700': '#4A5568',
+                        'slate-600': '#718096',
+                        'slate-300': '#CBD5E1',
+                        'slate-400': '#94A3B8'
+                    },
+                    animation: {
+                        'gentle-pulse': 'gentle-pulse 3s ease-in-out infinite',
+                        'subtle-float': 'subtle-float 4s ease-in-out infinite',
+                        'progress-fill': 'progress-fill 1.5s ease-out',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slide-up 0.5s ease-out',
+                        'fade-in': 'fade-in 0.6s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite'
+                    },
+                    keyframes: {
+                        'gentle-pulse': {
+                            '0%, 100%': { opacity: '0.7' },
+                            '50%': { opacity: '1' }
+                        },
+                        'subtle-float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-4px)' }
+                        },
+                        'progress-fill': {
+                            '0%': { width: '0%' },
+                            '100%': { width: 'var(--progress-width)' }
+                        },
+                        'glow': {
+                            '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }
+                        },
+                        'slide-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        'shimmer': {
+                            '0%': { backgroundPosition: '-200px 0' },
+                            '100%': { backgroundPosition: 'calc(200px + 100%) 0' }
+                        }
+                    },
+                    backdropBlur: {
+                        'xs': '2px'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-950 text-white font-primary">
+    <!-- Archive-themed Neural Network Background -->
+    <div class="neural-network-bg">
+        <div class="archive-grid"></div>
+        <!-- Vertical data streams for archive theme -->
+        <div class="data-stream" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="data-stream" style="left: 25%; animation-delay: 1s; background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.5), transparent);"></div>
+        <div class="data-stream" style="left: 40%; animation-delay: 2s; background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.5), transparent);"></div>
+        <div class="data-stream" style="left: 55%; animation-delay: 3s; background: linear-gradient(to bottom, transparent, rgba(245, 158, 11, 0.5), transparent);"></div>
+        <div class="data-stream" style="left: 70%; animation-delay: 4s; background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.5), transparent);"></div>
+        <div class="data-stream" style="left: 85%; animation-delay: 5s; background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.5), transparent);"></div>
+    </div>
+    <!-- Header -->
+    <header class="border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50 shadow-xl">
+        <div class="max-w-7xl mx-auto px-6 py-5">
+            <div class="grid grid-cols-3 items-center gap-8">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-4 animate-fade-in">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary via-cyan to-purple rounded-xl flex items-center justify-center animate-glow shadow-lg">
+                        <span class="text-2xl" role="img" aria-label="AI Brain">🧠</span>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold font-headings text-white tracking-tight">
+                            <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent">
+                                AI Nexus
+                            </span>
+                        </h1>
+                        <p class="text-sm text-slate-400 font-medium tracking-wide">Advanced Learning Ecosystem</p>
+                    </div>
+                </div>
+                
+                <!-- Centered Navigation -->
+                <nav class="flex space-x-3 justify-center" role="navigation" aria-label="Main navigation">
+                    <a href="index.html" class="px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Dashboard
+                    </a>
+                    <a href="labs.html" class="px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Labs
+                    </a>
+                    <a href="archive.html" class="px-6 py-3 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-purple/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Archive
+                    </a>
+                    <a href="profile.html" class="px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Profile
+                    </a>
+                </nav>
+                
+                <!-- Right side placeholder for consistency -->
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 relative">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-pink-500/5 rounded-3xl"></div>
+        
+        <div class="relative z-10">
+            <!-- Archive Header -->
+            <section class="mb-12 animate-fade-in">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-4xl font-bold font-headings text-white mb-4 flex items-center tracking-tight">
+                            <span class="w-12 h-12 bg-gradient-to-br from-purple to-pink-500 rounded-2xl mr-4 flex items-center justify-center shadow-xl animate-shimmer" role="img" aria-label="Archive">📚</span>
+                            Neural Knowledge Archive
+                        </h1>
+                        <p class="text-xl text-slate-400 font-medium">Comprehensive AI research repository and learning resources</p>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="relative w-96">
+                        <input type="search" 
+                               placeholder="Search the neural archive..." 
+                               class="w-full px-6 py-4 bg-slate-800/60 border border-slate-700/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple focus:border-purple/50 backdrop-blur-sm font-medium"
+                               aria-label="Search archive">
+                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                            <span class="text-slate-400">🔍</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-bold font-headings text-purple">2,847</div>
+                                <div class="text-sm text-slate-400 font-medium">Research Papers</div>
+                            </div>
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple/20 to-pink-500/20 rounded-xl flex items-center justify-center">
+                                <span class="text-2xl" role="img" aria-label="Document">📄</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-bold font-headings text-cyan">1,234</div>
+                                <div class="text-sm text-slate-400 font-medium">Code Examples</div>
+                            </div>
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan/20 to-blue-500/20 rounded-xl flex items-center justify-center">
+                                <span class="text-2xl" role="img" aria-label="Code">💻</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-bold font-headings text-success">567</div>
+                                <div class="text-sm text-slate-400 font-medium">Datasets</div>
+                            </div>
+                            <div class="w-12 h-12 bg-gradient-to-br from-success/20 to-green-500/20 rounded-xl flex items-center justify-center">
+                                <span class="text-2xl" role="img" aria-label="Database">🗃️</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-bold font-headings text-warning">89</div>
+                                <div class="text-sm text-slate-400 font-medium">Video Tutorials</div>
+                            </div>
+                            <div class="w-12 h-12 bg-gradient-to-br from-warning/20 to-orange-500/20 rounded-xl flex items-center justify-center">
+                                <span class="text-2xl" role="img" aria-label="Video">🎥</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Categories -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold font-headings text-white mb-6">Browse by Category</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <button class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-4 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                        <div class="text-2xl mb-2">🧠</div>
+                        <div class="text-sm font-medium text-white group-hover:text-primary">Neural Networks</div>
+                        <div class="text-xs text-slate-400 font-code">847 items</div>
+                    </button>
+
+                    <button class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-4 hover:border-success/50 transition-all duration-300 hover:shadow-lg hover:shadow-success/10">
+                        <div class="text-2xl mb-2">👁️</div>
+                        <div class="text-sm font-medium text-white group-hover:text-success">Computer Vision</div>
+                        <div class="text-xs text-slate-400 font-code">623 items</div>
+                    </button>
+
+                    <button class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-4 hover:border-cyan/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan/10">
+                        <div class="text-2xl mb-2">💬</div>
+                        <div class="text-sm font-medium text-white group-hover:text-cyan">NLP</div>
+                        <div class="text-xs text-slate-400 font-code">534 items</div>
+                    </button>
+
+                    <button class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-4 hover:border-warning/50 transition-all duration-300 hover:shadow-lg hover:shadow-warning/10">
+                        <div class="text-2xl mb-2">🎮</div>
+                        <div class="text-sm font-medium text-white group-hover:text-warning">Reinforcement</div>
+                        <div class="text-xs text-slate-400 font-code">412 items</div>
+                    </button>
+
+                    <button class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-4 hover:border-purple/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple/10">
+                        <div class="text-2xl mb-2">🤖</div>
+                        <div class="text-sm font-medium text-white group-hover:text-purple">Robotics</div>
+                        <div class="text-xs text-slate-400 font-code">298 items</div>
+                    </button>
+
+                    <button class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-4 hover:border-pink-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/10">
+                        <div class="text-2xl mb-2">🔬</div>
+                        <div class="text-sm font-medium text-white group-hover:text-pink-500">Research</div>
+                        <div class="text-xs text-slate-400 font-code">189 items</div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Featured Content -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                    <span class="w-8 h-8 bg-gradient-to-r from-warning to-orange-500 rounded-xl mr-4 flex items-center justify-center animate-gentle-pulse" role="img" aria-label="Star">⭐</span>
+                    Featured Resources
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Featured Paper -->
+                    <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 backdrop-blur-sm">
+                        <div class="flex items-start space-x-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                <span class="text-2xl" role="img" aria-label="Research">📊</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold font-headings text-white group-hover:text-primary transition-colors mb-2">
+                                    "Attention Is All You Need" Deep Dive
+                                </h3>
+                                <p class="text-slate-400 text-sm font-code mb-2">Vaswani et al. • Posted 2 days ago</p>
+                                <div class="flex items-center space-x-2 mb-4">
+                                    <span class="px-3 py-1 bg-primary/20 text-primary rounded-lg text-xs font-code">TRANSFORMER</span>
+                                    <span class="px-3 py-1 bg-purple/20 text-purple rounded-lg text-xs font-code">ATTENTION</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            Comprehensive analysis of the groundbreaking paper that introduced the Transformer architecture. 
+                            Includes code implementations, visualizations, and practical applications.
+                        </p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-sm text-slate-400">⏱️ 45 min read</span>
+                                <span class="text-sm text-slate-400">👀 2.3K views</span>
+                                <span class="text-sm text-slate-400">⭐ 4.9/5</span>
+                            </div>
+                        </div>
+
+                        <button class="w-full px-6 py-3 bg-primary/20 text-primary border border-primary/30 rounded-xl hover:bg-primary/30 transition-colors font-medium">
+                            Read Analysis
+                        </button>
+                    </article>
+
+                    <!-- Featured Tutorial -->
+                    <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-success/50 transition-all duration-500 hover:shadow-2xl hover:shadow-success/10 backdrop-blur-sm">
+                        <div class="flex items-start space-x-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-success to-green-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                <span class="text-2xl" role="img" aria-label="Video">🎥</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold font-headings text-white group-hover:text-success transition-colors mb-2">
+                                    Building GPT from Scratch
+                                </h3>
+                                <p class="text-slate-400 text-sm font-code mb-2">Dr. Sarah Chen • Posted 1 week ago</p>
+                                <div class="flex items-center space-x-2 mb-4">
+                                    <span class="px-3 py-1 bg-success/20 text-success rounded-lg text-xs font-code">TUTORIAL</span>
+                                    <span class="px-3 py-1 bg-cyan/20 text-cyan rounded-lg text-xs font-code">CODING</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            Step-by-step video series on implementing a GPT model from first principles. 
+                            Covers architecture design, training loops, and optimization techniques.
+                        </p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-sm text-slate-400">⏱️ 3.5 hours</span>
+                                <span class="text-sm text-slate-400">👀 8.7K views</span>
+                                <span class="text-sm text-slate-400">⭐ 4.8/5</span>
+                            </div>
+                        </div>
+
+                        <button class="w-full px-6 py-3 bg-success/20 text-success border border-success/30 rounded-xl hover:bg-success/30 transition-colors font-medium">
+                            Watch Series
+                        </button>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Recent Additions -->
+            <section>
+                <h2 class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                    <span class="w-8 h-8 bg-gradient-to-r from-success to-cyan rounded-xl mr-4 flex items-center justify-center" role="img" aria-label="New">🆕</span>
+                    Recently Added
+                </h2>
+
+                <div class="space-y-6">
+                    <!-- Recent Item 1 -->
+                    <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-6 hover:border-purple/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple/10 backdrop-blur-sm">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple to-pink-500 rounded-xl flex items-center justify-center">
+                                <span class="text-lg" role="img" aria-label="Code">💻</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold font-headings text-white group-hover:text-purple transition-colors">
+                                    Multi-Modal Vision Transformer Implementation
+                                </h3>
+                                <p class="text-slate-400 text-sm">Complete PyTorch implementation with pre-trained weights and fine-tuning examples</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-slate-400 font-code">2 hours ago</div>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <span class="px-2 py-1 bg-purple/20 text-purple rounded text-xs font-code">CODE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Recent Item 2 -->
+                    <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-6 hover:border-cyan/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan/10 backdrop-blur-sm">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan to-blue-500 rounded-xl flex items-center justify-center">
+                                <span class="text-lg" role="img" aria-label="Dataset">📊</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold font-headings text-white group-hover:text-cyan transition-colors">
+                                    Large-Scale Multimodal Dataset (50M samples)
+                                </h3>
+                                <p class="text-slate-400 text-sm">High-quality image-text pairs for training large vision-language models</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-slate-400 font-code">5 hours ago</div>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <span class="px-2 py-1 bg-cyan/20 text-cyan rounded text-xs font-code">DATASET</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Recent Item 3 -->
+                    <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl p-6 hover:border-warning/50 transition-all duration-300 hover:shadow-lg hover:shadow-warning/10 backdrop-blur-sm">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-warning to-orange-500 rounded-xl flex items-center justify-center">
+                                <span class="text-lg" role="img" aria-label="Paper">📄</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold font-headings text-white group-hover:text-warning transition-colors">
+                                    "Constitutional AI: Harmlessness from AI Feedback"
+                                </h3>
+                                <p class="text-slate-400 text-sm">Anthropic's latest research on training helpful, harmless, and honest AI systems</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-slate-400 font-code">1 day ago</div>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <span class="px-2 py-1 bg-warning/20 text-warning rounded text-xs font-code">PAPER</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Accessibility Script -->
+    <script>
+        // Respect user's motion preferences
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--animation-duration', '0s');
+        }
+        
+        // Search functionality
+        const searchInput = document.querySelector('input[type="search"]');
+        searchInput.addEventListener('input', (e) => {
+            // Implement search logic here
+            console.log('Searching for:', e.target.value);
+        });
+    </script>
+</body>
+</html>

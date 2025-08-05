@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nexus - Neural Learning Interface</title>
+    
+    <!-- Performance: Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Tailwind Configuration - Must be before Tailwind loads -->
+    <script>
+        window.tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'primary': ['Inter', 'system-ui', 'sans-serif'],
+                            'headings': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                            'code': ['JetBrains Mono', 'SF Mono', 'Monaco', 'monospace']
+                        },
+                        colors: {
+                            'primary': '#3B82F6',
+                            'primary-dark': '#1E40AF',
+                            'success': '#10B981',
+                            'warning': '#F59E0B', 
+                            'danger': '#EF4444',
+                            'purple': '#8B5CF6',
+                            'cyan': '#06B6D4',
+                            'slate-950': '#0A0F1C',
+                            'slate-900': '#1A202C',
+                            'slate-800': '#2D3748',
+                            'slate-700': '#4A5568',
+                            'slate-600': '#718096',
+                            'slate-300': '#CBD5E1',
+                            'slate-400': '#94A3B8'
+                        },
+                        animation: {
+                            'gentle-pulse': 'gentle-pulse 3s ease-in-out infinite',
+                            'subtle-float': 'subtle-float 4s ease-in-out infinite',
+                            'progress-fill': 'progress-fill 1.5s ease-out',
+                            'glow': 'glow 2s ease-in-out infinite alternate',
+                            'slide-up': 'slide-up 0.5s ease-out',
+                            'fade-in': 'fade-in 0.6s ease-out'
+                        },
+                        keyframes: {
+                            'gentle-pulse': {
+                                '0%, 100%': { opacity: '0.7' },
+                                '50%': { opacity: '1' }
+                            },
+                            'subtle-float': {
+                                '0%, 100%': { transform: 'translateY(0px)' },
+                                '50%': { transform: 'translateY(-4px)' }
+                            },
+                            'progress-fill': {
+                                '0%': { width: '0%' },
+                                '100%': { width: 'var(--progress-width)' }
+                            },
+                            'glow': {
+                                '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
+                                '100%': { boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }
+                            },
+                            'slide-up': {
+                                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)' }
+                            },
+                            'fade-in': {
+                                '0%': { opacity: '0' },
+                                '100%': { opacity: '1' }
+                            }
+                        },
+                        backdropBlur: {
+                            'xs': '2px'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Performance: Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Performance: Optimized font loading with display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Performance: Inline critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS for header and initial load */
+        .header-critical {
+            border-bottom: 1px solid rgba(74, 85, 104, 0.5);
+            background: rgba(10, 15, 28, 0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Fallback colors for custom Tailwind classes */
+        .text-success { color: #10B981 !important; }
+        .text-warning { color: #F59E0B !important; }
+        .text-primary { color: #3B82F6 !important; }
+        .text-purple { color: #8B5CF6 !important; }
+        .text-cyan { color: #06B6D4 !important; }
+        .text-slate-400 { color: #94A3B8 !important; }
+        .text-slate-300 { color: #CBD5E1 !important; }
+        .text-slate-500 { color: #64748B !important; }
+        .text-slate-600 { color: #475569 !important; }
+        .text-white { color: white !important; }
+        
+        /* Fix for gradient text fallback */
+        .bg-clip-text.text-transparent {
+            color: white !important;
+            background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        /* Ensure text is always visible */
+        h1, h2, h3, p, span {
+            color: inherit;
+        }
+        
+        /* Fallback background colors */
+        .bg-success\/20 { background-color: rgba(16, 185, 129, 0.2) !important; }
+        .bg-warning\/20 { background-color: rgba(245, 158, 11, 0.2) !important; }
+        .bg-primary\/20 { background-color: rgba(59, 130, 246, 0.2) !important; }
+        
+        /* Fallback border colors */
+        .border-success\/30 { border-color: rgba(16, 185, 129, 0.3) !important; }
+        .border-warning\/30 { border-color: rgba(245, 158, 11, 0.3) !important; }
+        .border-primary\/30 { border-color: rgba(59, 130, 246, 0.3) !important; }
+        
+        /* Progress bar specific styles */
+        .progress-bar-fill {
+            background: linear-gradient(to right, #3B82F6, #06B6D4, #10B981) !important;
+            width: 73% !important;
+            animation: progress-fill 1.5s ease-out;
+        }
+        
+        @keyframes progress-fill {
+            from { width: 0%; }
+            to { width: 73%; }
+        }
+        
+        /* Optimize animations for 60fps */
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+            will-change: box-shadow;
+            transform: translateZ(0); /* Hardware acceleration */
+        }
+        
+        .animate-gentle-pulse {
+            animation: gentle-pulse 3s ease-in-out infinite;
+            will-change: opacity;
+            transform: translateZ(0);
+        }
+        
+        .animate-subtle-float {
+            animation: subtle-float 4s ease-in-out infinite;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        @keyframes gentle-pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+        
+        /* Optimize hover effects */
+        .hover-optimized {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, box-shadow;
+        }
+        
+        /* Reduce paint operations */
+        .backdrop-blur-optimized {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        
+        /* Login screen styles */
+        .bg-animated {
+            background: linear-gradient(-45deg, #0A0F1C, #1A202C, #2D3748, #1A202C);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .neural-scan-line {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+            animation: neural-scan 2s ease-in-out infinite;
+        }
+        
+        @keyframes neural-scan {
+            0%, 100% { transform: translateX(-100%); opacity: 0; }
+            50% { transform: translateX(0%); opacity: 1; }
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #3B82F6;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-vertical 4s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        .particle:nth-child(2) { animation-delay: 0.5s; background: #06B6D4; }
+        .particle:nth-child(3) { animation-delay: 1s; background: #8B5CF6; }
+        .particle:nth-child(4) { animation-delay: 1.5s; background: #10B981; }
+        .particle:nth-child(5) { animation-delay: 2s; background: #F59E0B; }
+        .particle:nth-child(6) { animation-delay: 2.5s; background: #EF4444; }
+        
+        @keyframes float-vertical {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.4;
+            }
+            25% { 
+                transform: translateY(-20px) scale(1.2);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-40px) scale(1);
+                opacity: 0.9;
+            }
+            75% { 
+                transform: translateY(-20px) scale(0.8);
+                opacity: 0.5;
+            }
+        }
+        
+        /* Hexagon pattern background */
+        .hexagon-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(30deg, transparent 24%, rgba(59, 130, 246, 0.1) 25%, rgba(59, 130, 246, 0.1) 26%, transparent 27%, transparent 74%, rgba(59, 130, 246, 0.1) 75%, rgba(59, 130, 246, 0.1) 76%, transparent 77%, transparent),
+                linear-gradient(-30deg, transparent 24%, rgba(6, 182, 212, 0.1) 25%, rgba(6, 182, 212, 0.1) 26%, transparent 27%, transparent 74%, rgba(6, 182, 212, 0.1) 75%, rgba(6, 182, 212, 0.1) 76%, transparent 77%, transparent);
+            background-size: 60px 34px;
+            animation: hexagon-drift 20s linear infinite;
+        }
+        
+        @keyframes hexagon-drift {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(34px); }
+        }
+        
+        /* Digital rain effect - contained within login screen */
+        .digital-rain {
+            position: absolute;
+            top: -50px;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #3B82F6, transparent);
+            animation: rain-fall-contained 4s linear infinite;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        @keyframes rain-fall-contained {
+            0% { 
+                transform: translateY(-60px);
+                opacity: 0;
+            }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { 
+                transform: translateY(calc(100vh - 100px));
+                opacity: 0;
+            }
+        }
+        
+        /* Pulse rings */
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            animation: pulse-expand 4s ease-out infinite;
+        }
+        
+        @keyframes pulse-expand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+        
+        .neural-input {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .neural-input:focus {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            border-color: #3B82F6;
+        }
+        
+        .neural-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neural-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .neural-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .neural-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Data stream animation for progress bar */
+        @keyframes data-stream {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(300px); }
+        }
+        
+        /* Smooth transition effects for dashboard */
+        .dashboard-transition {
+            opacity: 0;
+            transform: translateY(10px) scale(0.99);
+            transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity;
+        }
+        
+        .dashboard-transition.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Enhanced welcome section */
+        .user-info-panel {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .user-info-panel.show {
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: block !important;
+        }
+        
+        /* Header welcome panel specific styles */
+        #userWelcomePanelHeader {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            min-width: 220px; /* Ensure consistent width */
+        }
+        
+        #userWelcomePanelHeader.show {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) scale(1);
+        }
+        
+        #userWelcomePanelHeader:hover {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        /* Enhanced user avatar glow */
+        #userWelcomePanelHeader .animate-glow {
+            box-shadow: 
+                0 0 20px rgba(59, 130, 246, 0.4),
+                0 0 40px rgba(6, 182, 212, 0.2),
+                0 0 60px rgba(16, 185, 129, 0.1);
+            animation: enhanced-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes enhanced-glow {
+            0% { 
+                box-shadow: 
+                    0 0 20px rgba(59, 130, 246, 0.4),
+                    0 0 40px rgba(6, 182, 212, 0.2),
+                    0 0 60px rgba(16, 185, 129, 0.1);
+            }
+            100% { 
+                box-shadow: 
+                    0 0 30px rgba(59, 130, 246, 0.6),
+                    0 0 50px rgba(6, 182, 212, 0.3),
+                    0 0 70px rgba(16, 185, 129, 0.2);
+            }
+        }
+        
+        /* Header layout optimizations */
+        .header-critical .max-w-7xl > div {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .header-critical nav {
+            justify-self: center;
+        }
+        
+        .header-critical #userWelcomePanelHeader {
+            justify-self: end;
+        }
+        
+        /* Advanced Background Visual Effects */
+        .neural-network-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .neural-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(59, 130, 246, 0.6);
+            border-radius: 50%;
+            animation: neural-pulse 3s ease-in-out infinite;
+        }
+        
+        .neural-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+            animation: data-flow 4s ease-in-out infinite;
+            transform-origin: left center;
+        }
+        
+        @keyframes neural-pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.5); }
+        }
+        
+        @keyframes data-flow {
+            0% { transform: scaleX(0); opacity: 0; }
+            25% { transform: scaleX(1); opacity: 1; }
+            75% { transform: scaleX(1); opacity: 1; }
+            100% { transform: scaleX(0); opacity: 0; }
+        }
+        
+        .floating-code-fragment {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(6, 182, 212, 0.4);
+            animation: code-drift 15s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes code-drift {
+            0% { transform: translateY(100vh) translateX(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+        
+        .quantum-grid {
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+            animation: grid-shift 20s ease-in-out infinite;
+        }
+        
+        @keyframes grid-shift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+        
+        .energy-wave {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            border-radius: 50%;
+            animation: energy-expand 8s ease-out infinite;
+        }
+        
+        @keyframes energy-expand {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white font-primary">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center relative overflow-hidden bg-animated min-h-screen">
+        <!-- Hexagon pattern background -->
+        <div class="hexagon-pattern"></div>
+        
+        <!-- Background grid pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0); background-size: 50px 50px;"></div>
+        </div>
+        
+        <!-- Digital rain effect - contained -->
+        <div class="digital-rain" style="left: 15%; animation-delay: 0s;"></div>
+        <div class="digital-rain" style="left: 30%; animation-delay: 0.8s; background: linear-gradient(to bottom, transparent, #06B6D4, transparent);"></div>
+        <div class="digital-rain" style="left: 45%; animation-delay: 1.6s; background: linear-gradient(to bottom, transparent, #8B5CF6, transparent);"></div>
+        <div class="digital-rain" style="left: 60%; animation-delay: 2.4s; background: linear-gradient(to bottom, transparent, #10B981, transparent);"></div>
+        <div class="digital-rain" style="left: 75%; animation-delay: 3.2s; background: linear-gradient(to bottom, transparent, #F59E0B, transparent);"></div>
+        
+        <!-- Floating particles -->
+        <div class="particle" style="top: 15%; left: 20%;"></div>
+        <div class="particle" style="top: 30%; left: 80%;"></div>
+        <div class="particle" style="top: 50%; left: 15%;"></div>
+        <div class="particle" style="top: 70%; left: 85%;"></div>
+        <div class="particle" style="top: 85%; left: 40%;"></div>
+        <div class="particle" style="top: 20%; left: 60%;"></div>
+        
+        <!-- Pulse rings around logo area -->
+        <div class="pulse-ring" style="top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%); animation-delay: 0s;"></div>
+        <div class="pulse-ring" style="top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%); animation-delay: 1s;"></div>
+        <div class="pulse-ring" style="top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%); animation-delay: 2s;"></div>
+        
+        <!-- Main container -->
+        <div class="relative z-10 w-full max-w-md mx-4">
+            <!-- Logo section -->
+            <div class="text-center mb-8 animate-slide-up">
+                <div class="w-20 h-20 bg-gradient-to-br from-primary via-cyan to-purple rounded-2xl flex items-center justify-center mx-auto mb-4 animate-glow shadow-2xl">
+                    <span class="text-4xl" role="img" aria-label="AI Brain">🧠</span>
+                </div>
+                <h1 class="text-4xl font-bold font-headings mb-2">
+                    <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent" 
+                          style="background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: white;">
+                        AI Nexus
+                    </span>
+                </h1>
+                <p class="text-slate-400 font-medium" style="color: #94A3B8;">Welcome to the AI Learning Platform</p>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-primary to-cyan mx-auto mt-4"></div>
+            </div>
+            
+            <!-- Login form -->
+                <div class="glass-morphism rounded-2xl p-8 shadow-2xl animate-slide-up relative overflow-hidden">
+                <!-- Neural scan line -->
+                <div class="neural-scan-line"></div>
+                
+                <!-- Animated border effect -->
+                <div class="absolute inset-0 rounded-2xl opacity-30">
+                    <div class="absolute inset-0 rounded-2xl border border-primary/20 animate-gentle-pulse"></div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan to-transparent animate-pulse" style="animation-delay: 1s;"></div>
+                    <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-purple to-transparent animate-pulse" style="animation-delay: 2s;"></div>
+                    <div class="absolute right-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-success to-transparent animate-pulse" style="animation-delay: 3s;"></div>
+                </div>
+                
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold font-headings text-white mb-2" style="color: white;">Welcome</h2>
+                    <p class="text-slate-400 text-sm" style="color: #94A3B8;">Enter your User ID to begin your AI learning journey</p>
+                </div>
+                
+                <form class="space-y-6" id="mainLoginForm">
+                    <!-- User ID field -->
+                    <div class="space-y-2">
+                        <label for="mainUserid" class="block text-sm font-medium text-slate-300" style="color: #CBD5E1;">User ID</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="mainUserid" 
+                                name="userid"
+                                class="neural-input w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-primary"
+                                style="background-color: rgba(15, 23, 42, 0.5); border-color: rgba(74, 85, 104, 0.5); color: white;"
+                                placeholder="Enter your User ID"
+                                required
+                            >
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                <span class="w-2 h-2 bg-primary rounded-full animate-gentle-pulse" style="background-color: #3B82F6;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Login button -->
+                    <button 
+                        type="submit" 
+                        class="neural-button w-full bg-gradient-to-r from-primary via-blue-500 to-cyan text-white font-bold py-3 px-6 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-900"
+                        style="background: linear-gradient(to right, #3B82F6, #2563EB, #06B6D4);"
+                    >
+                        <span class="flex items-center justify-center space-x-2">
+                            <span>Access Dashboard</span>
+                            <span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin hidden" id="mainLoadingSpinner"></span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Status indicators -->
+            <div class="mt-8 grid grid-cols-3 gap-4 text-center animate-fade-in">
+                <div class="glass-morphism rounded-lg p-3">
+                    <div class="w-3 h-3 bg-success rounded-full mx-auto mb-1 animate-gentle-pulse" style="background-color: #10B981;"></div>
+                    <p class="text-xs text-slate-400" style="color: #94A3B8;">System Online</p>
+                </div>
+                <div class="glass-morphism rounded-lg p-3">
+                    <div class="w-3 h-3 bg-primary rounded-full mx-auto mb-1 animate-gentle-pulse" style="background-color: #3B82F6;"></div>
+                    <p class="text-xs text-slate-400" style="color: #94A3B8;">Neural Ready</p>
+                </div>
+                <div class="glass-morphism rounded-lg p-3">
+                    <div class="w-3 h-3 bg-cyan rounded-full mx-auto mb-1 animate-gentle-pulse" style="background-color: #06B6D4;"></div>
+                    <p class="text-xs text-slate-400" style="color: #94A3B8;">Quantum Sync</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (hidden initially) -->
+    <div id="mainDashboard" class="hidden dashboard-transition">
+    
+    <!-- Advanced Neural Network Background -->
+    <div class="neural-network-bg" id="neuralNetworkBg">
+        <!-- Quantum grid pattern -->
+        <div class="quantum-grid"></div>
+        
+        <!-- Energy waves -->
+        <div class="energy-wave" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="energy-wave" style="top: 60%; right: 15%; animation-delay: 3s;"></div>
+        <div class="energy-wave" style="bottom: 25%; left: 60%; animation-delay: 6s;"></div>
+    </div>
+    
+    <!-- User Welcome Panel - Positioned in Header Between Logo and Navigation -->
+    <div id="userWelcomePanel" class="user-info-panel hidden">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-gradient-to-br from-primary via-cyan to-success rounded-lg flex items-center justify-center animate-glow">
+                <span class="text-sm" role="img" aria-label="User">👤</span>
+            </div>
+            <div class="flex-1">
+                <p id="userDisplayName" class="text-white font-bold text-sm font-headings">User</p>
+                <p class="text-cyan-400 text-xs font-code tracking-wide">ACTIVE</p>
+            </div>
+            <button id="logoutBtn" class="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/40 text-red-400 hover:text-red-300 rounded-md border border-red-500/30 transition-all duration-300 hover:scale-105 font-medium text-xs">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header-critical">
+        <div class="max-w-7xl mx-auto px-6 py-5">
+            <div class="flex items-center justify-between">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-4 animate-fade-in">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary via-cyan to-purple rounded-xl flex items-center justify-center animate-glow shadow-lg">
+                        <span class="text-2xl" role="img" aria-label="AI Brain">🧠</span>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold font-headings text-white tracking-tight">
+                            <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent" 
+                                  style="background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: white;">
+                                AI Nexus
+                            </span>
+                        </h1>
+                        <p class="text-sm text-slate-400 font-medium tracking-wide" style="color: #94A3B8;">Advanced Learning Ecosystem</p>
+                    </div>
+                </div>
+                
+                <!-- Centered Navigation -->
+                <nav class="flex space-x-3" role="navigation" aria-label="Main navigation">
+                    <button id="dashboardBtn" class="hover-optimized px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Dashboard
+                    </button>
+                    <a href="labs.html" class="hover-optimized px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg font-medium backdrop-blur-optimized border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Labs
+                    </a>
+                    <a href="archive.html" class="hover-optimized px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg font-medium backdrop-blur-optimized border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Archive
+                    </a>
+                    <a href="profile.html" class="hover-optimized px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg font-medium backdrop-blur-optimized border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Profile
+                    </a>
+                </nav>
+                
+                <!-- Welcome Panel - Right Side -->
+                <div id="userWelcomePanelHeader" class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-xl px-4 py-3 shadow-2xl backdrop-blur-sm hidden relative">
+                    <div class="flex items-center space-x-3 relative z-10">
+                        <!-- Enhanced user avatar -->
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary via-cyan to-success rounded-lg flex items-center justify-center animate-glow shadow-lg relative">
+                            <span class="text-sm" role="img" aria-label="User">👤</span>
+                            <!-- Status indicator -->
+                            <div class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-success rounded-full border-2 border-slate-900 animate-gentle-pulse"></div>
+                        </div>
+                        
+                        <!-- User info with improved layout and spacing -->
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2">
+                                <p id="userDisplayNameHeader" class="text-white font-bold text-sm font-headings leading-none">User</p>
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Enhanced logout button matching the page style -->
+                        <button id="logoutBtnHeader" class="group px-3 py-1.5 bg-gradient-to-r from-red-500/20 to-red-600/20 hover:from-red-500/30 hover:to-red-600/30 text-red-400 hover:text-red-300 rounded-lg border border-red-500/30 hover:border-red-400/50 transition-all duration-300 hover:scale-105 font-medium text-xs backdrop-blur-sm shadow-lg hover:shadow-red-500/20 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-1.5 h-1.5 bg-red-400 rounded-full group-hover:bg-red-300 transition-colors"></span>
+                                <span class="font-semibold">Logout</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 relative">
+        <!-- Background decoration with animated elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple/5 rounded-3xl"></div>
+        
+        <!-- Floating data nodes in main dashboard -->
+        <div class="absolute top-10 left-10 w-3 h-3 bg-primary rounded-full opacity-40 animate-gentle-pulse"></div>
+        <div class="absolute top-20 right-20 w-2 h-2 bg-cyan rounded-full opacity-30 animate-subtle-float"></div>
+        <div class="absolute bottom-20 left-1/4 w-4 h-4 bg-purple rounded-full opacity-20 animate-gentle-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/3 right-10 w-2 h-2 bg-success rounded-full opacity-35 animate-subtle-float" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-10 right-1/3 w-3 h-3 bg-warning rounded-full opacity-25 animate-gentle-pulse" style="animation-delay: 3s;"></div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
+            <!-- Main Learning Area -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Learning Progress -->
+                <section class="bg-gradient-to-br from-slate-800/80 to-slate-900/60 border border-slate-700/50 rounded-2xl p-8 backdrop-blur-sm shadow-2xl animate-slide-up" aria-labelledby="progress-heading">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 id="progress-heading" class="text-2xl font-bold font-headings text-white tracking-tight mb-2" style="color: white; font-weight: bold;">Neural Network Progress</h2>
+                            <p class="text-slate-400 font-medium" style="color: #94A3B8;">Synaptic connections strengthening • Next milestone in 860 XP</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-4xl font-bold font-headings bg-gradient-to-r from-success to-cyan bg-clip-text text-transparent" style="background: linear-gradient(to right, #10B981, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Level 7</div>
+                            <div class="text-sm text-slate-400 font-code" style="color: #94A3B8;">2,340 / 3,200 XP</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Progress Bar -->
+                    <div class="relative" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" aria-label="Learning progress: 73% complete">
+                        <div class="w-full bg-slate-900/50 rounded-full h-8 border-2 border-slate-700/30 overflow-hidden shadow-inner relative" style="background-color: rgba(15, 23, 42, 0.5);">
+                            <!-- Animated background pattern -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent animate-pulse"></div>
+                            
+                            <div class="progress-bar-fill h-full rounded-full transition-all duration-2000 relative overflow-hidden" 
+                                 style="background: linear-gradient(to right, #3B82F6, #06B6D4, #10B981); width: 73%;">
+                                <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent animate-pulse"></div>
+                                <!-- Data flow effect -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-20 animate-pulse" style="animation: data-stream 2s ease-in-out infinite;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-sm font-bold text-white drop-shadow-lg" style="color: white; font-weight: bold;">73% SYNCHRONIZED</span>
+                        </div>
+                        
+                        <!-- Floating progress indicators -->
+                        <div class="absolute -top-2 left-1/4 w-2 h-2 bg-primary rounded-full animate-gentle-pulse"></div>
+                        <div class="absolute -top-2 left-1/2 w-2 h-2 bg-cyan rounded-full animate-gentle-pulse" style="animation-delay: 0.5s;"></div>
+                        <div class="absolute -top-2 left-3/4 w-2 h-2 bg-success rounded-full animate-gentle-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+                </section>
+
+                <!-- Current Lessons -->
+                <section aria-labelledby="lessons-heading" class="animate-fade-in">
+                    <h2 id="lessons-heading" class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                        <span class="w-10 h-10 bg-gradient-to-br from-warning to-orange-500 rounded-xl mr-4 flex items-center justify-center shadow-lg" role="img" aria-label="Target">⚡</span>
+                        Active Neural Pathways
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- Lesson 1 - Enhanced In Progress -->
+                        <article class="group hover-optimized bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 backdrop-blur-optimized animate-slide-up">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary via-blue-500 to-purple rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl hover-optimized group-hover:scale-110">
+                                    <span class="text-2xl" role="img" aria-label="Neural Network">🧠</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold font-headings text-white mb-3 hover-optimized group-hover:text-primary">
+                                        Neural Architecture Mastery
+                                    </h3>
+                                    <p class="text-slate-300 mb-6 leading-relaxed text-lg">
+                                        Architect intelligent systems that learn and adapt. Master the fundamental building blocks 
+                                        of neural networks, from perceptrons to deep learning architectures.
+                                    </p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-gradient-to-r from-success to-green-400 rounded-full animate-gentle-pulse shadow-lg"></div>
+                                            <span class="text-success font-semibold font-code">MODULE 3 OF 5 ACTIVE</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <span class="px-4 py-2 bg-warning/20 text-warning rounded-lg font-bold font-code border border-warning/30">+250 XP</span>
+                                            <span class="px-4 py-2 bg-success/20 text-success rounded-lg font-semibold font-code border border-success/30">INTERMEDIATE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <div class="text-4xl font-bold font-headings text-success mb-1">60%</div>
+                                    <div class="text-xs text-slate-400 uppercase tracking-wider font-code">PROGRESS</div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Lesson 2 - Enhanced Locked -->
+                        <article class="group bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-slate-700/30 rounded-2xl p-8 opacity-60 backdrop-blur-sm">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <span class="text-2xl" role="img" aria-label="Lock">🔒</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold font-headings text-slate-400 mb-3">
+                                        Autonomous Decision Systems
+                                    </h3>
+                                    <p class="text-slate-500 mb-6 leading-relaxed text-lg">
+                                        Build AI agents that make intelligent decisions in complex environments. 
+                                        Explore reinforcement learning, decision trees, and strategic planning algorithms.
+                                    </p>
+                                    
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-4 h-4 bg-warning rounded-full"></div>
+                                        <span class="text-warning font-semibold font-code">UNLOCK: COMPLETE NEURAL ARCHITECTURE</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <div class="text-4xl font-bold text-slate-600 mb-1">🔒</div>
+                                    <div class="text-xs text-slate-500 uppercase tracking-wider font-code">LOCKED</div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Lesson 3 - Enhanced Available -->
+                        <article class="group hover-optimized bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-success/50 hover:shadow-2xl hover:shadow-success/10 backdrop-blur-optimized cursor-pointer">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-success via-green-500 to-cyan rounded-2xl flex items-center justify-center flex-shrink-0 animate-subtle-float shadow-xl hover-optimized group-hover:scale-110">
+                                    <span class="text-2xl" role="img" aria-label="Code Lightning">⚡</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold font-headings text-white mb-3 hover-optimized group-hover:text-success">
+                                        AI-Accelerated Development
+                                    </h3>
+                                    <p class="text-slate-300 mb-6 leading-relaxed text-lg">
+                                        Harness the power of AI coding assistants and generative models. 
+                                        Learn prompt engineering, code generation, and AI-human collaboration workflows.
+                                    </p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-gradient-to-r from-primary to-cyan rounded-full animate-gentle-pulse shadow-lg"></div>
+                                            <span class="text-primary font-semibold font-code">READY TO INITIALIZE</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <span class="px-4 py-2 bg-warning/20 text-warning rounded-lg font-bold font-code border border-warning/30">+300 XP</span>
+                                            <span class="px-4 py-2 bg-primary/20 text-primary rounded-lg font-semibold font-code border border-primary/30">BEGINNER</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <button class="text-4xl font-bold text-primary hover-optimized hover:text-cyan focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-800 rounded-lg p-2" 
+                                            aria-label="Start lesson">▶</button>
+                                    <div class="text-xs text-slate-400 uppercase tracking-wider font-code">START</div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Enhanced Sidebar -->
+            <aside class="space-y-8">
+                <!-- AI Neural Interface -->
+                <section class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm shadow-2xl animate-slide-up" aria-labelledby="neural-interface-heading">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary via-cyan to-success rounded-2xl flex items-center justify-center animate-glow shadow-xl">
+                            <span class="text-2xl" role="img" aria-label="Neural Interface">🧬</span>
+                        </div>
+                        <div>
+                            <h3 id="neural-interface-heading" class="text-xl font-bold font-headings text-white">Neural Interface</h3>
+                            <p class="text-xs text-slate-400 font-code">NEXUS v4.2.1 • QUANTUM READY</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-900/80 rounded-xl p-4 border-l-4 border-primary backdrop-blur-sm">
+                            <p class="text-sm text-slate-300 mb-2 font-medium">
+                                <span class="text-primary font-bold font-code">[NEXUS]:</span> Neural pathway optimization complete. 
+                                Your learning velocity is 23% above baseline parameters.
+                            </p>
+                            <p class="text-xs text-slate-500 font-code">∧ 2 minutes ago</p>
+                        </div>
+                        
+                        <div class="bg-slate-900/80 rounded-xl p-4 border-l-4 border-success backdrop-blur-sm">
+                            <p class="text-sm text-slate-300 mb-2 font-medium">
+                                <span class="text-success font-bold font-code">[SYSTEM]:</span> Achievement unlocked: "Neural Architect" - 
+                                Advanced pattern recognition capabilities enabled.
+                            </p>
+                            <p class="text-xs text-slate-500 font-code">∧ 15 minutes ago</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Enhanced Quick Stats -->
+                <section class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm shadow-2xl" aria-labelledby="stats-heading">
+                    <h3 id="stats-heading" class="text-xl font-bold font-headings text-white mb-6 flex items-center">
+                        <span class="w-6 h-6 bg-gradient-to-r from-cyan to-blue-400 rounded-lg mr-3" role="img" aria-label="Stats">📊</span>
+                        System Metrics
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Neural Modules</span>
+                            <span class="text-success font-bold font-code text-lg">12</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Code Simulations</span>
+                            <span class="text-primary font-bold font-code text-lg">28</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Sync Efficiency</span>
+                            <span class="text-purple font-bold font-code text-lg">94.7%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Learning Streak</span>
+                            <span class="text-warning font-bold font-code text-lg">7 DAYS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Enhanced Challenge Portal -->
+                <section class="bg-gradient-to-br from-warning/20 via-orange-500/10 to-purple/20 border border-warning/40 rounded-2xl p-6 shadow-2xl backdrop-blur-sm" aria-labelledby="challenge-heading">
+                    <h3 id="challenge-heading" class="text-xl font-bold font-headings text-warning mb-4 flex items-center">
+                        <span class="w-6 h-6 bg-gradient-to-r from-warning to-orange-500 rounded-lg mr-3 animate-gentle-pulse" role="img" aria-label="Lightning">⚡</span>
+                        Quantum Challenge
+                    </h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed font-medium">
+                        Architect an intelligent sorting algorithm that adapts to data patterns in real-time. 
+                        Perfect neural pathway activation challenge.
+                    </p>
+                    <button class="w-full bg-gradient-to-r from-warning via-orange-500 to-red-500 px-6 py-4 rounded-xl font-bold text-white hover-optimized hover:shadow-xl hover:shadow-warning/30 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 focus:ring-offset-slate-800 font-headings tracking-wide">
+                        INITIATE PROTOCOL
+                    </button>
+                    <div class="flex justify-between items-center mt-4 text-xs text-slate-400 font-code">
+                        <span>REWARD: +500 XP</span>
+                        <span>TIME: 6h 42m</span>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+    </div> <!-- End of mainDashboard -->
+
+    <!-- Optimized JavaScript for Performance -->
+    <script>
+        // Check if user is already logged in on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const userId = localStorage.getItem('userId');
+            const loginScreen = document.getElementById('loginScreen');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const userWelcomePanelHeader = document.getElementById('userWelcomePanelHeader');
+            const neuralNetworkBg = document.getElementById('neuralNetworkBg');
+            
+            console.log('Page loaded. User ID:', userId);
+            
+            if (userId && userId.trim() !== '') {
+                // User is logged in, show dashboard
+                console.log('User already logged in, showing dashboard');
+                if (loginScreen) {
+                    loginScreen.style.display = 'none';
+                    loginScreen.classList.add('hidden');
+                }
+                showDashboard(userId);
+            } else {
+                // Show login screen, hide dashboard and welcome panel
+                console.log('No user logged in, showing login screen');
+                
+                // Clear neural network background immediately and hide it
+                clearNeuralNetwork();
+                if (neuralNetworkBg) {
+                    neuralNetworkBg.style.display = 'none';
+                    neuralNetworkBg.style.visibility = 'hidden';
+                    neuralNetworkBg.style.opacity = '0';
+                }
+                
+                if (loginScreen) {
+                    loginScreen.style.display = 'flex';
+                    loginScreen.style.opacity = '1';
+                    loginScreen.style.transform = 'scale(1)';
+                    loginScreen.classList.remove('hidden');
+                }
+                
+                if (mainDashboard) {
+                    mainDashboard.classList.add('hidden');
+                    mainDashboard.style.display = 'none';
+                }
+                
+                if (userWelcomePanelHeader) {
+                    userWelcomePanelHeader.classList.add('hidden');
+                    userWelcomePanelHeader.classList.remove('show');
+                    userWelcomePanelHeader.style.display = 'none';
+                    userWelcomePanelHeader.style.visibility = 'hidden';
+                    userWelcomePanelHeader.style.opacity = '0';
+                }
+            }
+        });
+
+        // Function to show dashboard with smooth transition
+        function showDashboard(userId) {
+            const loginScreen = document.getElementById('loginScreen');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const userWelcomePanelHeader = document.getElementById('userWelcomePanelHeader');
+            const userDisplayNameHeader = document.getElementById('userDisplayNameHeader');
+            const neuralNetworkBg = document.getElementById('neuralNetworkBg');
+            
+            console.log('Showing dashboard for user:', userId);
+            
+            // Hide login screen with fade out
+            if (loginScreen) {
+                loginScreen.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                loginScreen.style.opacity = '0';
+                loginScreen.style.transform = 'scale(0.95)';
+            }
+            
+            setTimeout(() => {
+                if (loginScreen) {
+                    loginScreen.style.display = 'none';
+                    loginScreen.classList.add('hidden');
+                }
+                
+                // Show and enable neural network background
+                if (neuralNetworkBg) {
+                    neuralNetworkBg.style.display = 'block';
+                    neuralNetworkBg.style.visibility = 'visible';
+                    neuralNetworkBg.style.opacity = '1';
+                }
+                
+                // Show dashboard with optimized performance
+                if (mainDashboard) {
+                    mainDashboard.classList.remove('hidden');
+                    mainDashboard.style.display = 'block';
+                    
+                    // Force a reflow to ensure the display change is applied
+                    mainDashboard.offsetHeight;
+                }
+                
+                // Update and show welcome panel in header
+                if (userDisplayNameHeader) {
+                    userDisplayNameHeader.textContent = userId;
+                }
+                
+                // Ensure welcome panel is visible in header
+                if (userWelcomePanelHeader) {
+                    console.log('Setting up header welcome panel');
+                    userWelcomePanelHeader.classList.remove('hidden');
+                    userWelcomePanelHeader.classList.add('show');
+                    userWelcomePanelHeader.style.display = 'flex';
+                    userWelcomePanelHeader.style.visibility = 'visible';
+                    userWelcomePanelHeader.style.opacity = '1';
+                    
+                    // Force a reflow to ensure styles are applied
+                    userWelcomePanelHeader.offsetHeight;
+                }
+                
+                // Trigger dashboard transition with proper timing
+                requestAnimationFrame(() => {
+                    if (mainDashboard) {
+                        mainDashboard.classList.add('show');
+                    }
+                    
+                    // Initialize neural network background after transition starts
+                    setTimeout(() => {
+                        initNeuralNetwork();
+                    }, 200);
+                });
+                
+                // Initialize functionality after dashboard is visible
+                initLogoutButton();
+                initDashboardButton();
+                
+                // Initialize dashboard animations with delay for better performance
+                setTimeout(() => {
+                    optimizedAnimations.init();
+                }, 300);
+            }, 300);
+        }
+
+        // Main login form submission
+        document.getElementById('mainLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userid = document.getElementById('mainUserid').value.trim();
+            const button = this.querySelector('button[type="submit"]');
+            const spinner = document.getElementById('mainLoadingSpinner');
+            const buttonText = button.querySelector('span:first-child');
+            
+            console.log('Login attempt for user:', userid);
+            
+            // Basic validation
+            if (!userid) {
+                alert('Please enter your User ID');
+                return;
+            }
+            
+            // Show loading state
+            spinner.classList.remove('hidden');
+            buttonText.textContent = 'Connecting...';
+            button.disabled = true;
+            
+            // Simulate login process with faster timing
+            setTimeout(() => {
+                // Hide loading state
+                spinner.classList.add('hidden');
+                buttonText.textContent = 'Access Granted';
+                button.style.background = 'linear-gradient(to right, #10B981, #059669, #047857)';
+                
+                // Store user ID
+                localStorage.setItem('userId', userid);
+                console.log('User ID stored:', userid);
+                
+                // Transition to dashboard with optimized timing
+                setTimeout(() => {
+                    showDashboard(userid);
+                }, 600);
+            }, 1200);
+        });
+
+        // Dashboard button functionality
+        function initDashboardButton() {
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            if (dashboardBtn) {
+                dashboardBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Dashboard button clicked - staying on current dashboard');
+                    
+                    // Add visual feedback
+                    dashboardBtn.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        dashboardBtn.style.transform = '';
+                    }, 150);
+                    
+                    // Ensure we're showing the dashboard (in case something went wrong)
+                    const userId = localStorage.getItem('userId');
+                    if (userId && userId.trim() !== '') {
+                        // Refresh dashboard state without full reload
+                        const mainDashboard = document.getElementById('mainDashboard');
+                        if (mainDashboard && !mainDashboard.classList.contains('show')) {
+                            mainDashboard.classList.add('show');
+                        }
+                        
+                        // Reinitialize neural network if needed
+                        initNeuralNetwork();
+                    } else {
+                        // If no user is logged in, something is wrong - redirect to login
+                        console.log('No user logged in, showing login screen');
+                        const loginScreen = document.getElementById('loginScreen');
+                        const mainDashboard = document.getElementById('mainDashboard');
+                        
+                        clearNeuralNetwork();
+                        
+                        if (mainDashboard) {
+                            mainDashboard.classList.add('hidden');
+                            mainDashboard.style.display = 'none';
+                        }
+                        
+                        if (loginScreen) {
+                            loginScreen.style.display = 'flex';
+                            loginScreen.style.opacity = '1';
+                            loginScreen.style.transform = 'scale(1)';
+                            loginScreen.classList.remove('hidden');
+                        }
+                    }
+                });
+            }
+        }
+
+        // Logout functionality
+        function initLogoutButton() {
+            const logoutBtnHeader = document.getElementById('logoutBtnHeader');
+            if (logoutBtnHeader) {
+                logoutBtnHeader.addEventListener('click', function() {
+                    console.log('Logout clicked');
+                    const userWelcomePanelHeader = document.getElementById('userWelcomePanelHeader');
+                    const mainDashboard = document.getElementById('mainDashboard');
+                    const loginScreen = document.getElementById('loginScreen');
+                    
+                    // Animate out welcome panel
+                    if (userWelcomePanelHeader) {
+                        userWelcomePanelHeader.style.transition = 'all 0.3s ease-in';
+                        userWelcomePanelHeader.style.opacity = '0';
+                        userWelcomePanelHeader.style.transform = 'scale(0.95)';
+                    }
+                    
+                    // Animate out dashboard
+                    if (mainDashboard) {
+                        mainDashboard.classList.remove('show');
+                    }
+                    
+                    setTimeout(() => {
+                        // Clear stored user ID
+                        localStorage.removeItem('userId');
+                        console.log('User logged out');
+                        
+                        // Clear neural network background immediately and hide it
+                        clearNeuralNetwork();
+                        const neuralNetworkBg = document.getElementById('neuralNetworkBg');
+                        if (neuralNetworkBg) {
+                            neuralNetworkBg.style.display = 'none';
+                            neuralNetworkBg.style.visibility = 'hidden';
+                            neuralNetworkBg.style.opacity = '0';
+                        }
+                        
+                        // Hide dashboard and welcome panel completely
+                        if (mainDashboard) {
+                            mainDashboard.classList.add('hidden');
+                            mainDashboard.style.display = 'none';
+                        }
+                        
+                        if (userWelcomePanelHeader) {
+                            userWelcomePanelHeader.classList.add('hidden');
+                            userWelcomePanelHeader.classList.remove('show');
+                            userWelcomePanelHeader.style.display = 'none';
+                            userWelcomePanelHeader.style.visibility = 'hidden';
+                            userWelcomePanelHeader.style.opacity = '0';
+                        }
+                        
+                        // Clear neural network background
+                        clearNeuralNetwork();
+                        
+                        // Show login screen
+                        if (loginScreen) {
+                            loginScreen.style.display = 'flex';
+                            loginScreen.style.opacity = '0';
+                            loginScreen.style.transform = 'scale(0.95)';
+                            loginScreen.classList.remove('hidden');
+                            
+                            setTimeout(() => {
+                                loginScreen.style.transition = 'all 0.5s ease-out';
+                                loginScreen.style.opacity = '1';
+                                loginScreen.style.transform = 'scale(1)';
+                            }, 50);
+                        }
+                        
+                        // Reset login form
+                        const userIdInput = document.getElementById('mainUserid');
+                        if (userIdInput) {
+                            userIdInput.value = '';
+                        }
+                        
+                        const button = document.querySelector('#mainLoginForm button[type="submit"]');
+                        if (button) {
+                            const buttonText = button.querySelector('span:first-child');
+                            if (buttonText) {
+                                buttonText.textContent = 'Access Dashboard';
+                            }
+                            button.style.background = 'linear-gradient(to right, #3B82F6, #2563EB, #06B6D4)';
+                            button.disabled = false;
+                        }
+                    }, 500);
+                });
+            }
+        }
+
+        // Particle system for login screen - contained within login area only
+        function createLoginParticle() {
+            const loginScreen = document.getElementById('loginScreen');
+            if (!loginScreen || loginScreen.style.display === 'none' || loginScreen.style.opacity === '0') return;
+            
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.top = Math.random() * 70 + 15 + '%';
+            particle.style.left = Math.random() * 70 + 15 + '%';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = ['#3B82F6', '#06B6D4', '#8B5CF6', '#10B981', '#F59E0B'][Math.floor(Math.random() * 5)];
+            particle.style.borderRadius = '50%';
+            particle.style.opacity = '0.4';
+            particle.style.animation = 'float-vertical 4s ease-in-out infinite';
+            particle.style.zIndex = '1';
+            particle.style.pointerEvents = 'none';
+            
+            loginScreen.appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode === loginScreen) {
+                    loginScreen.removeChild(particle);
+                }
+            }, 4000);
+        }
+        
+        // Create login particles periodically (only when login screen is visible and active)
+        setInterval(() => {
+            const loginScreen = document.getElementById('loginScreen');
+            if (loginScreen && 
+                loginScreen.style.display !== 'none' && 
+                loginScreen.style.opacity !== '0' &&
+                !loginScreen.classList.contains('hidden')) {
+                createLoginParticle();
+            }
+        }, 2000);
+
+        // Neural scan effect on input focus
+        document.querySelectorAll('.neural-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.3)';
+                this.style.borderColor = '#3B82F6';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.boxShadow = 'none';
+                this.style.borderColor = 'rgba(74, 85, 104, 0.5)';
+            });
+        });
+
+        // Performance: Use requestAnimationFrame for smooth animations
+        const optimizedAnimations = {
+            init() {
+                // Respect user's motion preferences
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    document.documentElement.style.setProperty('--animation-duration', '0s');
+                    return;
+                }
+                
+                // Initialize intersection observer for lazy animations with improved performance
+                this.setupIntersectionObserver();
+            },
+            
+            setupIntersectionObserver() {
+                const observerOptions = {
+                    threshold: 0.05,  // Reduced threshold for faster triggering
+                    rootMargin: '20px'  // Reduced margin for better performance
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fade-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                
+                // Observe elements that should animate on scroll
+                document.querySelectorAll('.animate-slide-up').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        };
+        
+        // Performance: Announce progress updates to screen readers
+        function announceProgress(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            setTimeout(() => {
+                if (document.body.contains(announcement)) {
+                    document.body.removeChild(announcement);
+                }
+            }, 1000);
+        }
+        
+        // Performance: Preload hover states
+        document.addEventListener('mouseover', function(e) {
+            if (e.target.closest('.hover-optimized')) {
+                // Trigger hover state preparation
+                e.target.closest('.hover-optimized').style.willChange = 'transform, box-shadow';
+            }
+        }, { passive: true });
+        
+        document.addEventListener('mouseout', function(e) {
+            if (e.target.closest('.hover-optimized')) {
+                // Clean up will-change
+                setTimeout(() => {
+                    if (e.target.closest('.hover-optimized')) {
+                        e.target.closest('.hover-optimized').style.willChange = 'auto';
+                    }
+                }, 300);
+            }
+        }, { passive: true });
+        
+        // Neural Network Background System
+        let neuralInterval;
+        let codeFragmentInterval;
+        
+        function initNeuralNetwork() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            // Only initialize when dashboard is visible and login screen is hidden
+            if (!neuralBg || 
+                !mainDashboard || 
+                mainDashboard.classList.contains('hidden') ||
+                mainDashboard.style.display === 'none' ||
+                (loginScreen && !loginScreen.classList.contains('hidden') && loginScreen.style.display !== 'none')) {
+                return;
+            }
+            
+            // Clear any existing intervals first
+            clearNeuralNetwork();
+            
+            // Create neural nodes
+            createNeuralNodes();
+            
+            // Start neural connections animation with reduced frequency for better performance
+            neuralInterval = setInterval(createNeuralConnection, 4000);
+            
+            // Start floating code fragments with reduced frequency
+            codeFragmentInterval = setInterval(createCodeFragment, 6000);
+        }
+        
+        function createNeuralNodes() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            if (!neuralBg) return;
+            
+            // Reduced number of nodes for better performance
+            for (let i = 0; i < 8; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 3 + 's';
+                
+                // Random colors from our palette
+                const colors = ['rgba(59, 130, 246, 0.4)', 'rgba(6, 182, 212, 0.4)', 'rgba(139, 92, 246, 0.4)', 'rgba(16, 185, 129, 0.4)'];
+                node.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                neuralBg.appendChild(node);
+            }
+        }
+        
+        function createNeuralConnection() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            // Only create connections when dashboard is visible and login screen is hidden
+            if (!neuralBg || 
+                !mainDashboard || 
+                mainDashboard.classList.contains('hidden') ||
+                mainDashboard.style.display === 'none' ||
+                (loginScreen && !loginScreen.classList.contains('hidden') && loginScreen.style.display !== 'none')) {
+                return;
+            }
+            
+            const connection = document.createElement('div');
+            connection.className = 'neural-connection';
+            connection.style.top = Math.random() * 100 + '%';
+            connection.style.left = Math.random() * 80 + '%';
+            connection.style.width = Math.random() * 200 + 100 + 'px';
+            connection.style.animationDelay = Math.random() * 2 + 's';
+            
+            neuralBg.appendChild(connection);
+            
+            setTimeout(() => {
+                if (connection.parentNode === neuralBg) {
+                    neuralBg.removeChild(connection);
+                }
+            }, 4000);
+        }
+        
+        function createCodeFragment() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            // Only create code fragments when dashboard is visible and login screen is hidden
+            if (!neuralBg || 
+                !mainDashboard || 
+                mainDashboard.classList.contains('hidden') ||
+                mainDashboard.style.display === 'none' ||
+                (loginScreen && !loginScreen.classList.contains('hidden') && loginScreen.style.display !== 'none')) {
+                return;
+            }
+            
+            const codeSnippets = [
+                'def neural_net():', 'import tensorflow as tf', 'model.compile()', 
+                'if __name__ == "__main__":', 'class AIModel:', 'return predictions',
+                'async function train(){}', 'const model = new Model()', 'export default class',
+                'function optimize(){}', 'let accuracy = 0.97', 'console.log("training...")'
+            ];
+            
+            const fragment = document.createElement('div');
+            fragment.className = 'floating-code-fragment';
+            fragment.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+            fragment.style.left = Math.random() * 90 + '%';
+            fragment.style.animationDelay = Math.random() * 5 + 's';
+            
+            neuralBg.appendChild(fragment);
+            
+            setTimeout(() => {
+                if (fragment.parentNode === neuralBg) {
+                    neuralBg.removeChild(fragment);
+                }
+            }, 15000);
+        }
+        
+        function clearNeuralNetwork() {
+            if (neuralInterval) {
+                clearInterval(neuralInterval);
+                neuralInterval = null;
+            }
+            if (codeFragmentInterval) {
+                clearInterval(codeFragmentInterval);
+                codeFragmentInterval = null;
+            }
+            
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            if (neuralBg) {
+                // Clear all dynamic elements except the static quantum grid and energy waves
+                const dynamicElements = neuralBg.querySelectorAll('.neural-node, .neural-connection, .floating-code-fragment');
+                dynamicElements.forEach(el => el.remove());
+            }
+        }
+    </script>
+</body>
+</html>

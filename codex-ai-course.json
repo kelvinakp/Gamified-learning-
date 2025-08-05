@@ -1,0 +1,402 @@
+{
+  "course": {
+    "id": "codex-ai-mastery",
+    "title": "Codex AI Mastery",
+    "description": "Master AI-powered code generation, analysis, and optimization using advanced language models and development workflows.",
+    "version": "1.8.0",
+    "difficulty": "intermediate",
+    "estimatedHours": 35,
+    "prerequisites": [
+      "Proficiency in at least one programming language",
+      "Basic understanding of AI/ML concepts",
+      "Familiarity with development tools and IDEs"
+    ],
+    "modules": [
+      {
+        "id": "codex-module-1",
+        "title": "Code Generation Fundamentals",
+        "description": "Learn the principles of AI-powered code generation and how to effectively collaborate with AI coding assistants.",
+        "status": "available",
+        "progress": 0,
+        "xp": 200,
+        "difficulty": "beginner",
+        "estimatedHours": 6,
+        "lessons": [
+          {
+            "id": "codex-lesson-1-1",
+            "title": "Introduction to AI Code Generation",
+            "type": "theory",
+            "duration": 40,
+            "status": "available",
+            "xp": 30
+          },
+          {
+            "id": "codex-lesson-1-2",
+            "title": "Setting Up AI Development Environment",
+            "type": "hands-on",
+            "duration": 60,
+            "status": "available",
+            "xp": 50
+          },
+          {
+            "id": "codex-lesson-1-3",
+            "title": "Basic Prompt Engineering for Code",
+            "type": "practical",
+            "duration": 75,
+            "status": "available",
+            "xp": 70
+          },
+          {
+            "id": "codex-lesson-1-4",
+            "title": "Code Completion and Suggestions",
+            "type": "hands-on",
+            "duration": 45,
+            "status": "available",
+            "xp": 50
+          }
+        ]
+      },
+      {
+        "id": "codex-module-2",
+        "title": "Advanced Prompt Engineering",
+        "description": "Master sophisticated prompting techniques for complex code generation tasks.",
+        "status": "available",
+        "progress": 0,
+        "xp": 300,
+        "difficulty": "intermediate",
+        "estimatedHours": 8,
+        "lessons": [
+          {
+            "id": "codex-lesson-2-1",
+            "title": "Context-Aware Prompting",
+            "type": "theory",
+            "duration": 50,
+            "status": "available",
+            "xp": 60
+          },
+          {
+            "id": "codex-lesson-2-2",
+            "title": "Multi-Step Code Generation",
+            "type": "hands-on",
+            "duration": 90,
+            "status": "available",
+            "xp": 100
+          },
+          {
+            "id": "codex-lesson-2-3",
+            "title": "Domain-Specific Code Generation",
+            "type": "practical",
+            "duration": 105,
+            "status": "available",
+            "xp": 120
+          },
+          {
+            "id": "codex-lesson-2-4",
+            "title": "Error Handling and Debugging with AI",
+            "type": "hands-on",
+            "duration": 75,
+            "status": "available",
+            "xp": 90
+          }
+        ]
+      },
+      {
+        "id": "codex-module-3",
+        "title": "Code Analysis and Optimization",
+        "description": "Use AI to analyze, review, and optimize existing codebases for performance and maintainability.",
+        "status": "available",
+        "progress": 0,
+        "xp": 350,
+        "difficulty": "intermediate",
+        "estimatedHours": 10,
+        "lessons": [
+          {
+            "id": "codex-lesson-3-1",
+            "title": "Automated Code Review",
+            "type": "theory",
+            "duration": 45,
+            "status": "available",
+            "xp": 70
+          },
+          {
+            "id": "codex-lesson-3-2",
+            "title": "Performance Analysis with AI",
+            "type": "hands-on",
+            "duration": 90,
+            "status": "available",
+            "xp": 110
+          },
+          {
+            "id": "codex-lesson-3-3",
+            "title": "Refactoring and Modernization",
+            "type": "practical",
+            "duration": 120,
+            "status": "available",
+            "xp": 140
+          },
+          {
+            "id": "codex-lesson-3-4",
+            "title": "Security Vulnerability Detection",
+            "type": "hands-on",
+            "duration": 75,
+            "status": "available",
+            "xp": 100
+          }
+        ]
+      },
+      {
+        "id": "codex-module-4",
+        "title": "Testing and Documentation",
+        "description": "Generate comprehensive tests and documentation using AI assistance.",
+        "status": "locked",
+        "progress": 0,
+        "xp": 250,
+        "difficulty": "intermediate",
+        "estimatedHours": 6,
+        "unlockRequirements": ["codex-module-2"],
+        "lessons": [
+          {
+            "id": "codex-lesson-4-1",
+            "title": "Automated Test Generation",
+            "type": "hands-on",
+            "duration": 75,
+            "status": "locked",
+            "xp": 90
+          },
+          {
+            "id": "codex-lesson-4-2",
+            "title": "Edge Case Discovery",
+            "type": "practical",
+            "duration": 60,
+            "status": "locked",
+            "xp": 80
+          },
+          {
+            "id": "codex-lesson-4-3",
+            "title": "API Documentation Generation",
+            "type": "hands-on",
+            "duration": 45,
+            "status": "locked",
+            "xp": 60
+          },
+          {
+            "id": "codex-lesson-4-4",
+            "title": "Code Comments and Explanations",
+            "type": "practical",
+            "duration": 30,
+            "status": "locked",
+            "xp": 40
+          }
+        ]
+      },
+      {
+        "id": "codex-module-5",
+        "title": "Production Workflows",
+        "description": "Integrate AI coding tools into production development workflows and CI/CD pipelines.",
+        "status": "locked",
+        "progress": 0,
+        "xp": 400,
+        "difficulty": "advanced",
+        "estimatedHours": 12,
+        "unlockRequirements": ["codex-module-3", "codex-module-4"],
+        "lessons": [
+          {
+            "id": "codex-lesson-5-1",
+            "title": "CI/CD Integration",
+            "type": "theory",
+            "duration": 60,
+            "status": "locked",
+            "xp": 80
+          },
+          {
+            "id": "codex-lesson-5-2",
+            "title": "Automated Code Quality Gates",
+            "type": "hands-on",
+            "duration": 90,
+            "status": "locked",
+            "xp": 120
+          },
+          {
+            "id": "codex-lesson-5-3",
+            "title": "Team Collaboration Workflows",
+            "type": "practical",
+            "duration": 105,
+            "status": "locked",
+            "xp": 140
+          },
+          {
+            "id": "codex-lesson-5-4",
+            "title": "Monitoring and Analytics",
+            "type": "hands-on",
+            "duration": 75,
+            "status": "locked",
+            "xp": 100
+          }
+        ]
+      },
+      {
+        "id": "codex-module-6",
+        "title": "Custom AI Models",
+        "description": "Train and deploy custom code generation models for specific domains and use cases.",
+        "status": "locked",
+        "progress": 0,
+        "xp": 500,
+        "difficulty": "expert",
+        "estimatedHours": 15,
+        "unlockRequirements": ["codex-module-5"],
+        "lessons": [
+          {
+            "id": "codex-lesson-6-1",
+            "title": "Fine-tuning Code Models",
+            "type": "theory",
+            "duration": 90,
+            "status": "locked",
+            "xp": 120
+          },
+          {
+            "id": "codex-lesson-6-2",
+            "title": "Domain-Specific Training Data",
+            "type": "hands-on",
+            "duration": 120,
+            "status": "locked",
+            "xp": 150
+          },
+          {
+            "id": "codex-lesson-6-3",
+            "title": "Model Evaluation and Metrics",
+            "type": "practical",
+            "duration": 90,
+            "status": "locked",
+            "xp": 130
+          },
+          {
+            "id": "codex-lesson-6-4",
+            "title": "Deployment and Scaling",
+            "type": "capstone",
+            "duration": 150,
+            "status": "locked",
+            "xp": 200
+          }
+        ]
+      }
+    ],
+    "challenges": [
+      {
+        "id": "code-completion-challenge",
+        "title": "AI Code Completion Race",
+        "description": "Complete coding tasks faster using AI assistance vs traditional methods",
+        "xp": 150,
+        "timeLimit": 60,
+        "difficulty": "intermediate"
+      },
+      {
+        "id": "refactoring-challenge",
+        "title": "Legacy Code Modernization",
+        "description": "Use AI to modernize and optimize a legacy codebase",
+        "xp": 200,
+        "timeLimit": 120,
+        "difficulty": "advanced"
+      },
+      {
+        "id": "test-generation-challenge",
+        "title": "Complete Test Suite Generation",
+        "description": "Generate comprehensive test coverage for a complex application",
+        "xp": 175,
+        "timeLimit": 90,
+        "difficulty": "intermediate"
+      }
+    ],
+    "assessments": [
+      {
+        "id": "codex-midterm",
+        "title": "AI-Assisted Development Assessment",
+        "type": "practical",
+        "xp": 250,
+        "requiredModules": ["codex-module-1", "codex-module-2", "codex-module-3"],
+        "timeLimit": 180
+      },
+      {
+        "id": "codex-capstone",
+        "title": "Production Workflow Implementation",
+        "type": "capstone",
+        "xp": 400,
+        "requiredModules": ["codex-module-1", "codex-module-2", "codex-module-3", "codex-module-4", "codex-module-5"],
+        "timeLimit": 240
+      }
+    ],
+    "achievements": [
+      {
+        "id": "prompt-engineer",
+        "title": "Prompt Engineer",
+        "description": "Master advanced prompting techniques",
+        "xp": 100,
+        "requirement": "complete-codex-module-2"
+      },
+      {
+        "id": "code-optimizer",
+        "title": "Code Optimizer",
+        "description": "Successfully optimize performance in multiple projects",
+        "xp": 150,
+        "requirement": "complete-codex-module-3"
+      },
+      {
+        "id": "test-master",
+        "title": "Test Master",
+        "description": "Generate comprehensive test suites using AI",
+        "xp": 120,
+        "requirement": "complete-codex-module-4"
+      },
+      {
+        "id": "workflow-architect",
+        "title": "Workflow Architect",
+        "description": "Design and implement production AI workflows",
+        "xp": 200,
+        "requirement": "complete-codex-module-5"
+      },
+      {
+        "id": "model-creator",
+        "title": "Model Creator",
+        "description": "Successfully train and deploy custom code models",
+        "xp": 300,
+        "requirement": "complete-codex-module-6"
+      },
+      {
+        "id": "speed-coder",
+        "title": "Speed Coder",
+        "description": "Complete code-completion-challenge under time limit",
+        "xp": 75,
+        "requirement": "complete-challenge-code-completion"
+      }
+    ],
+    "totalXP": 2000,
+    "certificationRequirements": {
+      "minimumXP": 1500,
+      "requiredModules": ["codex-module-1", "codex-module-2", "codex-module-3", "codex-module-4"],
+      "requiredAssessments": ["codex-midterm", "codex-capstone"],
+      "minimumScore": 80,
+      "requiredChallenges": ["code-completion-challenge"]
+    },
+    "tools": [
+      {
+        "name": "GitHub Copilot",
+        "type": "IDE Extension",
+        "integration": "native"
+      },
+      {
+        "name": "ChatGPT",
+        "type": "Web Interface",
+        "integration": "api"
+      },
+      {
+        "name": "CodeT5",
+        "type": "Custom Model",
+        "integration": "local"
+      },
+      {
+        "name": "Tabnine",
+        "type": "IDE Extension",
+        "integration": "native"
+      }
+    ]
+  }
+}
