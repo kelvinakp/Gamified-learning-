@@ -1,122 +1,67 @@
-# 🤖 AI Nexus - Neural Learning Interface
+# 🤖 T&A - Neural Learning Interface
 
-A futuristic, gamified AI learning platform with professional UI/UX, accessibility features, and streamlined user experience.
+A futuristic, gamified AI learning platform with a professional Single Page Application (SPA) architecture, advanced UI/UX, full Light/Dark mode support, accessibility features, and a seamless user experience.
 
 ## 🚀 Getting Started
 
-1. **Entry Point**: Open `login.html` in your web browser
-2. **Login**: Enter any User ID to access the platform (no password required)
-3. **Dashboard**: After login, you'll be automatically redirected to the main learning dashboard
-4. **Navigation**: Use the top navigation bar to explore different sections
+1. **Entry Point**: Open `login.html` in your web browser.
+2. **Login**: Enter any User ID to access the platform.
+3. **Dashboard**: After login, you'll be automatically redirected to the main learning dashboard (`index.html`).
+4. **Navigation**: Use the top navigation bar or sidebar to explore different sections seamlessly via SPA routing.
 
 ## 🌟 Platform Features
 
 ### 🎯 Core Learning Experience
-- **Interactive Dashboard** (`index.html`): Progress tracking, lesson management, and personalized learning paths
-- **AI Labs** (`labs.html`): Hands-on experimentation with AI concepts and tools
-- **Archive** (`archive.html`): Comprehensive library of lessons and reference materials
-- **Profile** (`profile.html`): User progress, achievements, and skill development tracking
+- **Interactive Dashboard** (`index.html`): Progress tracking, lesson management, and personalized learning paths.
+- **Labs** (`labs.html`): Hands-on experimentation with AI concepts and tools.
+- **Archive** (`archive.html`): Comprehensive library of historical data, completed experiments, and knowledge.
+- **Profile** (`profile.html`): User progress, achievements, and skill development tracking.
 
 ### 🎮 Gamification Elements
-- Real-time progress bars and completion tracking
-- Achievement badges and milestone rewards
-- Interactive challenge portal with skill assessments
-- XP system and level progression
-- Personalized learning paths
+- Real-time progress bars and completion tracking.
+- Achievement badges and milestone rewards.
+- Glassmorphism design and interactive UI nodes.
+- XP system and level progression.
 
-### ♿ Accessibility Features
-- **WCAG AA Compliant**: Full accessibility compliance
-- **Keyboard Navigation**: Complete keyboard-only navigation support
-- **Screen Reader Compatible**: Semantic HTML and ARIA labels
-- **High Contrast**: Professional color schemes with sufficient contrast
-- **Focus Management**: Clear focus indicators and logical tab order
+### 🌓 Global Theme System
+- **True Dark/Light Modes**: Comprehensive styling for both modes using Tailwind CSS and CSS variables.
+- **Persistent State**: Theme preference is saved locally via `localStorage` and persists across sessions.
+- **Cross-Tab Synchronization**: Automatically syncs theme changes across open tabs in real-time using `storage` events.
 
-### 🚀 Performance Optimizations
-- Hardware-accelerated animations and transitions
-- Optimized loading with preconnect and DNS prefetch
-- Efficient CSS with inline critical styles
-- Responsive design for all devices and screen sizes
-- Deferred JavaScript loading for better performance
+### ⚡ SPA Navigation Architecture
+- **No Page Reloads**: Uses `fetch` API and `history.pushState` to dynamically load page content without full browser refreshes.
+- **Maintained State**: The header (with the theme toggle and user profile) remains static and fully functional across navigation.
+- **Optimized Transitions**: Hardware-accelerated animations fade content in and out during navigation.
 
 ## 📁 File Structure
 
 ```
 researchX/
-├── login.html          # Entry point - Simplified User ID login
-├── index.html          # Main dashboard with progress tracking
-├── labs.html           # AI Labs experimentation environment
-├── archive.html        # Lesson archive and knowledge library
+├── index.html          # Main dashboard & SPA Shell
+├── login.html          # Authentication entry point
 ├── profile.html        # User profile and achievements
+├── labs.html           # Experimental AI environments
+├── archive.html        # Historical data and completed experiments
+├── scripts.js          # Main SPA navigation and session logic
+├── global-theme.js     # Global theme switcher logic
 └── README.md           # Documentation (this file)
 ```
 
 ## 🛠️ Technical Details
 
-- **Framework**: Pure HTML, CSS, and JavaScript (no external dependencies)
-- **Styling**: Tailwind CSS with custom design system and configurations
-- **Typography**: Inter (body text) and Space Grotesk (headings) from Google Fonts
-- **Storage**: localStorage for User ID persistence
-- **Browser Support**: Modern browsers (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+- **Framework**: Pure HTML5, CSS3, and JavaScript (ES6+). No external JS frameworks required.
+- **Styling**: Tailwind CSS via CDN, heavily customized with glassmorphism and gradient utilities.
+- **Typography**: Inter (body text) and Space Grotesk (headings) from Google Fonts.
+- **Storage**: `localStorage` used for session management (`userSession`) and theme preferences.
 
 ## 🎨 Visual Design System
+- **Colors**: Rich gradients featuring Blue (#3B82F6), Cyan (#06B6D4), and Purple (#8B5CF6).
+- **Dark Theme**: Deep slate backgrounds (#0F172A, #1E293B) with glowing accents. 
+- **Light Theme**: Bright, clean backgrounds (#F8FAFC) with vibrant gradient overrides for key elements to ensure they pop.
+- **Interactive**: Hover, scale, and focus states with smooth transitions on buttons and cards.
 
-### Color Palette
-- **Primary**: Blue (#3B82F6) to Cyan (#06B6D4) gradients
-- **Background**: Dark slate theme (#0F172A, #1E293B, #334155)
-- **Text**: White (#FFFFFF) and Slate variants (#94A3B8, #CBD5E1)
-- **Accents**: Purple (#8B5CF6) and success green states
-- **Interactive**: Hover and focus states with smooth transitions
-
-### Typography
-- **Headings**: Space Grotesk - Modern, geometric, professional
-- **Body**: Inter - Highly readable, optimized for screens
-- **Hierarchy**: Clear type scale with appropriate line heights
-- **Accessibility**: Sufficient font sizes and contrast ratios
-
-### Animation Philosophy
-- **Smooth**: Hardware-accelerated transforms and opacity changes
-- **Purposeful**: Animations enhance UX without being distracting
-- **Performance-first**: Optimized for 60fps on all devices
-- **Accessible**: Respects user preferences for reduced motion
-
-## 💻 Usage Instructions
-
-### First Time Setup
-1. Open `login.html` in any modern web browser
-2. Enter a User ID (can be anything: "student123", "learner01", "your-name")
-3. Click "Access Dashboard" to enter the platform
-
-### Navigation
-- **Dashboard**: Overview of progress, active lessons, and quick access
-- **AI Labs**: Interactive tools and experiments
-- **Archive**: Browse and search all available content
-- **Profile**: View achievements, progress, and user statistics
-- **Login**: Return to login (clears current session)
-
-### Features
-- Your User ID is stored locally and displayed in the header
-- Progress is tracked across sessions
-- All pages maintain consistent navigation and styling
-- Fully responsive design works on mobile, tablet, and desktop
-
-## 🎯 Learning Experience
-
-### Beginner-Friendly
-- Clear onboarding with intuitive interface
-- Progressive disclosure of advanced features
-- Helpful hints and guidance throughout
-- No overwhelming complexity
-
-### Professional Quality
-- Clean, modern design that feels trustworthy
-- Consistent branding and visual hierarchy
-- Professional-grade accessibility features
-- Enterprise-level performance optimization
-
-### Engaging & Interactive
-- Gamified progress tracking
-- Interactive lesson components
-- Real-time feedback and rewards
-- Personalized learning experience
-
-This platform combines the sophistication of professional learning management systems with the engaging experience of modern gamified education, all while maintaining the highest standards for accessibility and performance.
+## 💻 Contribution & Development
+This dashboard is designed to be easily extensible. To add a new page:
+1. Create a visually consistent HTML file (e.g., `settings.html`).
+2. Exclude the Header and Theme Switcher from the new file (the SPA shell in `index.html` injects the content).
+3. Add a navigation link with `data-page="settings.html"` and the `nav-link` class.

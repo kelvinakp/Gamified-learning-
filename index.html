@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Nexus - Neural Learning Interface</title>
+    <title>T&A - Neural Learning Interface</title>
     
     <!-- Performance: Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,17 +88,6 @@
     
     <!-- Performance: Inline critical CSS for above-the-fold content -->
     <style>
-        /* Critical CSS for header and initial load */
-        .header-critical {
-            border-bottom: 1px solid rgba(74, 85, 104, 0.5);
-            background: rgba(10, 15, 28, 0.9);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-        
         /* Fallback colors for custom Tailwind classes */
         .text-success { color: #10B981 !important; }
         .text-warning { color: #F59E0B !important; }
@@ -395,153 +384,319 @@
             display: block !important;
         }
         
-        /* Header welcome panel specific styles */
-        #userWelcomePanelHeader {
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            min-width: 220px; /* Ensure consistent width */
+        /* Global Theme System */
+        :root {
+            --bg-primary: #0A0F1C;
+            --bg-secondary: #1A202C;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --border-primary: rgba(71, 85, 105, 0.5);
+            --glass-bg: rgba(45, 55, 72, 0.6);
         }
-        
-        #userWelcomePanelHeader.show {
-            display: flex !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            transform: translateY(0) scale(1);
+
+        /* Light Theme */
+        .light-theme {
+            --bg-primary: #F8FAFC;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #475569;
+            --border-primary: rgba(203, 213, 225, 0.8);
+            --glass-bg: rgba(248, 250, 252, 0.85);
         }
-        
-        #userWelcomePanelHeader:hover {
-            transform: translateY(-1px) scale(1.02);
+
+        .light-theme body {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
         }
-        
-        /* Enhanced user avatar glow */
-        #userWelcomePanelHeader .animate-glow {
-            box-shadow: 
-                0 0 20px rgba(59, 130, 246, 0.4),
-                0 0 40px rgba(6, 182, 212, 0.2),
-                0 0 60px rgba(16, 185, 129, 0.1);
-            animation: enhanced-glow 3s ease-in-out infinite alternate;
+
+        .light-theme .neural-network-bg {
+            background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 50%, #CBD5E1 100%) !important;
         }
-        
-        @keyframes enhanced-glow {
-            0% { 
-                box-shadow: 
-                    0 0 20px rgba(59, 130, 246, 0.4),
-                    0 0 40px rgba(6, 182, 212, 0.2),
-                    0 0 60px rgba(16, 185, 129, 0.1);
-            }
-            100% { 
-                box-shadow: 
-                    0 0 30px rgba(59, 130, 246, 0.6),
-                    0 0 50px rgba(6, 182, 212, 0.3),
-                    0 0 70px rgba(16, 185, 129, 0.2);
-            }
+
+        .light-theme .bg-slate-950 {
+            background-color: #F8FAFC !important;
         }
-        
-        /* Header layout optimizations */
-        .header-critical .max-w-7xl > div {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 2rem;
+
+        .light-theme .bg-slate-800\/90,
+        .light-theme .bg-slate-800\/80,
+        .light-theme .bg-slate-800\/60,
+        .light-theme .from-slate-800\/90,
+        .light-theme .from-slate-800\/80 {
+            background: rgba(248, 250, 252, 0.9) !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
         }
-        
-        .header-critical nav {
-            justify-self: center;
+
+        .light-theme .bg-slate-900\/70,
+        .light-theme .bg-slate-900\/50,
+        .light-theme .to-slate-900\/70,
+        .light-theme .to-slate-900\/60 {
+            background: rgba(255, 255, 255, 0.8) !important;
         }
-        
-        .header-critical #userWelcomePanelHeader {
-            justify-self: end;
+
+        /* Additional comprehensive light theme coverage */
+        .light-theme .bg-slate-700,
+        .light-theme .bg-slate-600,
+        .light-theme .bg-slate-700\/50,
+        .light-theme .bg-slate-600\/50 {
+            background: rgba(248, 250, 252, 0.9) !important;
         }
-        
-        /* Advanced Background Visual Effects */
-        .neural-network-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            pointer-events: none;
+
+        .light-theme .backdrop-blur-sm,
+        .light-theme .backdrop-blur-md {
+            background: rgba(255, 255, 255, 0.8) !important;
         }
-        
-        .neural-node {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(59, 130, 246, 0.6);
-            border-radius: 50%;
-            animation: neural-pulse 3s ease-in-out infinite;
+
+        /* Header specific fixes */
+        .light-theme header {
+            background-color: rgba(248, 250, 252, 0.95) !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
         }
-        
-        .neural-connection {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
-            animation: data-flow 4s ease-in-out infinite;
-            transform-origin: left center;
+
+        /* Gradient backgrounds should be light */
+        /* Preserve logo and title gradients in both themes */
+        .light-theme .bg-gradient-to-br:not(.from-primary) {
+            background: rgba(255, 255, 255, 0.9) !important;
         }
-        
-        @keyframes neural-pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.5); }
+
+        .light-theme .text-white {
+            color: #1E293B !important;
         }
-        
-        @keyframes data-flow {
-            0% { transform: scaleX(0); opacity: 0; }
-            25% { transform: scaleX(1); opacity: 1; }
-            75% { transform: scaleX(1); opacity: 1; }
-            100% { transform: scaleX(0); opacity: 0; }
+
+        .light-theme .text-slate-400 {
+            color: #64748B !important;
         }
-        
-        .floating-code-fragment {
-            position: absolute;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: rgba(6, 182, 212, 0.4);
-            animation: code-drift 15s linear infinite;
-            pointer-events: none;
+
+        .light-theme .text-slate-300 {
+            color: #475569 !important;
         }
-        
-        @keyframes code-drift {
-            0% { transform: translateY(100vh) translateX(-50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(-100px) translateX(50px) rotate(360deg); opacity: 0; }
+
+        .light-theme .border-slate-700\/50,
+        .light-theme .border-slate-700\/30,
+        .light-theme .border-slate-600\/50 {
+            border-color: rgba(203, 213, 225, 0.6) !important;
         }
-        
-        .quantum-grid {
-            position: absolute;
-            inset: 0;
-            background: 
-                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                linear-gradient(180deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
-            background-size: 100px 100px;
-            animation: grid-shift 20s ease-in-out infinite;
+
+        .light-theme .shadow-2xl,
+        .light-theme .shadow-xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important;
         }
-        
-        @keyframes grid-shift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
+
+        .light-theme #loginScreen {
+            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 25%, #F0F9FF 50%, #ECFDF5 75%, #FEF3C7 100%) !important;
         }
-        
-        .energy-wave {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border: 2px solid rgba(139, 92, 246, 0.2);
-            border-radius: 50%;
-            animation: energy-expand 8s ease-out infinite;
+
+        .light-theme .glass-morphism {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border-color: rgba(203, 213, 225, 0.4) !important;
         }
-        
-        @keyframes energy-expand {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(4); opacity: 0; }
+
+        /* Theme switcher button styles for dark mode - enhanced visibility */
+        #themeSwitcher {
+            background-color: rgba(51, 65, 85, 0.8) !important;
+            border-color: rgba(71, 85, 105, 0.8) !important;
+            color: #E2E8F0 !important;
+        }
+
+        #themeSwitcher:hover {
+            background-color: rgba(71, 85, 105, 0.9) !important;
+            border-color: rgba(100, 116, 139, 0.9) !important;
+        }
+
+        #themeSwitcher #themeText {
+            color: #CBD5E1 !important;
+        }
+
+        #themeSwitcher:hover #themeText {
+            color: #F1F5F9 !important;
+        }
+
+        /* Theme switcher button styles for light mode */
+        .light-theme #themeSwitcher {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(203, 213, 225, 0.8) !important;
+            color: #334155 !important;
+        }
+
+        .light-theme #themeSwitcher:hover {
+            background-color: rgba(248, 250, 252, 0.95) !important;
+            border-color: rgba(148, 163, 184, 0.9) !important;
+        }
+
+        .light-theme #themeSwitcher #themeText {
+            color: #475569 !important;
+        }
+
+        .light-theme #themeSwitcher:hover #themeText {
+            color: #334155 !important;
+        }
+
+        /* Logout button styles for dark mode */
+        #logoutBtn {
+            background-color: rgba(220, 38, 38, 0.1) !important;
+            border-color: rgba(239, 68, 68, 0.3) !important;
+        }
+
+        #logoutBtn:hover {
+            background-color: rgba(220, 38, 38, 0.2) !important;
+            border-color: rgba(239, 68, 68, 0.5) !important;
+        }
+
+        /* Light mode logout button overrides */
+        .light-theme #logoutBtn {
+            background-color: rgba(239, 68, 68, 0.1) !important;
+            border-color: rgba(220, 38, 38, 0.3) !important;
+        }
+
+        .light-theme #logoutBtn:hover {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(185, 28, 28, 0.4) !important;
+        }
+
+        /* Light theme button borders */
+        .light-theme button.bg-gradient-to-r.from-primary {
+            border: 1px solid #2563eb !important;
+        }
+
+        .light-theme button.bg-gradient-to-r.from-success {
+            border: 1px solid #10b981 !important;
+        }
+
+        .light-theme button.bg-gradient-to-r.from-warning {
+            border: 1px solid #f59e0b !important;
+        }
+
+        .light-theme button.bg-gradient-to-r.from-purple {
+            border: 1px solid #8b5cf6 !important;
+        }
+
+        /* Preserve header navigation buttons in dark style even in light mode */
+        .light-theme .nav-link:not(.bg-gradient-to-r) {
+            background-color: transparent !important;
+            color: #CBD5E1 !important;
+            border-color: rgba(71, 85, 105, 0.5) !important;
+        }
+
+        .light-theme .nav-link:not(.bg-gradient-to-r):hover {
+            color: white !important;
+            background-color: rgba(51, 65, 85, 0.6) !important;
+            border-color: rgba(100, 116, 139, 0.6) !important;
+        }
+
+        /* Force navigation buttons to show correct gradient colors */
+        .light-theme #dashboardBtn,
+        .light-theme button[data-page="index.html"] {
+            background: linear-gradient(to right, #3B82F6, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="labs.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #10B981, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="archive.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #8B5CF6, #EC4899) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="profile.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #F59E0B, #F97316) !important;
+            color: white !important;
+        }
+
+        /* Comprehensive light theme overrides for all dark elements */
+        .light-theme div.bg-slate-900\/50,
+        .light-theme span.bg-slate-900\/50,
+        .light-theme section.bg-slate-900\/50,
+        .light-theme [class*="bg-slate-900/50"],
+        .light-theme [class*="bg-slate-900/80"] {
+            background: rgba(248, 250, 252, 0.9) !important;
+            color: #1E293B !important;
+        }
+
+        /* Input fields */
+        .light-theme .neural-input,
+        .light-theme input.bg-slate-900\/50 {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #1E293B !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        .light-theme .neural-input::placeholder {
+            color: #64748B !important;
+        }
+
+        /* Progress bars and containers */
+        .light-theme .rounded-full.bg-slate-900\/50,
+        .light-theme div[class*="bg-slate-900/50"].rounded-full {
+            background: rgba(226, 232, 240, 0.8) !important;
+        }
+
+        /* Stats cards and info boxes */
+        .light-theme .p-3.bg-slate-900\/50,
+        .light-theme .p-4.bg-slate-900\/50 {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #1E293B !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        /* Achievement and notification cards */
+        .light-theme .rounded-xl.bg-slate-900\/80,
+        .light-theme .rounded-xl.bg-slate-900\/50 {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #1E293B !important;
+        }
+
+        /* All slate-700 border elements */
+        .light-theme [class*="border-slate-700"] {
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        /* Page transition effects - only for main content */
+        main {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        main.content-loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Theme transition */
+        body, .neural-network-bg {
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .theme-transition main *,
+        .theme-transition section *,
+        .theme-transition article * {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+        }
+
+        /* Exclude header from theme transitions to prevent refresh appearance */
+        .theme-transition header,
+        .theme-transition header * {
+            transition: none !important;
         }
     </style>
+    
+    <!-- Immediate theme application to prevent flash -->
+    <script>
+        // Apply saved theme immediately before page renders
+        (function() {
+            const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+            document.documentElement.classList.remove('light-theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+            }
+        })();
+    </script>
 </head>
 <body class="bg-slate-950 text-white font-primary">
-    <!-- Login Screen -->
-    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center relative overflow-hidden bg-animated min-h-screen">
+    <!-- Login Screen (hidden by default) -->
+    <div id="loginScreen" class="fixed inset-0 z-50 hidden items-center justify-center relative overflow-hidden bg-animated min-h-screen">
         <!-- Hexagon pattern background -->
         <div class="hexagon-pattern"></div>
         
@@ -580,7 +735,7 @@
                 <h1 class="text-4xl font-bold font-headings mb-2">
                     <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent" 
                           style="background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: white;">
-                        AI Nexus
+                        T&A
                     </span>
                 </h1>
                 <p class="text-slate-400 font-medium" style="color: #94A3B8;">Welcome to the AI Learning Platform</p>
@@ -658,19 +813,8 @@
         </div>
     </div>
 
-    <!-- Main Dashboard (hidden initially) -->
-    <div id="mainDashboard" class="hidden dashboard-transition">
-    
-    <!-- Advanced Neural Network Background -->
-    <div class="neural-network-bg" id="neuralNetworkBg">
-        <!-- Quantum grid pattern -->
-        <div class="quantum-grid"></div>
-        
-        <!-- Energy waves -->
-        <div class="energy-wave" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
-        <div class="energy-wave" style="top: 60%; right: 15%; animation-delay: 3s;"></div>
-        <div class="energy-wave" style="bottom: 25%; left: 60%; animation-delay: 6s;"></div>
-    </div>
+    <!-- Main Dashboard (shown by default) -->
+    <div id="mainDashboard" class="dashboard-transition">
     
     <!-- User Welcome Panel - Positioned in Header Between Logo and Navigation -->
     <div id="userWelcomePanel" class="user-info-panel hidden">
@@ -682,14 +826,11 @@
                 <p id="userDisplayName" class="text-white font-bold text-sm font-headings">User</p>
                 <p class="text-cyan-400 text-xs font-code tracking-wide">ACTIVE</p>
             </div>
-            <button id="logoutBtn" class="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/40 text-red-400 hover:text-red-300 rounded-md border border-red-500/30 transition-all duration-300 hover:scale-105 font-medium text-xs">
-                Logout
-            </button>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="header-critical">
+    <header class="border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50 shadow-xl">
         <div class="max-w-7xl mx-auto px-6 py-5">
             <div class="grid grid-cols-3 items-center gap-8">
                 <!-- Logo & Title -->
@@ -699,60 +840,48 @@
                     </div>
                     <div>
                         <h1 class="text-3xl font-bold font-headings text-white tracking-tight">
-                            <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent" 
-                                  style="background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: white;">
-                                AI Nexus
+                            <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent">
+                                T&A
                             </span>
                         </h1>
-                        <p class="text-sm text-slate-400 font-medium tracking-wide" style="color: #94A3B8;">Advanced Learning Ecosystem</p>
+                        <p class="text-sm text-slate-400 font-medium tracking-wide">Advanced Learning Ecosystem</p>
                     </div>
                 </div>
                 
                 <!-- Centered Navigation -->
-                <nav class="flex justify-center space-x-3" role="navigation" aria-label="Main navigation">
-                    <button id="dashboardBtn" class="hover-optimized px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950">
+                <nav class="flex space-x-3 justify-center" role="navigation" aria-label="Main navigation">
+                    <button id="dashboardBtn" data-page="index.html" class="nav-link px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 border border-primary/30 hover:border-primary/50">
                         Dashboard
                     </button>
-                    <a href="labs.html" class="hover-optimized px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg font-medium backdrop-blur-optimized border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                    <button data-page="labs.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
                         Labs
-                    </a>
-                    <a href="archive.html" class="hover-optimized px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg font-medium backdrop-blur-optimized border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                    </button>
+                    <button data-page="archive.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
                         Archive
-                    </a>
-                    <a href="profile.html" class="hover-optimized px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg font-medium backdrop-blur-optimized border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                    </button>
+                    <button data-page="profile.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
                         Profile
-                    </a>
+                    </button>
                 </nav>
                 
-                <!-- Welcome Panel - Right Side -->
-                <div class="flex justify-end">
-                    <div id="userWelcomePanelHeader" class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5 shadow-lg backdrop-blur-sm hidden relative w-72">
-                    <div class="flex items-center justify-between space-x-4 relative z-10">
-                        <!-- Enhanced user avatar section -->
-                        <div class="flex items-center space-x-3 flex-1 min-w-0">
-                            <div class="w-10 h-10 bg-gradient-to-br from-primary via-cyan to-success rounded-xl flex items-center justify-center animate-glow shadow-lg relative flex-shrink-0">
-                                <span class="text-lg" role="img" aria-label="User">👤</span>
-                                <!-- Status indicator -->
-                                <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-slate-800 shadow-lg animate-gentle-pulse"></div>
-                            </div>
-                            
-                            <!-- User info with improved typography and layout -->
-                            <div class="flex-1 min-w-0">
-                                <p id="userDisplayNameHeader" class="text-white font-bold text-base font-headings leading-tight truncate">User</p>
-                                <p class="text-cyan-400 text-[10px] font-code tracking-widest uppercase opacity-80">NEURAL ACTIVE</p>
-                            </div>
+                <!-- Theme Switcher & User Actions -->
+                <div class="flex items-center space-x-3 justify-end">
+                    <!-- Theme Switcher Button -->
+                    <button id="themeSwitcher" class="group flex items-center space-x-2 px-4 py-2.5 bg-slate-800/60 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 shadow-lg backdrop-blur-sm">
+                        <div id="themeIcon" class="w-5 h-5 flex items-center justify-center">
+                            <span class="text-yellow-400 group-hover:text-yellow-300 transition-colors">🌙</span>
                         </div>
-                        
-                        <!-- Enhanced logout button with better proportions -->
-                        <button id="logoutBtnHeader" class="group px-3 py-1.5 bg-gradient-to-r from-red-600/30 to-red-700/30 hover:from-red-500/40 hover:to-red-600/40 text-red-300 hover:text-red-200 rounded-lg border border-red-500/40 hover:border-red-400/60 transition-all duration-300 hover:scale-105 font-medium text-xs backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-800 flex-shrink-0 shadow-lg">
-                            <div class="flex items-center space-x-1.5">
-                                <span class="w-1.5 h-1.5 bg-red-400 rounded-full group-hover:bg-red-300 transition-colors animate-gentle-pulse"></span>
-                                <span class="tracking-wider font-semibold">LOGOUT</span>
-                            </div>
-                        </button>
-                    </div>
+                        <span id="themeText" class="text-sm font-medium text-slate-300 group-hover:text-white font-code tracking-wider">DARK</span>
+                    </button>
+                    
+                    <!-- Logout Button -->
+                    <button id="logoutBtn" class="group flex items-center space-x-2 px-4 py-2.5 bg-red-600/10 hover:bg-red-600/20 border border-red-500/30 hover:border-red-400/50 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-950 shadow-lg backdrop-blur-sm">
+                        <div class="w-5 h-5 flex items-center justify-center">
+                            <span class="text-red-400 group-hover:text-red-300 transition-colors">🚪</span>
+                        </div>
+                        <span class="text-sm font-medium text-red-400 group-hover:text-red-300 font-code tracking-wider">LOGOUT</span>
+                    </button>
                 </div>
-            </div>
             </div>
         </div>
     </header>
@@ -1005,52 +1134,36 @@
     <script>
         // Check if user is already logged in on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth content transition effect
+            const main = document.querySelector('main');
+            if (main) {
+                setTimeout(() => {
+                    main.classList.add('content-loaded');
+                }, 20);
+            }
+            
             const userId = localStorage.getItem('userId');
             const loginScreen = document.getElementById('loginScreen');
             const mainDashboard = document.getElementById('mainDashboard');
-            const userWelcomePanelHeader = document.getElementById('userWelcomePanelHeader');
-            const neuralNetworkBg = document.getElementById('neuralNetworkBg');
             
             console.log('Page loaded. User ID:', userId);
             
             if (userId && userId.trim() !== '') {
-                // User is logged in, show dashboard
-                console.log('User already logged in, showing dashboard');
-                if (loginScreen) {
-                    loginScreen.style.display = 'none';
-                    loginScreen.classList.add('hidden');
-                }
+                // User is logged in, dashboard is already shown by default
+                console.log('User already logged in, keeping dashboard visible');
                 showDashboard(userId);
             } else {
-                // Show login screen, hide dashboard and welcome panel
+                // Show login screen, hide dashboard
                 console.log('No user logged in, showing login screen');
-                
-                // Clear neural network background immediately and hide it
-                clearNeuralNetwork();
-                if (neuralNetworkBg) {
-                    neuralNetworkBg.style.display = 'none';
-                    neuralNetworkBg.style.visibility = 'hidden';
-                    neuralNetworkBg.style.opacity = '0';
-                }
                 
                 if (loginScreen) {
                     loginScreen.style.display = 'flex';
-                    loginScreen.style.opacity = '1';
-                    loginScreen.style.transform = 'scale(1)';
                     loginScreen.classList.remove('hidden');
                 }
                 
                 if (mainDashboard) {
                     mainDashboard.classList.add('hidden');
                     mainDashboard.style.display = 'none';
-                }
-                
-                if (userWelcomePanelHeader) {
-                    userWelcomePanelHeader.classList.add('hidden');
-                    userWelcomePanelHeader.classList.remove('show');
-                    userWelcomePanelHeader.style.display = 'none';
-                    userWelcomePanelHeader.style.visibility = 'hidden';
-                    userWelcomePanelHeader.style.opacity = '0';
                 }
             }
         });
@@ -1059,8 +1172,6 @@
         function showDashboard(userId) {
             const loginScreen = document.getElementById('loginScreen');
             const mainDashboard = document.getElementById('mainDashboard');
-            const userWelcomePanelHeader = document.getElementById('userWelcomePanelHeader');
-            const userDisplayNameHeader = document.getElementById('userDisplayNameHeader');
             const neuralNetworkBg = document.getElementById('neuralNetworkBg');
             
             console.log('Showing dashboard for user:', userId);
@@ -1094,24 +1205,6 @@
                     mainDashboard.offsetHeight;
                 }
                 
-                // Update and show welcome panel in header
-                if (userDisplayNameHeader) {
-                    userDisplayNameHeader.textContent = userId;
-                }
-                
-                // Ensure welcome panel is visible in header
-                if (userWelcomePanelHeader) {
-                    console.log('Setting up header welcome panel');
-                    userWelcomePanelHeader.classList.remove('hidden');
-                    userWelcomePanelHeader.classList.add('show');
-                    userWelcomePanelHeader.style.display = 'flex';
-                    userWelcomePanelHeader.style.visibility = 'visible';
-                    userWelcomePanelHeader.style.opacity = '1';
-                    
-                    // Force a reflow to ensure styles are applied
-                    userWelcomePanelHeader.offsetHeight;
-                }
-                
                 // Trigger dashboard transition with proper timing
                 requestAnimationFrame(() => {
                     if (mainDashboard) {
@@ -1125,8 +1218,7 @@
                 });
                 
                 // Initialize functionality after dashboard is visible
-                initLogoutButton();
-                initDashboardButton();
+                // Dashboard button is handled by SPA navigation system
                 
                 // Initialize dashboard animations with delay for better performance
                 setTimeout(() => {
@@ -1176,141 +1268,6 @@
         });
 
         // Dashboard button functionality
-        function initDashboardButton() {
-            const dashboardBtn = document.getElementById('dashboardBtn');
-            if (dashboardBtn) {
-                dashboardBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Dashboard button clicked - staying on current dashboard');
-                    
-                    // Add visual feedback
-                    dashboardBtn.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        dashboardBtn.style.transform = '';
-                    }, 150);
-                    
-                    // Ensure we're showing the dashboard (in case something went wrong)
-                    const userId = localStorage.getItem('userId');
-                    if (userId && userId.trim() !== '') {
-                        // Refresh dashboard state without full reload
-                        const mainDashboard = document.getElementById('mainDashboard');
-                        if (mainDashboard && !mainDashboard.classList.contains('show')) {
-                            mainDashboard.classList.add('show');
-                        }
-                        
-                        // Reinitialize neural network if needed
-                        initNeuralNetwork();
-                    } else {
-                        // If no user is logged in, something is wrong - redirect to login
-                        console.log('No user logged in, showing login screen');
-                        const loginScreen = document.getElementById('loginScreen');
-                        const mainDashboard = document.getElementById('mainDashboard');
-                        
-                        clearNeuralNetwork();
-                        
-                        if (mainDashboard) {
-                            mainDashboard.classList.add('hidden');
-                            mainDashboard.style.display = 'none';
-                        }
-                        
-                        if (loginScreen) {
-                            loginScreen.style.display = 'flex';
-                            loginScreen.style.opacity = '1';
-                            loginScreen.style.transform = 'scale(1)';
-                            loginScreen.classList.remove('hidden');
-                        }
-                    }
-                });
-            }
-        }
-
-        // Logout functionality
-        function initLogoutButton() {
-            const logoutBtnHeader = document.getElementById('logoutBtnHeader');
-            if (logoutBtnHeader) {
-                logoutBtnHeader.addEventListener('click', function() {
-                    console.log('Logout clicked');
-                    const userWelcomePanelHeader = document.getElementById('userWelcomePanelHeader');
-                    const mainDashboard = document.getElementById('mainDashboard');
-                    const loginScreen = document.getElementById('loginScreen');
-                    
-                    // Animate out welcome panel
-                    if (userWelcomePanelHeader) {
-                        userWelcomePanelHeader.style.transition = 'all 0.3s ease-in';
-                        userWelcomePanelHeader.style.opacity = '0';
-                        userWelcomePanelHeader.style.transform = 'scale(0.95)';
-                    }
-                    
-                    // Animate out dashboard
-                    if (mainDashboard) {
-                        mainDashboard.classList.remove('show');
-                    }
-                    
-                    setTimeout(() => {
-                        // Clear stored user ID
-                        localStorage.removeItem('userId');
-                        console.log('User logged out');
-                        
-                        // Clear neural network background immediately and hide it
-                        clearNeuralNetwork();
-                        const neuralNetworkBg = document.getElementById('neuralNetworkBg');
-                        if (neuralNetworkBg) {
-                            neuralNetworkBg.style.display = 'none';
-                            neuralNetworkBg.style.visibility = 'hidden';
-                            neuralNetworkBg.style.opacity = '0';
-                        }
-                        
-                        // Hide dashboard and welcome panel completely
-                        if (mainDashboard) {
-                            mainDashboard.classList.add('hidden');
-                            mainDashboard.style.display = 'none';
-                        }
-                        
-                        if (userWelcomePanelHeader) {
-                            userWelcomePanelHeader.classList.add('hidden');
-                            userWelcomePanelHeader.classList.remove('show');
-                            userWelcomePanelHeader.style.display = 'none';
-                            userWelcomePanelHeader.style.visibility = 'hidden';
-                            userWelcomePanelHeader.style.opacity = '0';
-                        }
-                        
-                        // Clear neural network background
-                        clearNeuralNetwork();
-                        
-                        // Show login screen
-                        if (loginScreen) {
-                            loginScreen.style.display = 'flex';
-                            loginScreen.style.opacity = '0';
-                            loginScreen.style.transform = 'scale(0.95)';
-                            loginScreen.classList.remove('hidden');
-                            
-                            setTimeout(() => {
-                                loginScreen.style.transition = 'all 0.5s ease-out';
-                                loginScreen.style.opacity = '1';
-                                loginScreen.style.transform = 'scale(1)';
-                            }, 50);
-                        }
-                        
-                        // Reset login form
-                        const userIdInput = document.getElementById('mainUserid');
-                        if (userIdInput) {
-                            userIdInput.value = '';
-                        }
-                        
-                        const button = document.querySelector('#mainLoginForm button[type="submit"]');
-                        if (button) {
-                            const buttonText = button.querySelector('span:first-child');
-                            if (buttonText) {
-                                buttonText.textContent = 'Access Dashboard';
-                            }
-                            button.style.background = 'linear-gradient(to right, #3B82F6, #2563EB, #06B6D4)';
-                            button.disabled = false;
-                        }
-                    }, 500);
-                });
-            }
-        }
-
         // Particle system for login screen - contained within login area only
         function createLoginParticle() {
             const loginScreen = document.getElementById('loginScreen');
@@ -1565,6 +1522,342 @@
                 dynamicElements.forEach(el => el.remove());
             }
         }
+
+        // Global Theme System (with switcher on this page)
+        class GlobalThemeSwitcher {
+            constructor() {
+                // Prevent multiple instances
+                if (GlobalThemeSwitcher.instance) {
+                    return GlobalThemeSwitcher.instance;
+                }
+                GlobalThemeSwitcher.instance = this;
+                
+                this.currentTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+                this.findElements();
+                
+                this.init();
+            }
+
+            findElements() {
+                this.themeSwitcher = document.getElementById('themeSwitcher');
+                this.themeIcon = document.getElementById('themeIcon');
+                this.themeText = document.getElementById('themeText');
+            }
+
+            init() {
+                // Apply saved theme on load
+                this.applyTheme(this.currentTheme);
+                
+                // Find elements again in case they weren't available during construction
+                if (!this.themeSwitcher) {
+                    this.findElements();
+                }
+                
+                // Remove existing listeners to prevent duplicates
+                if (this.themeSwitcher && this.themeSwitcher._themeListener) {
+                    this.themeSwitcher.removeEventListener('click', this.themeSwitcher._themeListener);
+                }
+                
+                // Add event listener only if element exists
+                if (this.themeSwitcher) {
+                    this.themeSwitcher._themeListener = () => this.toggleTheme();
+                    this.themeSwitcher.addEventListener('click', this.themeSwitcher._themeListener);
+                }
+
+                // Listen for theme changes from other pages
+                if (!this._storageListener) {
+                    this._storageListener = (e) => {
+                        if (e.key === 'ai-nexus-theme' && e.newValue !== this.currentTheme) {
+                            this.currentTheme = e.newValue;
+                            this.applyTheme(this.currentTheme);
+                        }
+                    };
+                    window.addEventListener('storage', this._storageListener);
+                }
+            }
+
+            toggleTheme() {
+                const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+                this.setTheme(newTheme);
+            }
+
+            setTheme(theme) {
+                this.currentTheme = theme;
+                localStorage.setItem('ai-nexus-theme', theme);
+                this.applyThemeWithAnimation(theme);
+                
+                // Trigger storage event for other open pages
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'ai-nexus-theme',
+                    newValue: theme,
+                    url: window.location.href
+                }));
+            }
+
+            // Apply theme with button animation (for user-initiated changes)
+            applyThemeWithAnimation(theme) {
+                const html = document.documentElement;
+                const body = document.body;
+                
+                // Add transition class
+                body.classList.add('theme-transition');
+                
+                if (theme === 'light') {
+                    html.classList.add('light-theme');
+                    this.updateThemeButton('🌞', 'LIGHT', 'text-orange-400', 'group-hover:text-orange-300');
+                } else {
+                    html.classList.remove('light-theme');
+                    this.updateThemeButton('🌙', 'DARK', 'text-yellow-400', 'group-hover:text-yellow-300');
+                }
+                
+                // Remove transition class after animation
+                setTimeout(() => {
+                    body.classList.remove('theme-transition');
+                }, 400);
+            }
+
+            applyTheme(theme) {
+                const html = document.documentElement;
+                const body = document.body;
+                
+                // Apply theme changes without transition for immediate load
+                if (theme === 'light') {
+                    html.classList.add('light-theme');
+                    this.setThemeButtonState('🌞', 'LIGHT', 'text-orange-400', 'group-hover:text-orange-300');
+                } else {
+                    html.classList.remove('light-theme');
+                    this.setThemeButtonState('🌙', 'DARK', 'text-yellow-400', 'group-hover:text-yellow-300');
+                }
+            }
+
+            // Set button state without animation (for initial load and cross-page sync)
+            setThemeButtonState(icon, text, iconClass, hoverClass) {
+                if (this.themeIcon && this.themeText) {
+                    this.themeIcon.innerHTML = `<span class="${iconClass} ${hoverClass} transition-colors">${icon}</span>`;
+                    this.themeText.textContent = text;
+                }
+            }
+
+            updateThemeButton(icon, text, iconClass, hoverClass) {
+                if (this.themeIcon && this.themeText) {
+                    // Update icon with animation
+                    this.themeIcon.style.transform = 'scale(0.8) rotate(180deg)';
+                    
+                    setTimeout(() => {
+                        this.themeIcon.innerHTML = `<span class="${iconClass} ${hoverClass} transition-colors">${icon}</span>`;
+                        this.themeText.textContent = text;
+                        this.themeIcon.style.transform = 'scale(1) rotate(0deg)';
+                    }, 150);
+                }
+            }
+            
+            static reset() {
+                GlobalThemeSwitcher.instance = null;
+            }
+        }
+
+        // Comprehensive SPA Navigation System
+        class SPANavigation {
+            constructor() {
+                // Prevent multiple instances
+                if (SPANavigation.instance) {
+                    return SPANavigation.instance;
+                }
+                SPANavigation.instance = this;
+                
+                this.init();
+            }
+
+            init() {
+                // Clear any existing listeners first
+                this.clearEventListeners();
+                
+                // Add click listeners to all navigation links
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (!link._spaListener) {
+                        link._spaListener = (e) => {
+                            e.preventDefault();
+                            const targetPage = link.getAttribute('data-page');
+                            if (targetPage) {
+                                this.navigateToPage(targetPage);
+                            }
+                        };
+                        link.addEventListener('click', link._spaListener);
+                    }
+                });
+            }
+
+            clearEventListeners() {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (link._spaListener) {
+                        link.removeEventListener('click', link._spaListener);
+                        link._spaListener = null;
+                    }
+                });
+            }
+
+            async navigateToPage(targetPage) {
+                const mainElement = document.querySelector('main');
+                if (!mainElement) return;
+
+                try {
+                    // Start transition
+                    mainElement.style.opacity = '0';
+                    mainElement.style.transform = 'translateY(10px)';
+
+                    // Fetch the target page
+                    const response = await fetch(targetPage);
+                    if (!response.ok) throw new Error('Failed to load page');
+
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Extract main content
+                    const newMain = doc.querySelector('main');
+                    if (newMain) {
+                        // Store current header state to prevent changes
+                        const currentHeader = document.querySelector('header');
+                        const currentHeaderHTML = currentHeader ? currentHeader.innerHTML : null;
+                        
+                        // Replace content
+                        mainElement.innerHTML = newMain.innerHTML;
+
+                        // Ensure header remains unchanged
+                        if (currentHeaderHTML && currentHeader) {
+                            const headerAfterNav = document.querySelector('header');
+                            if (!headerAfterNav || headerAfterNav.innerHTML !== currentHeaderHTML) {
+                                currentHeader.innerHTML = currentHeaderHTML;
+                            }
+                        }
+
+                        // Update page title
+                        const newTitle = doc.querySelector('title')?.textContent;
+                        if (newTitle) {
+                            document.title = newTitle;
+                        }
+
+                        // Update URL
+                        history.pushState({page: targetPage}, newTitle || targetPage, targetPage);
+
+                        // Re-initialize navigation for new content
+                        this.reinitializeNavigation();
+
+                        // Update navigation state
+                        this.updateNavigationState(targetPage);
+
+                        // Animate in new content
+                        setTimeout(() => {
+                            mainElement.style.opacity = '1';
+                            mainElement.style.transform = 'translateY(0)';
+                        }, 50);
+                    }
+                } catch (error) {
+                    console.error('Navigation failed:', error);
+                    // Fallback to regular navigation
+                    window.location.href = targetPage;
+                }
+            }
+
+            reinitializeNavigation() {
+                // Use the main init method to handle all navigation setup
+                this.init();
+
+                // Re-initialize theme switcher if present in new content - prevent duplicates
+                const themeSwitcher = document.getElementById('themeSwitcher');
+                if (themeSwitcher && !window.themeInitialized) {
+                    if (GlobalThemeSwitcher.instance) {
+                        GlobalThemeSwitcher.instance = null;
+                    }
+                    new GlobalThemeSwitcher();
+                    window.themeInitialized = true;
+                }
+
+                // Re-initialize logout functionality - only for dashboard page
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn && !logoutBtn.hasAttribute('data-logout-initialized')) {
+                    logoutBtn.addEventListener('click', (event) => {
+                        // Prevent event bubbling and default behavior
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        console.log('Logout button clicked!'); // Debug log
+                        
+                        // Clear any stored session data
+                        localStorage.removeItem('userSession');
+                        sessionStorage.clear();
+                        
+                        // Show logout confirmation or redirect to login
+                        if (confirm('Are you sure you want to log out?')) {
+                            // Redirect to login page
+                            console.log('User confirmed logout, redirecting to login...'); // Debug log
+                            window.location.href = 'login.html';
+                        } else {
+                            console.log('User cancelled logout.'); // Debug log
+                        }
+                    });
+                    logoutBtn.setAttribute('data-logout-initialized', 'true');
+                }
+            }
+
+            updateNavigationState(activePage) {
+                // Reset all nav buttons to default state
+                const navButtons = document.querySelectorAll('.nav-link');
+                navButtons.forEach(btn => {
+                    btn.className = 'nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950';
+                });
+
+                // Highlight active page with specific colors
+                if (activePage === 'index.html') {
+                    const dashboardBtn = document.querySelector('[data-page="index.html"]');
+                    if (dashboardBtn) {
+                        dashboardBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 border border-primary/30 hover:border-primary/50';
+                    }
+                } else {
+                    const activeBtn = document.querySelector(`[data-page="${activePage}"]`);
+                    if (activeBtn) {
+                        if (activePage === 'labs.html') {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-success to-cyan text-white rounded-lg hover:from-green-600 hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-success/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-success focus:ring-offset-2 focus:ring-offset-slate-950 border border-success/30 hover:border-success/50';
+                        } else if (activePage === 'archive.html') {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-purple/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2 focus:ring-offset-slate-950 border border-purple/30 hover:border-purple/50';
+                        } else if (activePage === 'profile.html') {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-warning to-orange-500 text-white rounded-lg hover:from-orange-500 hover:to-red-500 transition-all duration-300 font-medium shadow-lg hover:shadow-warning/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 focus:ring-offset-slate-950 border border-warning/30 hover:border-warning/50';
+                        } else {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 border border-primary/30 hover:border-primary/50';
+                        }
+                    }
+                }
+            }
+        }
+
+        // Initialize theme switcher when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in
+            const userSession = localStorage.getItem('userSession');
+            if (!userSession) {
+                // User is not logged in, redirect to login page
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Only initialize if not already done to prevent header refresh
+            if (!window.themeInitialized && !GlobalThemeSwitcher.instance) {
+                new GlobalThemeSwitcher();
+                window.themeInitialized = true;
+            }
+            
+            if (!window.spaInitialized && !SPANavigation.instance) {
+                new SPANavigation();
+                window.spaInitialized = true;
+            }
+            
+            // Update navigation state to highlight current page on load
+            if (SPANavigation.instance) {
+                SPANavigation.instance.updateNavigationState('index.html');
+            }
+        });
     </script>
 </body>
 </html>

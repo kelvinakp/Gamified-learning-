@@ -1,4 +1,4 @@
-// AI Nexus - Neural Learning Interface - Main JavaScript
+// T&A - Neural Learning Interface - Main JavaScript
 // Check if user is already logged in on page load
 document.addEventListener('DOMContentLoaded', function() {
     const userId = localStorage.getItem('userId');
