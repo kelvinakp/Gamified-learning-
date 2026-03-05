@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T&A - Labs</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad1)'/%3E%3Ctext x='50' y='60' font-family='Arial' font-size='35' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Immediate theme application to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+    
+    <style>
+        /* Theme-based styles */
+        .light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4, .light-theme h5, .light-theme h6 {
+            color: #1E293B !important;
+        }
+
+        .light-theme p:not(.text-white):not([class*="text-"]) {
+            color: #374151 !important;
+        }
+
+        /* Force navigation buttons to show correct gradient colors */
+        .light-theme button[data-page="index.html"] {
+            background: linear-gradient(to right, #3B82F6, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="labs.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #10B981, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="archive.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #8B5CF6, #EC4899) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="profile.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #F59E0B, #F97316) !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white min-h-screen font-sans transition-colors duration-300">
+
+    <!-- Header stays consistent across all pages -->
+    <header class="border-b border-slate-800/50 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-cyan rounded-xl flex items-center justify-center shadow-lg animate-glow">
+                        <span class="text-lg font-bold" role="img" aria-label="AI">🤖</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold font-headings bg-gradient-to-r from-primary via-cyan to-success bg-clip-text text-transparent tracking-tight">
+                            T&A
+                        </h1>
+                        <p class="text-xs text-slate-400 font-code tracking-wider">LABS</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <button data-page="index.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Dashboard
+                    </button>
+                    <button data-page="labs.html" class="nav-link px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 font-medium shadow-lg hover:shadow-emerald-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-emerald-400/30 hover:border-emerald-400/50">
+                        Labs
+                    </button>
+                    <button data-page="profile.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Profile
+                    </button>
+                    <button data-page="archive.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Archive
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 relative">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-cyan/5 to-success/5 rounded-3xl blur-3xl -z-10"></div>
+
+        <!-- Page Header -->
+        <section class="text-center mb-16 relative">
+            <div class="absolute -top-20 left-1/2 transform -translate-x-1/2 w-40 h-40 bg-gradient-to-r from-success/20 to-cyan/20 rounded-full blur-3xl -z-10"></div>
+            <h1 class="text-5xl font-bold font-headings bg-gradient-to-r from-success via-cyan to-primary bg-clip-text text-transparent mb-4 tracking-tight">
+                Labs
+            </h1>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Advanced AI environments for groundbreaking experiments and discoveries
+            </p>
+        </section>
+
+        <!-- Active Experiments -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                <span class="w-8 h-8 bg-gradient-to-r from-warning to-orange-500 rounded-xl mr-4 flex items-center justify-center animate-gentle-pulse" role="img" aria-label="Running">🏃</span>
+                Running Experiments
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Experiment 1 -->
+                <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-14 h-14 bg-gradient-to-br from-primary via-blue-500 to-cyan rounded-2xl flex items-center justify-center shadow-xl">
+                                <span class="text-xl" role="img" aria-label="Neural Network">🧠</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold font-headings text-white group-hover:text-primary transition-colors">Sentiment Analysis Engine</h3>
+                                <p class="text-sm text-slate-400 font-code">EXP-2024-001 • Started 3 days ago</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-success/20 text-success rounded-full text-xs font-medium border border-success/30">
+                            RUNNING
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-slate-300 leading-relaxed">
+                            Advanced transformer-based model for multi-language sentiment classification with real-time processing capabilities.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-cyan-400">94.7%</div>
+                                    <div class="text-xs text-slate-400 font-code">ACCURACY</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-primary">2.3ms</div>
+                                    <div class="text-xs text-slate-400 font-code">LATENCY</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-success">15.2K</div>
+                                    <div class="text-xs text-slate-400 font-code">SAMPLES</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-lg transition-colors border border-primary/30 hover:border-primary/50">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Experiment 2 -->
+                <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-success/50 transition-all duration-500 hover:shadow-2xl hover:shadow-success/10 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-14 h-14 bg-gradient-to-br from-success via-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-xl">
+                                <span class="text-xl" role="img" aria-label="Robot">🤖</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold font-headings text-white group-hover:text-success transition-colors">Autonomous Learning Agent</h3>
+                                <p class="text-sm text-slate-400 font-code">EXP-2024-002 • Started 1 week ago</p>
+                            </div>
+                        </div>
+                        <div class="px-3 py-1 bg-warning/20 text-warning rounded-full text-xs font-medium border border-warning/30">
+                            TRAINING
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-slate-300 leading-relaxed">
+                            Self-improving AI system using reinforcement learning with dynamic environment adaptation and knowledge transfer.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-success">87.3%</div>
+                                    <div class="text-xs text-slate-400 font-code">PROGRESS</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-cyan-400">3.2M</div>
+                                    <div class="text-xs text-slate-400 font-code">EPISODES</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-warning">4.7</div>
+                                    <div class="text-xs text-slate-400 font-code">REWARD</div>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-success/20 hover:bg-success/30 text-success rounded-lg transition-colors border border-success/30 hover:border-success/50">
+                                Monitor
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Available Lab Resources -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                <span class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl mr-4 flex items-center justify-center animate-gentle-pulse" role="img" aria-label="Resources">⚡</span>
+                Lab Resources
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- GPU Cluster -->
+                <div class="bg-gradient-to-br from-primary/20 to-blue-500/10 border border-primary/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="GPU">🔥</span>
+                        </div>
+                        <div class="px-2 py-1 bg-success/20 text-success rounded-full text-xs font-medium">ONLINE</div>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-headings mb-2">GPU Cluster</h3>
+                    <p class="text-slate-400 text-sm mb-4">High-performance computing cluster</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs text-slate-400">Utilization</span>
+                            <span class="text-xs text-primary font-medium">73%</span>
+                        </div>
+                        <div class="w-full bg-slate-700/50 rounded-full h-1.5">
+                            <div class="bg-gradient-to-r from-primary to-blue-500 h-1.5 rounded-full" style="width: 73%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Storage -->
+                <div class="bg-gradient-to-br from-success/20 to-emerald-500/10 border border-success/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-success to-emerald-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Storage">💾</span>
+                        </div>
+                        <div class="px-2 py-1 bg-success/20 text-success rounded-full text-xs font-medium">HEALTHY</div>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-headings mb-2">Data Storage</h3>
+                    <p class="text-slate-400 text-sm mb-4">Distributed storage system</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs text-slate-400">Used</span>
+                            <span class="text-xs text-success font-medium">2.8TB / 10TB</span>
+                        </div>
+                        <div class="w-full bg-slate-700/50 rounded-full h-1.5">
+                            <div class="bg-gradient-to-r from-success to-emerald-500 h-1.5 rounded-full" style="width: 28%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Queue -->
+                <div class="bg-gradient-to-br from-warning/20 to-orange-500/10 border border-warning/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-warning to-orange-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Queue">⏳</span>
+                        </div>
+                        <div class="px-2 py-1 bg-warning/20 text-warning rounded-full text-xs font-medium">ACTIVE</div>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-headings mb-2">Job Queue</h3>
+                    <p class="text-slate-400 text-sm mb-4">Background processing jobs</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs text-slate-400">Pending</span>
+                            <span class="text-xs text-warning font-medium">7 jobs</span>
+                        </div>
+                        <div class="text-xs text-slate-400">Avg. wait: 12 minutes</div>
+                    </div>
+                </div>
+
+                <!-- API Endpoints -->
+                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="API">🌐</span>
+                        </div>
+                        <div class="px-2 py-1 bg-success/20 text-success rounded-full text-xs font-medium">UP</div>
+                    </div>
+                    <h3 class="text-lg font-bold text-white font-headings mb-2">API Gateway</h3>
+                    <p class="text-slate-400 text-sm mb-4">External service endpoints</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs text-slate-400">Requests/min</span>
+                            <span class="text-xs text-purple-400 font-medium">1.2K</span>
+                        </div>
+                        <div class="text-xs text-slate-400">Latency: 45ms avg</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple theme listener - no local theme switcher
+        const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Listen for theme changes from dashboard
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'ai-nexus-theme') {
+                if (e.newValue === 'light') {
+                    document.body.classList.add('light-theme');
+                } else {
+                    document.body.classList.remove('light-theme');
+                }
+            }
+        });
+
+        // SPA Navigation System - Simple Version
+        class SPANavigation {
+            constructor() {
+                if (SPANavigation.instance) {
+                    return SPANavigation.instance;
+                }
+                SPANavigation.instance = this;
+                this.init();
+            }
+
+            init() {
+                this.clearEventListeners();
+                
+                // Add navigation listeners
+                const navLinks = document.querySelectorAll('[data-page]');
+                navLinks.forEach(link => {
+                    if (!link._spaListener) {
+                        link._spaListener = (e) => this.navigate(e, link.getAttribute('data-page'));
+                        link.addEventListener('click', link._spaListener);
+                    }
+                });
+            }
+
+            clearEventListeners() {
+                const navLinks = document.querySelectorAll('[data-page]');
+                navLinks.forEach(link => {
+                    if (link._spaListener) {
+                        link.removeEventListener('click', link._spaListener);
+                        delete link._spaListener;
+                    }
+                });
+            }
+
+            async navigate(event, targetPage) {
+                event.preventDefault();
+                
+                if (targetPage === 'labs.html') {
+                    return; // Already on labs page
+                }
+
+                try {
+                    const response = await fetch(targetPage);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const newDoc = parser.parseFromString(html, 'text/html');
+                    
+                    // Update main content
+                    const currentMain = document.querySelector('main');
+                    const newMain = newDoc.querySelector('main');
+                    
+                    if (currentMain && newMain) {
+                        // Preserve header
+                        const currentHeader = document.querySelector('header');
+                        const currentHeaderHTML = currentHeader ? currentHeader.innerHTML : null;
+                        
+                        // Update main content
+                        currentMain.innerHTML = newMain.innerHTML;
+                        
+                        // Restore header if needed
+                        const headerAfterNav = document.querySelector('header');
+                        if (currentHeaderHTML && headerAfterNav && 
+                            (!headerAfterNav || headerAfterNav.innerHTML !== currentHeaderHTML)) {
+                            currentHeader.innerHTML = currentHeaderHTML;
+                        }
+                        
+                        // Update page title and URL
+                        document.title = newDoc.title;
+                        history.pushState({page: targetPage}, '', targetPage);
+                        
+                        // Reinitialize navigation
+                        this.reinitializeNavigation();
+                    }
+                } catch (error) {
+                    console.error('Navigation failed:', error);
+                    window.location.href = targetPage;
+                }
+            }
+
+            reinitializeNavigation() {
+                this.init();
+                this.updateNavigationState('labs.html');
+            }
+
+            updateNavigationState(activePage) {
+                // Reset all nav buttons
+                const navButtons = document.querySelectorAll('nav button');
+                navButtons.forEach(btn => {
+                    if (btn.classList.contains('nav-link')) {
+                        btn.className = 'nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950';
+                    }
+                });
+
+                // Highlight active page
+                if (activePage === 'labs.html') {
+                    const labsBtn = document.querySelector('[data-page="labs.html"]');
+                    if (labsBtn) {
+                        labsBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 font-medium shadow-lg hover:shadow-emerald-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-emerald-400/30 hover:border-emerald-400/50';
+                    }
+                }
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            if (SPANavigation.instance) {
+                SPANavigation.instance = null;
+            }
+            
+            new SPANavigation();
+            
+            // Update navigation state
+            if (SPANavigation.instance) {
+                SPANavigation.instance.updateNavigationState('labs.html');
+            }
+        });
+    </script>
+</body>
+</html>

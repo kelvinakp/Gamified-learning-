@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T&A - Archive</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad1)'/%3E%3Ctext x='50' y='60' font-family='Arial' font-size='35' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Immediate theme application to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+    
+    <style>
+        /* Theme-based styles */
+        .light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4, .light-theme h5, .light-theme h6 {
+            color: #1E293B !important;
+        }
+
+        .light-theme p:not(.text-white):not([class*="text-"]) {
+            color: #374151 !important;
+        }
+
+        /* Force navigation buttons to show correct gradient colors */
+        .light-theme button[data-page="index.html"] {
+            background: linear-gradient(to right, #3B82F6, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="labs.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #10B981, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="archive.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #8B5CF6, #EC4899) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="profile.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #F59E0B, #F97316) !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white min-h-screen font-sans transition-colors duration-300">
+
+    <!-- Header stays consistent across all pages -->
+    <header class="border-b border-slate-800/50 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-cyan rounded-xl flex items-center justify-center shadow-lg animate-glow">
+                        <span class="text-lg font-bold" role="img" aria-label="AI">🤖</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold font-headings bg-gradient-to-r from-primary via-cyan to-success bg-clip-text text-transparent tracking-tight">
+                            T&A
+                        </h1>
+                        <p class="text-xs text-slate-400 font-code tracking-wider">ARCHIVE</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <button data-page="index.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Dashboard
+                    </button>
+                    <button data-page="labs.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Labs
+                    </button>
+                    <button data-page="profile.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Profile
+                    </button>
+                    <button data-page="archive.html" class="nav-link px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-purple-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-purple-400/30 hover:border-purple-400/50">
+                        Archive
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 relative">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-red-500/5 rounded-3xl blur-3xl -z-10"></div>
+
+        <!-- Page Header -->
+        <section class="text-center mb-16 relative">
+            <div class="absolute -top-20 left-1/2 transform -translate-x-1/2 w-40 h-40 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl -z-10"></div>
+            <h1 class="text-5xl font-bold font-headings bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent mb-4 tracking-tight">
+                Archive
+            </h1>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Historical data, completed experiments, and knowledge repository
+            </p>
+        </section>
+
+        <!-- Archive Statistics -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Total Papers -->
+                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Papers">📄</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-headings mb-1">1,247</h3>
+                    <p class="text-purple-400 text-sm font-medium">Papers</p>
+                    <p class="text-slate-400 text-xs mt-1">+23 this month</p>
+                </div>
+
+                <!-- Experiments -->
+                <div class="bg-gradient-to-br from-pink-500/20 to-red-500/10 border border-pink-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Experiments">🧪</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-headings mb-1">843</h3>
+                    <p class="text-pink-400 text-sm font-medium">Completed Experiments</p>
+                    <p class="text-slate-400 text-xs mt-1">92% success rate</p>
+                </div>
+
+                <!-- Datasets -->
+                <div class="bg-gradient-to-br from-red-500/20 to-orange-500/10 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Datasets">💾</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-headings mb-1">156</h3>
+                    <p class="text-red-400 text-sm font-medium">Datasets</p>
+                    <p class="text-slate-400 text-xs mt-1">42.8 TB total</p>
+                </div>
+
+                <!-- Citations -->
+                <div class="bg-gradient-to-br from-orange-500/20 to-yellow-500/10 border border-orange-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Citations">📊</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-headings mb-1">12.4K</h3>
+                    <p class="text-orange-400 text-sm font-medium">Total Citations</p>
+                    <p class="text-slate-400 text-xs mt-1">H-index: 47</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Publications -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                <span class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mr-4 flex items-center justify-center animate-gentle-pulse" role="img" aria-label="Publications">📚</span>
+                Recent Publications
+            </h2>
+
+            <div class="space-y-6">
+                <!-- Publication 1 -->
+                <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors mb-2">
+                                Advanced Neural Architecture Search with Evolutionary Algorithms
+                            </h3>
+                            <p class="text-slate-400 text-sm mb-2">
+                                Dr. AI, Dr. Neural Network, Dr. Deep Learning
+                            </p>
+                            <div class="flex items-center space-x-4 text-xs text-slate-500">
+                                <span>Nature Machine Intelligence</span>
+                                <span>•</span>
+                                <span>December 2024</span>
+                                <span>•</span>
+                                <span class="text-cyan-400">247 citations</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-medium">
+                                Q1 Journal
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        This paper presents a novel approach to neural architecture search using evolutionary algorithms, achieving state-of-the-art results on ImageNet classification with 40% fewer parameters than conventional architectures.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-xs text-slate-400">Impact Factor: 8.2</span>
+                            <span class="text-xs text-success">Open Access</span>
+                        </div>
+                        <button class="px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 rounded-lg transition-colors border border-purple-500/30 hover:border-purple-500/50">
+                            View Paper
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Publication 2 -->
+                <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 hover:border-pink-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-500/10 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors mb-2">
+                                Federated Learning for Privacy-Preserving Medical AI
+                            </h3>
+                            <p class="text-slate-400 text-sm mb-2">
+                                Dr. Privacy Expert, Dr. AI, Dr. Medical AI
+                            </p>
+                            <div class="flex items-center space-x-4 text-xs text-slate-500">
+                                <span>IEEE Transactions on Medical Imaging</span>
+                                <span>•</span>
+                                <span>November 2024</span>
+                                <span>•</span>
+                                <span class="text-cyan-400">189 citations</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-xs font-medium">
+                                Top Venue
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        A comprehensive framework for federated learning in healthcare settings, enabling collaborative AI development while maintaining patient privacy and regulatory compliance.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-xs text-slate-400">Impact Factor: 6.8</span>
+                            <span class="text-xs text-warning">Featured Article</span>
+                        </div>
+                        <button class="px-4 py-2 bg-pink-500/20 hover:bg-pink-500/30 text-pink-400 rounded-lg transition-colors border border-pink-500/30 hover:border-pink-500/50">
+                            View Paper
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Publication 3 -->
+                <article class="group bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-6 hover:border-red-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/10 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors mb-2">
+                                Quantum-Enhanced Machine Learning for Complex Optimization
+                            </h3>
+                            <p class="text-slate-400 text-sm mb-2">
+                                Dr. Quantum Computing, Dr. AI, Dr. Optimization
+                            </p>
+                            <div class="flex items-center space-x-4 text-xs text-slate-500">
+                                <span>Science</span>
+                                <span>•</span>
+                                <span>October 2024</span>
+                                <span>•</span>
+                                <span class="text-cyan-400">312 citations</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-xs font-medium">
+                                High Impact
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        Breakthrough demonstrating the application of quantum computing principles to enhance machine learning optimization, achieving exponential speedups for specific problem classes.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-xs text-slate-400">Impact Factor: 47.9</span>
+                            <span class="text-xs text-red-400">Cover Story</span>
+                        </div>
+                        <button class="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors border border-red-500/30 hover:border-red-500/50">
+                            View Paper
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple theme listener - no local theme switcher
+        const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Listen for theme changes from dashboard
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'ai-nexus-theme') {
+                if (e.newValue === 'light') {
+                    document.body.classList.add('light-theme');
+                } else {
+                    document.body.classList.remove('light-theme');
+                }
+            }
+        });
+
+        // SPA Navigation System - Simple Version
+        class SPANavigation {
+            constructor() {
+                if (SPANavigation.instance) {
+                    return SPANavigation.instance;
+                }
+                SPANavigation.instance = this;
+                this.init();
+            }
+
+            init() {
+                this.clearEventListeners();
+                
+                // Add navigation listeners
+                const navLinks = document.querySelectorAll('[data-page]');
+                navLinks.forEach(link => {
+                    if (!link._spaListener) {
+                        link._spaListener = (e) => this.navigate(e, link.getAttribute('data-page'));
+                        link.addEventListener('click', link._spaListener);
+                    }
+                });
+            }
+
+            clearEventListeners() {
+                const navLinks = document.querySelectorAll('[data-page]');
+                navLinks.forEach(link => {
+                    if (link._spaListener) {
+                        link.removeEventListener('click', link._spaListener);
+                        delete link._spaListener;
+                    }
+                });
+            }
+
+            async navigate(event, targetPage) {
+                event.preventDefault();
+                
+                if (targetPage === 'archive.html') {
+                    return; // Already on archive page
+                }
+
+                try {
+                    const response = await fetch(targetPage);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const newDoc = parser.parseFromString(html, 'text/html');
+                    
+                    // Update main content
+                    const currentMain = document.querySelector('main');
+                    const newMain = newDoc.querySelector('main');
+                    
+                    if (currentMain && newMain) {
+                        // Preserve header
+                        const currentHeader = document.querySelector('header');
+                        const currentHeaderHTML = currentHeader ? currentHeader.innerHTML : null;
+                        
+                        // Update main content
+                        currentMain.innerHTML = newMain.innerHTML;
+                        
+                        // Restore header if needed
+                        const headerAfterNav = document.querySelector('header');
+                        if (currentHeaderHTML && headerAfterNav && 
+                            (!headerAfterNav || headerAfterNav.innerHTML !== currentHeaderHTML)) {
+                            currentHeader.innerHTML = currentHeaderHTML;
+                        }
+                        
+                        // Update page title and URL
+                        document.title = newDoc.title;
+                        history.pushState({page: targetPage}, '', targetPage);
+                        
+                        // Reinitialize navigation
+                        this.reinitializeNavigation();
+                    }
+                } catch (error) {
+                    console.error('Navigation failed:', error);
+                    window.location.href = targetPage;
+                }
+            }
+
+            reinitializeNavigation() {
+                this.init();
+                this.updateNavigationState('archive.html');
+            }
+
+            updateNavigationState(activePage) {
+                // Reset all nav buttons
+                const navButtons = document.querySelectorAll('nav button');
+                navButtons.forEach(btn => {
+                    if (btn.classList.contains('nav-link')) {
+                        btn.className = 'nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950';
+                    }
+                });
+
+                // Highlight active page
+                if (activePage === 'archive.html') {
+                    const archiveBtn = document.querySelector('[data-page="archive.html"]');
+                    if (archiveBtn) {
+                        archiveBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-purple-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-purple-400/30 hover:border-purple-400/50';
+                    }
+                }
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            if (SPANavigation.instance) {
+                SPANavigation.instance = null;
+            }
+            
+            new SPANavigation();
+            
+            // Update navigation state
+            if (SPANavigation.instance) {
+                SPANavigation.instance.updateNavigationState('archive.html');
+            }
+        });
+    </script>
+</body>
+</html>

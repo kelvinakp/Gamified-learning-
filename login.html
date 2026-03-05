@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T&A - Login</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad1)'/%3E%3Ctext x='50' y='60' font-family='Arial' font-size='35' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#667eea',
+                        secondary: '#764ba2',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        cyan: '#06b6d4'
+                    },
+                    fontFamily: {
+                        'headings': ['Inter', 'system-ui', 'sans-serif'],
+                        'code': ['JetBrains Mono', 'Consolas', 'monospace']
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'gentle-pulse': 'gentle-pulse 3s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px theme(colors.primary), 0 0 10px theme(colors.primary), 0 0 15px theme(colors.primary)' },
+                            '100%': { boxShadow: '0 0 10px theme(colors.primary), 0 0 20px theme(colors.primary), 0 0 30px theme(colors.primary)' }
+                        },
+                        'gentle-pulse': {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white min-h-screen font-sans">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-40 -right-40 w-80 h-80 bg-gradient-to-r from-cyan/20 to-success/20 rounded-full blur-3xl animate-float" style="animation-delay: -1s;"></div>
+        <div class="absolute -bottom-40 left-1/2 transform -translate-x-1/2 w-80 h-80 bg-gradient-to-r from-warning/20 to-danger/20 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+    </div>
+
+    <div class="min-h-screen flex items-center justify-center px-4 relative z-10">
+        <div class="bg-slate-800/90 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <!-- Logo & Brand -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 animate-glow">
+                    <span class="text-3xl" role="img" aria-label="AI">🤖</span>
+                </div>
+                <h1 class="text-3xl font-bold font-headings bg-gradient-to-r from-primary via-cyan to-success bg-clip-text text-transparent tracking-tight">
+                    T&A
+                </h1>
+                <p class="text-slate-400 mt-2 font-code text-sm tracking-wider">SECURE ACCESS PORTAL</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-6">
+                <div class="space-y-2">
+                    <label for="username" class="block text-sm font-medium text-slate-300">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username"
+                        class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 transition-all duration-300"
+                        placeholder="Enter your username"
+                        required
+                    >
+                </div>
+
+                <div class="space-y-2">
+                    <label for="password" class="block text-sm font-medium text-slate-300">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 transition-all duration-300"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input 
+                            type="checkbox" 
+                            id="remember" 
+                            name="remember"
+                            class="w-4 h-4 text-primary bg-slate-700 border-slate-600 rounded focus:ring-primary focus:ring-2"
+                        >
+                        <label for="remember" class="ml-2 text-sm text-slate-300">Remember me</label>
+                    </div>
+                    <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">Forgot password?</a>
+                </div>
+
+                <button 
+                    type="submit"
+                    class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-xl hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 shadow-lg hover:shadow-primary/25 hover:scale-105 transform"
+                >
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Alternative Login Options -->
+            <div class="mt-6 text-center">
+                <p class="text-sm text-slate-400 mb-4">Or continue with</p>
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-slate-700/50 hover:bg-slate-700/70 border border-slate-600/50 hover:border-slate-500 rounded-xl py-2 px-4 text-sm text-slate-300 hover:text-white transition-all duration-300">
+                        Google
+                    </button>
+                    <button class="flex-1 bg-slate-700/50 hover:bg-slate-700/70 border border-slate-600/50 hover:border-slate-500 rounded-xl py-2 px-4 text-sm text-slate-300 hover:text-white transition-all duration-300">
+                        GitHub
+                    </button>
+                    <button class="flex-1 bg-slate-700/50 hover:bg-slate-700/70 border border-slate-600/50 hover:border-slate-500 rounded-xl py-2 px-4 text-sm text-slate-300 hover:text-white transition-all duration-300">
+                        ORCID
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sign Up Link -->
+            <div class="mt-6 text-center">
+                <p class="text-sm text-slate-400">
+                    Don't have an account? 
+                    <a href="#" class="text-primary hover:text-primary/80 transition-colors font-medium">Create Account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation for demo
+            if (username && password) {
+                // Store user session
+                localStorage.setItem('userSession', JSON.stringify({
+                    username: username,
+                    loginTime: new Date().toISOString(),
+                    sessionId: Math.random().toString(36).substr(2, 9)
+                }));
+                
+                // Redirect to dashboard
+                window.location.href = 'index.html';
+            } else {
+                alert('Please enter both username and password');
+            }
+        });
+
+        // Check if user is already logged in
+        const userSession = localStorage.getItem('userSession');
+        if (userSession) {
+            // User is already logged in, redirect to dashboard
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

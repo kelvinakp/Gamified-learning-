@@ -1,0 +1,294 @@
+{
+  "course": {
+    "id": "agentic-ai-fundamentals",
+    "title": "Agentic AI Fundamentals",
+    "description": "Master the principles of autonomous AI agents that can reason, plan, and take actions in complex environments.",
+    "version": "2.1.0",
+    "difficulty": "intermediate",
+    "estimatedHours": 45,
+    "prerequisites": [
+      "Basic Python programming",
+      "Understanding of machine learning concepts",
+      "Familiarity with neural networks"
+    ],
+    "modules": [
+      {
+        "id": "module-1",
+        "title": "Neural Architecture Mastery",
+        "description": "Architect intelligent systems that learn and adapt. Master the fundamental building blocks of neural networks, from perceptrons to deep learning architectures.",
+        "status": "in-progress",
+        "progress": 60,
+        "xp": 250,
+        "difficulty": "intermediate",
+        "estimatedHours": 8,
+        "lessons": [
+          {
+            "id": "lesson-1-1",
+            "title": "Introduction to Neural Networks",
+            "type": "theory",
+            "duration": 45,
+            "status": "completed",
+            "xp": 50
+          },
+          {
+            "id": "lesson-1-2",
+            "title": "Perceptrons and Multi-layer Networks",
+            "type": "hands-on",
+            "duration": 60,
+            "status": "completed",
+            "xp": 75
+          },
+          {
+            "id": "lesson-1-3",
+            "title": "Backpropagation Deep Dive",
+            "type": "practical",
+            "duration": 90,
+            "status": "in-progress",
+            "xp": 100
+          },
+          {
+            "id": "lesson-1-4",
+            "title": "Advanced Architectures (CNNs, RNNs, Transformers)",
+            "type": "project",
+            "duration": 120,
+            "status": "locked",
+            "xp": 150
+          }
+        ]
+      },
+      {
+        "id": "module-2",
+        "title": "Autonomous Decision Systems",
+        "description": "Build AI agents that make intelligent decisions in complex environments. Explore reinforcement learning, decision trees, and strategic planning algorithms.",
+        "status": "locked",
+        "progress": 0,
+        "xp": 400,
+        "difficulty": "advanced",
+        "estimatedHours": 12,
+        "unlockRequirements": ["module-1"],
+        "lessons": [
+          {
+            "id": "lesson-2-1",
+            "title": "Reinforcement Learning Fundamentals",
+            "type": "theory",
+            "duration": 60,
+            "status": "locked",
+            "xp": 80
+          },
+          {
+            "id": "lesson-2-2",
+            "title": "Q-Learning and Policy Gradients",
+            "type": "hands-on",
+            "duration": 90,
+            "status": "locked",
+            "xp": 120
+          },
+          {
+            "id": "lesson-2-3",
+            "title": "Multi-Agent Systems",
+            "type": "practical",
+            "duration": 120,
+            "status": "locked",
+            "xp": 150
+          },
+          {
+            "id": "lesson-2-4",
+            "title": "Strategic Planning and Game Theory",
+            "type": "project",
+            "duration": 150,
+            "status": "locked",
+            "xp": 200
+          }
+        ]
+      },
+      {
+        "id": "module-3",
+        "title": "AI-Accelerated Development",
+        "description": "Harness the power of AI coding assistants and generative models. Learn prompt engineering, code generation, and AI-human collaboration workflows.",
+        "status": "available",
+        "progress": 0,
+        "xp": 300,
+        "difficulty": "beginner",
+        "estimatedHours": 10,
+        "lessons": [
+          {
+            "id": "lesson-3-1",
+            "title": "Introduction to AI Coding Assistants",
+            "type": "theory",
+            "duration": 30,
+            "status": "available",
+            "xp": 40
+          },
+          {
+            "id": "lesson-3-2",
+            "title": "Prompt Engineering Best Practices",
+            "type": "hands-on",
+            "duration": 75,
+            "status": "available",
+            "xp": 90
+          },
+          {
+            "id": "lesson-3-3",
+            "title": "Code Generation and Review",
+            "type": "practical",
+            "duration": 90,
+            "status": "available",
+            "xp": 110
+          },
+          {
+            "id": "lesson-3-4",
+            "title": "Building AI-Human Workflows",
+            "type": "project",
+            "duration": 120,
+            "status": "available",
+            "xp": 160
+          }
+        ]
+      },
+      {
+        "id": "module-4",
+        "title": "Agent Memory and Learning",
+        "description": "Implement persistent memory systems and continuous learning capabilities for AI agents.",
+        "status": "locked",
+        "progress": 0,
+        "xp": 350,
+        "difficulty": "advanced",
+        "estimatedHours": 8,
+        "unlockRequirements": ["module-2"],
+        "lessons": [
+          {
+            "id": "lesson-4-1",
+            "title": "Memory Architectures",
+            "type": "theory",
+            "duration": 45,
+            "status": "locked",
+            "xp": 70
+          },
+          {
+            "id": "lesson-4-2",
+            "title": "Episodic and Semantic Memory",
+            "type": "hands-on",
+            "duration": 90,
+            "status": "locked",
+            "xp": 120
+          },
+          {
+            "id": "lesson-4-3",
+            "title": "Continual Learning Strategies",
+            "type": "practical",
+            "duration": 105,
+            "status": "locked",
+            "xp": 140
+          }
+        ]
+      },
+      {
+        "id": "module-5",
+        "title": "Multi-Modal Agent Systems",
+        "description": "Create agents that can process and integrate information from multiple modalities (text, vision, audio).",
+        "status": "locked",
+        "progress": 0,
+        "xp": 450,
+        "difficulty": "expert",
+        "estimatedHours": 15,
+        "unlockRequirements": ["module-2", "module-4"],
+        "lessons": [
+          {
+            "id": "lesson-5-1",
+            "title": "Vision-Language Models",
+            "type": "theory",
+            "duration": 60,
+            "status": "locked",
+            "xp": 100
+          },
+          {
+            "id": "lesson-5-2",
+            "title": "Audio Processing Integration",
+            "type": "hands-on",
+            "duration": 90,
+            "status": "locked",
+            "xp": 130
+          },
+          {
+            "id": "lesson-5-3",
+            "title": "Multi-Modal Fusion Techniques",
+            "type": "practical",
+            "duration": 120,
+            "status": "locked",
+            "xp": 160
+          },
+          {
+            "id": "lesson-5-4",
+            "title": "Building a Complete Agent System",
+            "type": "capstone",
+            "duration": 180,
+            "status": "locked",
+            "xp": 250
+          }
+        ]
+      }
+    ],
+    "assessments": [
+      {
+        "id": "midterm-assessment",
+        "title": "Neural Architecture Design Challenge",
+        "type": "practical",
+        "xp": 200,
+        "requiredModules": ["module-1", "module-3"],
+        "timeLimit": 120
+      },
+      {
+        "id": "final-project",
+        "title": "Autonomous Agent Capstone",
+        "type": "capstone",
+        "xp": 500,
+        "requiredModules": ["module-1", "module-2", "module-3", "module-4"],
+        "timeLimit": 300
+      }
+    ],
+    "achievements": [
+      {
+        "id": "neural-architect",
+        "title": "Neural Architect",
+        "description": "Complete all neural network modules",
+        "xp": 100,
+        "requirement": "complete-module-1"
+      },
+      {
+        "id": "decision-master",
+        "title": "Decision Master",
+        "description": "Build a working autonomous decision system",
+        "xp": 150,
+        "requirement": "complete-module-2"
+      },
+      {
+        "id": "ai-collaborator",
+        "title": "AI Collaborator",
+        "description": "Successfully integrate AI tools into development workflow",
+        "xp": 120,
+        "requirement": "complete-module-3"
+      },
+      {
+        "id": "memory-engineer",
+        "title": "Memory Engineer",
+        "description": "Implement persistent agent memory",
+        "xp": 180,
+        "requirement": "complete-module-4"
+      },
+      {
+        "id": "multi-modal-expert",
+        "title": "Multi-Modal Expert",
+        "description": "Create agents that process multiple data types",
+        "xp": 250,
+        "requirement": "complete-module-5"
+      }
+    ],
+    "totalXP": 1750,
+    "certificationRequirements": {
+      "minimumXP": 1400,
+      "requiredModules": ["module-1", "module-2", "module-3"],
+      "requiredAssessments": ["midterm-assessment", "final-project"],
+      "minimumScore": 85
+    }
+  }
+}

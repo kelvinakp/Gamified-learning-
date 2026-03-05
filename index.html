@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T&A - Neural Learning Interface</title>
+    
+    <!-- Performance: Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Tailwind Configuration - Must be before Tailwind loads -->
+    <script>
+        window.tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'primary': ['Inter', 'system-ui', 'sans-serif'],
+                            'headings': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                            'code': ['JetBrains Mono', 'SF Mono', 'Monaco', 'monospace']
+                        },
+                        colors: {
+                            'primary': '#3B82F6',
+                            'primary-dark': '#1E40AF',
+                            'success': '#10B981',
+                            'warning': '#F59E0B', 
+                            'danger': '#EF4444',
+                            'purple': '#8B5CF6',
+                            'cyan': '#06B6D4',
+                            'slate-950': '#0A0F1C',
+                            'slate-900': '#1A202C',
+                            'slate-800': '#2D3748',
+                            'slate-700': '#4A5568',
+                            'slate-600': '#718096',
+                            'slate-300': '#CBD5E1',
+                            'slate-400': '#94A3B8'
+                        },
+                        animation: {
+                            'gentle-pulse': 'gentle-pulse 3s ease-in-out infinite',
+                            'subtle-float': 'subtle-float 4s ease-in-out infinite',
+                            'progress-fill': 'progress-fill 1.5s ease-out',
+                            'glow': 'glow 2s ease-in-out infinite alternate',
+                            'slide-up': 'slide-up 0.5s ease-out',
+                            'fade-in': 'fade-in 0.6s ease-out'
+                        },
+                        keyframes: {
+                            'gentle-pulse': {
+                                '0%, 100%': { opacity: '0.7' },
+                                '50%': { opacity: '1' }
+                            },
+                            'subtle-float': {
+                                '0%, 100%': { transform: 'translateY(0px)' },
+                                '50%': { transform: 'translateY(-4px)' }
+                            },
+                            'progress-fill': {
+                                '0%': { width: '0%' },
+                                '100%': { width: 'var(--progress-width)' }
+                            },
+                            'glow': {
+                                '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
+                                '100%': { boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)' }
+                            },
+                            'slide-up': {
+                                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                                '100%': { opacity: '1', transform: 'translateY(0)' }
+                            },
+                            'fade-in': {
+                                '0%': { opacity: '0' },
+                                '100%': { opacity: '1' }
+                            }
+                        },
+                        backdropBlur: {
+                            'xs': '2px'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Performance: Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Performance: Optimized font loading with display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Performance: Inline critical CSS for above-the-fold content -->
+    <style>
+        /* Fallback colors for custom Tailwind classes */
+        .text-success { color: #10B981 !important; }
+        .text-warning { color: #F59E0B !important; }
+        .text-primary { color: #3B82F6 !important; }
+        .text-purple { color: #8B5CF6 !important; }
+        .text-cyan { color: #06B6D4 !important; }
+        .text-slate-400 { color: #94A3B8 !important; }
+        .text-slate-300 { color: #CBD5E1 !important; }
+        .text-slate-500 { color: #64748B !important; }
+        .text-slate-600 { color: #475569 !important; }
+        .text-white { color: white !important; }
+        
+        /* Fix for gradient text fallback */
+        .bg-clip-text.text-transparent {
+            color: white !important;
+            background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        /* Ensure text is always visible */
+        h1, h2, h3, p, span {
+            color: inherit;
+        }
+        
+        /* Fallback background colors */
+        .bg-success\/20 { background-color: rgba(16, 185, 129, 0.2) !important; }
+        .bg-warning\/20 { background-color: rgba(245, 158, 11, 0.2) !important; }
+        .bg-primary\/20 { background-color: rgba(59, 130, 246, 0.2) !important; }
+        
+        /* Fallback border colors */
+        .border-success\/30 { border-color: rgba(16, 185, 129, 0.3) !important; }
+        .border-warning\/30 { border-color: rgba(245, 158, 11, 0.3) !important; }
+        .border-primary\/30 { border-color: rgba(59, 130, 246, 0.3) !important; }
+        
+        /* Progress bar specific styles */
+        .progress-bar-fill {
+            background: linear-gradient(to right, #3B82F6, #06B6D4, #10B981) !important;
+            width: 73% !important;
+            animation: progress-fill 1.5s ease-out;
+        }
+        
+        @keyframes progress-fill {
+            from { width: 0%; }
+            to { width: 73%; }
+        }
+        
+        /* Optimize animations for 60fps */
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+            will-change: box-shadow;
+            transform: translateZ(0); /* Hardware acceleration */
+        }
+        
+        .animate-gentle-pulse {
+            animation: gentle-pulse 3s ease-in-out infinite;
+            will-change: opacity;
+            transform: translateZ(0);
+        }
+        
+        .animate-subtle-float {
+            animation: subtle-float 4s ease-in-out infinite;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        @keyframes gentle-pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+        
+        /* Optimize hover effects */
+        .hover-optimized {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, box-shadow;
+        }
+        
+        /* Reduce paint operations */
+        .backdrop-blur-optimized {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        
+        /* Login screen styles */
+        .bg-animated {
+            background: linear-gradient(-45deg, #0A0F1C, #1A202C, #2D3748, #1A202C);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .neural-scan-line {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+            animation: neural-scan 2s ease-in-out infinite;
+        }
+        
+        @keyframes neural-scan {
+            0%, 100% { transform: translateX(-100%); opacity: 0; }
+            50% { transform: translateX(0%); opacity: 1; }
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #3B82F6;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-vertical 4s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        .particle:nth-child(2) { animation-delay: 0.5s; background: #06B6D4; }
+        .particle:nth-child(3) { animation-delay: 1s; background: #8B5CF6; }
+        .particle:nth-child(4) { animation-delay: 1.5s; background: #10B981; }
+        .particle:nth-child(5) { animation-delay: 2s; background: #F59E0B; }
+        .particle:nth-child(6) { animation-delay: 2.5s; background: #EF4444; }
+        
+        @keyframes float-vertical {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.4;
+            }
+            25% { 
+                transform: translateY(-20px) scale(1.2);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-40px) scale(1);
+                opacity: 0.9;
+            }
+            75% { 
+                transform: translateY(-20px) scale(0.8);
+                opacity: 0.5;
+            }
+        }
+        
+        /* Hexagon pattern background */
+        .hexagon-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(30deg, transparent 24%, rgba(59, 130, 246, 0.1) 25%, rgba(59, 130, 246, 0.1) 26%, transparent 27%, transparent 74%, rgba(59, 130, 246, 0.1) 75%, rgba(59, 130, 246, 0.1) 76%, transparent 77%, transparent),
+                linear-gradient(-30deg, transparent 24%, rgba(6, 182, 212, 0.1) 25%, rgba(6, 182, 212, 0.1) 26%, transparent 27%, transparent 74%, rgba(6, 182, 212, 0.1) 75%, rgba(6, 182, 212, 0.1) 76%, transparent 77%, transparent);
+            background-size: 60px 34px;
+            animation: hexagon-drift 20s linear infinite;
+        }
+        
+        @keyframes hexagon-drift {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(34px); }
+        }
+        
+        /* Digital rain effect - contained within login screen */
+        .digital-rain {
+            position: absolute;
+            top: -50px;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #3B82F6, transparent);
+            animation: rain-fall-contained 4s linear infinite;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        @keyframes rain-fall-contained {
+            0% { 
+                transform: translateY(-60px);
+                opacity: 0;
+            }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { 
+                transform: translateY(calc(100vh - 100px));
+                opacity: 0;
+            }
+        }
+        
+        /* Pulse rings */
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            animation: pulse-expand 4s ease-out infinite;
+        }
+        
+        @keyframes pulse-expand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+        
+        .neural-input {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .neural-input:focus {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            border-color: #3B82F6;
+        }
+        
+        .neural-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neural-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .neural-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .neural-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Data stream animation for progress bar */
+        @keyframes data-stream {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(300px); }
+        }
+        
+        /* Smooth transition effects for dashboard */
+        .dashboard-transition {
+            opacity: 0;
+            transform: translateY(10px) scale(0.99);
+            transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity;
+        }
+        
+        .dashboard-transition.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        /* Enhanced welcome section */
+        .user-info-panel {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .user-info-panel.show {
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: block !important;
+        }
+        
+        /* Global Theme System */
+        :root {
+            --bg-primary: #0A0F1C;
+            --bg-secondary: #1A202C;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --border-primary: rgba(71, 85, 105, 0.5);
+            --glass-bg: rgba(45, 55, 72, 0.6);
+        }
+
+        /* Light Theme */
+        .light-theme {
+            --bg-primary: #F8FAFC;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #475569;
+            --border-primary: rgba(203, 213, 225, 0.8);
+            --glass-bg: rgba(248, 250, 252, 0.85);
+        }
+
+        .light-theme body {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+        }
+
+        .light-theme .neural-network-bg {
+            background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 50%, #CBD5E1 100%) !important;
+        }
+
+        .light-theme .bg-slate-950 {
+            background-color: #F8FAFC !important;
+        }
+
+        .light-theme .bg-slate-800\/90,
+        .light-theme .bg-slate-800\/80,
+        .light-theme .bg-slate-800\/60,
+        .light-theme .from-slate-800\/90,
+        .light-theme .from-slate-800\/80 {
+            background: rgba(248, 250, 252, 0.9) !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        .light-theme .bg-slate-900\/70,
+        .light-theme .bg-slate-900\/50,
+        .light-theme .to-slate-900\/70,
+        .light-theme .to-slate-900\/60 {
+            background: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Additional comprehensive light theme coverage */
+        .light-theme .bg-slate-700,
+        .light-theme .bg-slate-600,
+        .light-theme .bg-slate-700\/50,
+        .light-theme .bg-slate-600\/50 {
+            background: rgba(248, 250, 252, 0.9) !important;
+        }
+
+        .light-theme .backdrop-blur-sm,
+        .light-theme .backdrop-blur-md {
+            background: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Header specific fixes */
+        .light-theme header {
+            background-color: rgba(248, 250, 252, 0.95) !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        /* Gradient backgrounds should be light */
+        /* Preserve logo and title gradients in both themes */
+        .light-theme .bg-gradient-to-br:not(.from-primary) {
+            background: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        .light-theme .text-white {
+            color: #1E293B !important;
+        }
+
+        .light-theme .text-slate-400 {
+            color: #64748B !important;
+        }
+
+        .light-theme .text-slate-300 {
+            color: #475569 !important;
+        }
+
+        .light-theme .border-slate-700\/50,
+        .light-theme .border-slate-700\/30,
+        .light-theme .border-slate-600\/50 {
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        .light-theme .shadow-2xl,
+        .light-theme .shadow-xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-theme #loginScreen {
+            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 25%, #F0F9FF 50%, #ECFDF5 75%, #FEF3C7 100%) !important;
+        }
+
+        .light-theme .glass-morphism {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border-color: rgba(203, 213, 225, 0.4) !important;
+        }
+
+        /* Theme switcher button styles for dark mode - enhanced visibility */
+        #themeSwitcher {
+            background-color: rgba(51, 65, 85, 0.8) !important;
+            border-color: rgba(71, 85, 105, 0.8) !important;
+            color: #E2E8F0 !important;
+        }
+
+        #themeSwitcher:hover {
+            background-color: rgba(71, 85, 105, 0.9) !important;
+            border-color: rgba(100, 116, 139, 0.9) !important;
+        }
+
+        #themeSwitcher #themeText {
+            color: #CBD5E1 !important;
+        }
+
+        #themeSwitcher:hover #themeText {
+            color: #F1F5F9 !important;
+        }
+
+        /* Theme switcher button styles for light mode */
+        .light-theme #themeSwitcher {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(203, 213, 225, 0.8) !important;
+            color: #334155 !important;
+        }
+
+        .light-theme #themeSwitcher:hover {
+            background-color: rgba(248, 250, 252, 0.95) !important;
+            border-color: rgba(148, 163, 184, 0.9) !important;
+        }
+
+        .light-theme #themeSwitcher #themeText {
+            color: #475569 !important;
+        }
+
+        .light-theme #themeSwitcher:hover #themeText {
+            color: #334155 !important;
+        }
+
+        /* Logout button styles for dark mode */
+        #logoutBtn {
+            background-color: rgba(220, 38, 38, 0.1) !important;
+            border-color: rgba(239, 68, 68, 0.3) !important;
+        }
+
+        #logoutBtn:hover {
+            background-color: rgba(220, 38, 38, 0.2) !important;
+            border-color: rgba(239, 68, 68, 0.5) !important;
+        }
+
+        /* Light mode logout button overrides */
+        .light-theme #logoutBtn {
+            background-color: rgba(239, 68, 68, 0.1) !important;
+            border-color: rgba(220, 38, 38, 0.3) !important;
+        }
+
+        .light-theme #logoutBtn:hover {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(185, 28, 28, 0.4) !important;
+        }
+
+        /* Light theme button borders */
+        .light-theme button.bg-gradient-to-r.from-primary {
+            border: 1px solid #2563eb !important;
+        }
+
+        .light-theme button.bg-gradient-to-r.from-success {
+            border: 1px solid #10b981 !important;
+        }
+
+        .light-theme button.bg-gradient-to-r.from-warning {
+            border: 1px solid #f59e0b !important;
+        }
+
+        .light-theme button.bg-gradient-to-r.from-purple {
+            border: 1px solid #8b5cf6 !important;
+        }
+
+        /* Preserve header navigation buttons in dark style even in light mode */
+        .light-theme .nav-link:not(.bg-gradient-to-r) {
+            background-color: transparent !important;
+            color: #CBD5E1 !important;
+            border-color: rgba(71, 85, 105, 0.5) !important;
+        }
+
+        .light-theme .nav-link:not(.bg-gradient-to-r):hover {
+            color: white !important;
+            background-color: rgba(51, 65, 85, 0.6) !important;
+            border-color: rgba(100, 116, 139, 0.6) !important;
+        }
+
+        /* Force navigation buttons to show correct gradient colors */
+        .light-theme #dashboardBtn,
+        .light-theme button[data-page="index.html"] {
+            background: linear-gradient(to right, #3B82F6, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="labs.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #10B981, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="archive.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #8B5CF6, #EC4899) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="profile.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #F59E0B, #F97316) !important;
+            color: white !important;
+        }
+
+        /* Comprehensive light theme overrides for all dark elements */
+        .light-theme div.bg-slate-900\/50,
+        .light-theme span.bg-slate-900\/50,
+        .light-theme section.bg-slate-900\/50,
+        .light-theme [class*="bg-slate-900/50"],
+        .light-theme [class*="bg-slate-900/80"] {
+            background: rgba(248, 250, 252, 0.9) !important;
+            color: #1E293B !important;
+        }
+
+        /* Input fields */
+        .light-theme .neural-input,
+        .light-theme input.bg-slate-900\/50 {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #1E293B !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        .light-theme .neural-input::placeholder {
+            color: #64748B !important;
+        }
+
+        /* Progress bars and containers */
+        .light-theme .rounded-full.bg-slate-900\/50,
+        .light-theme div[class*="bg-slate-900/50"].rounded-full {
+            background: rgba(226, 232, 240, 0.8) !important;
+        }
+
+        /* Stats cards and info boxes */
+        .light-theme .p-3.bg-slate-900\/50,
+        .light-theme .p-4.bg-slate-900\/50 {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #1E293B !important;
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        /* Achievement and notification cards */
+        .light-theme .rounded-xl.bg-slate-900\/80,
+        .light-theme .rounded-xl.bg-slate-900\/50 {
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #1E293B !important;
+        }
+
+        /* All slate-700 border elements */
+        .light-theme [class*="border-slate-700"] {
+            border-color: rgba(203, 213, 225, 0.6) !important;
+        }
+
+        /* Page transition effects - only for main content */
+        main {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        main.content-loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Theme transition */
+        body, .neural-network-bg {
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .theme-transition main *,
+        .theme-transition section *,
+        .theme-transition article * {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+        }
+
+        /* Exclude header from theme transitions to prevent refresh appearance */
+        .theme-transition header,
+        .theme-transition header * {
+            transition: none !important;
+        }
+    </style>
+    
+    <!-- Immediate theme application to prevent flash -->
+    <script>
+        // Apply saved theme immediately before page renders
+        (function() {
+            const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+            document.documentElement.classList.remove('light-theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+            }
+        })();
+    </script>
+</head>
+<body class="bg-slate-950 text-white font-primary">
+    <!-- Login Screen (hidden by default) -->
+    <div id="loginScreen" class="fixed inset-0 z-50 hidden items-center justify-center relative overflow-hidden bg-animated min-h-screen">
+        <!-- Hexagon pattern background -->
+        <div class="hexagon-pattern"></div>
+        
+        <!-- Background grid pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0); background-size: 50px 50px;"></div>
+        </div>
+        
+        <!-- Digital rain effect - contained -->
+        <div class="digital-rain" style="left: 15%; animation-delay: 0s;"></div>
+        <div class="digital-rain" style="left: 30%; animation-delay: 0.8s; background: linear-gradient(to bottom, transparent, #06B6D4, transparent);"></div>
+        <div class="digital-rain" style="left: 45%; animation-delay: 1.6s; background: linear-gradient(to bottom, transparent, #8B5CF6, transparent);"></div>
+        <div class="digital-rain" style="left: 60%; animation-delay: 2.4s; background: linear-gradient(to bottom, transparent, #10B981, transparent);"></div>
+        <div class="digital-rain" style="left: 75%; animation-delay: 3.2s; background: linear-gradient(to bottom, transparent, #F59E0B, transparent);"></div>
+        
+        <!-- Floating particles -->
+        <div class="particle" style="top: 15%; left: 20%;"></div>
+        <div class="particle" style="top: 30%; left: 80%;"></div>
+        <div class="particle" style="top: 50%; left: 15%;"></div>
+        <div class="particle" style="top: 70%; left: 85%;"></div>
+        <div class="particle" style="top: 85%; left: 40%;"></div>
+        <div class="particle" style="top: 20%; left: 60%;"></div>
+        
+        <!-- Pulse rings around logo area -->
+        <div class="pulse-ring" style="top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%); animation-delay: 0s;"></div>
+        <div class="pulse-ring" style="top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%); animation-delay: 1s;"></div>
+        <div class="pulse-ring" style="top: 35%; left: 50%; transform: translateX(-50%) translateY(-50%); animation-delay: 2s;"></div>
+        
+        <!-- Main container -->
+        <div class="relative z-10 w-full max-w-md mx-4">
+            <!-- Logo section -->
+            <div class="text-center mb-8 animate-slide-up">
+                <div class="w-20 h-20 bg-gradient-to-br from-primary via-cyan to-purple rounded-2xl flex items-center justify-center mx-auto mb-4 animate-glow shadow-2xl">
+                    <span class="text-4xl" role="img" aria-label="AI Brain">🧠</span>
+                </div>
+                <h1 class="text-4xl font-bold font-headings mb-2">
+                    <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent" 
+                          style="background: linear-gradient(to right, #3B82F6, #06B6D4, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: white;">
+                        T&A
+                    </span>
+                </h1>
+                <p class="text-slate-400 font-medium" style="color: #94A3B8;">Welcome to the AI Learning Platform</p>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-primary to-cyan mx-auto mt-4"></div>
+            </div>
+            
+            <!-- Login form -->
+                <div class="glass-morphism rounded-2xl p-8 shadow-2xl animate-slide-up relative overflow-hidden">
+                <!-- Neural scan line -->
+                <div class="neural-scan-line"></div>
+                
+                <!-- Animated border effect -->
+                <div class="absolute inset-0 rounded-2xl opacity-30">
+                    <div class="absolute inset-0 rounded-2xl border border-primary/20 animate-gentle-pulse"></div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan to-transparent animate-pulse" style="animation-delay: 1s;"></div>
+                    <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-purple to-transparent animate-pulse" style="animation-delay: 2s;"></div>
+                    <div class="absolute right-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-success to-transparent animate-pulse" style="animation-delay: 3s;"></div>
+                </div>
+                
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold font-headings text-white mb-2" style="color: white;">Welcome</h2>
+                    <p class="text-slate-400 text-sm" style="color: #94A3B8;">Enter your User ID to begin your AI learning journey</p>
+                </div>
+                
+                <form class="space-y-6" id="mainLoginForm">
+                    <!-- User ID field -->
+                    <div class="space-y-2">
+                        <label for="mainUserid" class="block text-sm font-medium text-slate-300" style="color: #CBD5E1;">User ID</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="mainUserid" 
+                                name="userid"
+                                class="neural-input w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-primary"
+                                style="background-color: rgba(15, 23, 42, 0.5); border-color: rgba(74, 85, 104, 0.5); color: white;"
+                                placeholder="Enter your User ID"
+                                required
+                            >
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                <span class="w-2 h-2 bg-primary rounded-full animate-gentle-pulse" style="background-color: #3B82F6;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Login button -->
+                    <button 
+                        type="submit" 
+                        class="neural-button w-full bg-gradient-to-r from-primary via-blue-500 to-cyan text-white font-bold py-3 px-6 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-900"
+                        style="background: linear-gradient(to right, #3B82F6, #2563EB, #06B6D4);"
+                    >
+                        <span class="flex items-center justify-center space-x-2">
+                            <span>Access Dashboard</span>
+                            <span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin hidden" id="mainLoadingSpinner"></span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Status indicators -->
+            <div class="mt-8 grid grid-cols-3 gap-4 text-center animate-fade-in">
+                <div class="glass-morphism rounded-lg p-3">
+                    <div class="w-3 h-3 bg-success rounded-full mx-auto mb-1 animate-gentle-pulse" style="background-color: #10B981;"></div>
+                    <p class="text-xs text-slate-400" style="color: #94A3B8;">System Online</p>
+                </div>
+                <div class="glass-morphism rounded-lg p-3">
+                    <div class="w-3 h-3 bg-primary rounded-full mx-auto mb-1 animate-gentle-pulse" style="background-color: #3B82F6;"></div>
+                    <p class="text-xs text-slate-400" style="color: #94A3B8;">Neural Ready</p>
+                </div>
+                <div class="glass-morphism rounded-lg p-3">
+                    <div class="w-3 h-3 bg-cyan rounded-full mx-auto mb-1 animate-gentle-pulse" style="background-color: #06B6D4;"></div>
+                    <p class="text-xs text-slate-400" style="color: #94A3B8;">Quantum Sync</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (shown by default) -->
+    <div id="mainDashboard" class="dashboard-transition">
+    
+    <!-- User Welcome Panel - Positioned in Header Between Logo and Navigation -->
+    <div id="userWelcomePanel" class="user-info-panel hidden">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-gradient-to-br from-primary via-cyan to-success rounded-lg flex items-center justify-center animate-glow">
+                <span class="text-sm" role="img" aria-label="User">👤</span>
+            </div>
+            <div class="flex-1">
+                <p id="userDisplayName" class="text-white font-bold text-sm font-headings">User</p>
+                <p class="text-cyan-400 text-xs font-code tracking-wide">ACTIVE</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="border-b border-slate-700/50 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50 shadow-xl">
+        <div class="max-w-7xl mx-auto px-6 py-5">
+            <div class="grid grid-cols-3 items-center gap-8">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-4 animate-fade-in">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary via-cyan to-purple rounded-xl flex items-center justify-center animate-glow shadow-lg">
+                        <span class="text-2xl" role="img" aria-label="AI Brain">🧠</span>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold font-headings text-white tracking-tight">
+                            <span class="bg-gradient-to-r from-primary via-cyan to-purple bg-clip-text text-transparent">
+                                T&A
+                            </span>
+                        </h1>
+                        <p class="text-sm text-slate-400 font-medium tracking-wide">Advanced Learning Ecosystem</p>
+                    </div>
+                </div>
+                
+                <!-- Centered Navigation -->
+                <nav class="flex space-x-3 justify-center" role="navigation" aria-label="Main navigation">
+                    <button id="dashboardBtn" data-page="index.html" class="nav-link px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 border border-primary/30 hover:border-primary/50">
+                        Dashboard
+                    </button>
+                    <button data-page="labs.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Labs
+                    </button>
+                    <button data-page="archive.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Archive
+                    </button>
+                    <button data-page="profile.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Profile
+                    </button>
+                </nav>
+                
+                <!-- Theme Switcher & User Actions -->
+                <div class="flex items-center space-x-3 justify-end">
+                    <!-- Theme Switcher Button -->
+                    <button id="themeSwitcher" class="group flex items-center space-x-2 px-4 py-2.5 bg-slate-800/60 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 shadow-lg backdrop-blur-sm">
+                        <div id="themeIcon" class="w-5 h-5 flex items-center justify-center">
+                            <span class="text-yellow-400 group-hover:text-yellow-300 transition-colors">🌙</span>
+                        </div>
+                        <span id="themeText" class="text-sm font-medium text-slate-300 group-hover:text-white font-code tracking-wider">DARK</span>
+                    </button>
+                    
+                    <!-- Logout Button -->
+                    <button id="logoutBtn" class="group flex items-center space-x-2 px-4 py-2.5 bg-red-600/10 hover:bg-red-600/20 border border-red-500/30 hover:border-red-400/50 rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-950 shadow-lg backdrop-blur-sm">
+                        <div class="w-5 h-5 flex items-center justify-center">
+                            <span class="text-red-400 group-hover:text-red-300 transition-colors">🚪</span>
+                        </div>
+                        <span class="text-sm font-medium text-red-400 group-hover:text-red-300 font-code tracking-wider">LOGOUT</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 relative">
+        <!-- Background decoration with animated elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple/5 rounded-3xl"></div>
+        
+        <!-- Floating data nodes in main dashboard -->
+        <div class="absolute top-10 left-10 w-3 h-3 bg-primary rounded-full opacity-40 animate-gentle-pulse"></div>
+        <div class="absolute top-20 right-20 w-2 h-2 bg-cyan rounded-full opacity-30 animate-subtle-float"></div>
+        <div class="absolute bottom-20 left-1/4 w-4 h-4 bg-purple rounded-full opacity-20 animate-gentle-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/3 right-10 w-2 h-2 bg-success rounded-full opacity-35 animate-subtle-float" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-10 right-1/3 w-3 h-3 bg-warning rounded-full opacity-25 animate-gentle-pulse" style="animation-delay: 3s;"></div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
+            <!-- Main Learning Area -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Learning Progress -->
+                <section class="bg-gradient-to-br from-slate-800/80 to-slate-900/60 border border-slate-700/50 rounded-2xl p-8 backdrop-blur-sm shadow-2xl animate-slide-up" aria-labelledby="progress-heading">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 id="progress-heading" class="text-2xl font-bold font-headings text-white tracking-tight mb-2" style="color: white; font-weight: bold;">Neural Network Progress</h2>
+                            <p class="text-slate-400 font-medium" style="color: #94A3B8;">Synaptic connections strengthening • Next milestone in 860 XP</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-4xl font-bold font-headings bg-gradient-to-r from-success to-cyan bg-clip-text text-transparent" style="background: linear-gradient(to right, #10B981, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Level 7</div>
+                            <div class="text-sm text-slate-400 font-code" style="color: #94A3B8;">2,340 / 3,200 XP</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Progress Bar -->
+                    <div class="relative" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" aria-label="Learning progress: 73% complete">
+                        <div class="w-full bg-slate-900/50 rounded-full h-8 border-2 border-slate-700/30 overflow-hidden shadow-inner relative" style="background-color: rgba(15, 23, 42, 0.5);">
+                            <!-- Animated background pattern -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent animate-pulse"></div>
+                            
+                            <div class="progress-bar-fill h-full rounded-full transition-all duration-2000 relative overflow-hidden" 
+                                 style="background: linear-gradient(to right, #3B82F6, #06B6D4, #10B981); width: 73%;">
+                                <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent animate-pulse"></div>
+                                <!-- Data flow effect -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-20 animate-pulse" style="animation: data-stream 2s ease-in-out infinite;"></div>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-sm font-bold text-white drop-shadow-lg" style="color: white; font-weight: bold;">73% SYNCHRONIZED</span>
+                        </div>
+                        
+                        <!-- Floating progress indicators -->
+                        <div class="absolute -top-2 left-1/4 w-2 h-2 bg-primary rounded-full animate-gentle-pulse"></div>
+                        <div class="absolute -top-2 left-1/2 w-2 h-2 bg-cyan rounded-full animate-gentle-pulse" style="animation-delay: 0.5s;"></div>
+                        <div class="absolute -top-2 left-3/4 w-2 h-2 bg-success rounded-full animate-gentle-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+                </section>
+
+                <!-- Current Lessons -->
+                <section aria-labelledby="lessons-heading" class="animate-fade-in">
+                    <h2 id="lessons-heading" class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                        <span class="w-10 h-10 bg-gradient-to-br from-warning to-orange-500 rounded-xl mr-4 flex items-center justify-center shadow-lg" role="img" aria-label="Target">⚡</span>
+                        Active Neural Pathways
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- Lesson 1 - Enhanced In Progress -->
+                        <article class="group hover-optimized bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 backdrop-blur-optimized animate-slide-up">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary via-blue-500 to-purple rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl hover-optimized group-hover:scale-110">
+                                    <span class="text-2xl" role="img" aria-label="Neural Network">🧠</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold font-headings text-white mb-3 hover-optimized group-hover:text-primary">
+                                        Neural Architecture Mastery
+                                    </h3>
+                                    <p class="text-slate-300 mb-6 leading-relaxed text-lg">
+                                        Architect intelligent systems that learn and adapt. Master the fundamental building blocks 
+                                        of neural networks, from perceptrons to deep learning architectures.
+                                    </p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-gradient-to-r from-success to-green-400 rounded-full animate-gentle-pulse shadow-lg"></div>
+                                            <span class="text-success font-semibold font-code">MODULE 3 OF 5 ACTIVE</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <span class="px-4 py-2 bg-warning/20 text-warning rounded-lg font-bold font-code border border-warning/30">+250 XP</span>
+                                            <span class="px-4 py-2 bg-success/20 text-success rounded-lg font-semibold font-code border border-success/30">INTERMEDIATE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <div class="text-4xl font-bold font-headings text-success mb-1">60%</div>
+                                    <div class="text-xs text-slate-400 uppercase tracking-wider font-code">PROGRESS</div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Lesson 2 - Enhanced Locked -->
+                        <article class="group bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-slate-700/30 rounded-2xl p-8 opacity-60 backdrop-blur-sm">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <span class="text-2xl" role="img" aria-label="Lock">🔒</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold font-headings text-slate-400 mb-3">
+                                        Autonomous Decision Systems
+                                    </h3>
+                                    <p class="text-slate-500 mb-6 leading-relaxed text-lg">
+                                        Build AI agents that make intelligent decisions in complex environments. 
+                                        Explore reinforcement learning, decision trees, and strategic planning algorithms.
+                                    </p>
+                                    
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-4 h-4 bg-warning rounded-full"></div>
+                                        <span class="text-warning font-semibold font-code">UNLOCK: COMPLETE NEURAL ARCHITECTURE</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <div class="text-4xl font-bold text-slate-600 mb-1">🔒</div>
+                                    <div class="text-xs text-slate-500 uppercase tracking-wider font-code">LOCKED</div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Lesson 3 - Enhanced Available -->
+                        <article class="group hover-optimized bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-2xl p-8 hover:border-success/50 hover:shadow-2xl hover:shadow-success/10 backdrop-blur-optimized cursor-pointer">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-success via-green-500 to-cyan rounded-2xl flex items-center justify-center flex-shrink-0 animate-subtle-float shadow-xl hover-optimized group-hover:scale-110">
+                                    <span class="text-2xl" role="img" aria-label="Code Lightning">⚡</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold font-headings text-white mb-3 hover-optimized group-hover:text-success">
+                                        AI-Accelerated Development
+                                    </h3>
+                                    <p class="text-slate-300 mb-6 leading-relaxed text-lg">
+                                        Harness the power of AI coding assistants and generative models. 
+                                        Learn prompt engineering, code generation, and AI-human collaboration workflows.
+                                    </p>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-gradient-to-r from-primary to-cyan rounded-full animate-gentle-pulse shadow-lg"></div>
+                                            <span class="text-primary font-semibold font-code">READY TO INITIALIZE</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <span class="px-4 py-2 bg-warning/20 text-warning rounded-lg font-bold font-code border border-warning/30">+300 XP</span>
+                                            <span class="px-4 py-2 bg-primary/20 text-primary rounded-lg font-semibold font-code border border-primary/30">BEGINNER</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-right">
+                                    <button class="text-4xl font-bold text-primary hover-optimized hover:text-cyan focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-800 rounded-lg p-2" 
+                                            aria-label="Start lesson">▶</button>
+                                    <div class="text-xs text-slate-400 uppercase tracking-wider font-code">START</div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Enhanced Sidebar -->
+            <aside class="space-y-8">
+                <!-- AI Neural Interface -->
+                <section class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 backdrop-blur-sm shadow-lg animate-slide-up" aria-labelledby="neural-interface-heading">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary via-cyan to-success rounded-2xl flex items-center justify-center animate-glow shadow-xl">
+                            <span class="text-2xl" role="img" aria-label="Neural Interface">🧬</span>
+                        </div>
+                        <div>
+                            <h3 id="neural-interface-heading" class="text-xl font-bold font-headings text-white">Neural Interface</h3>
+                            <p class="text-xs text-slate-400 font-code">NEXUS v4.2.1 • QUANTUM READY</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-900/80 rounded-xl p-4 border-l-4 border-primary backdrop-blur-sm">
+                            <p class="text-sm text-slate-300 mb-2 font-medium">
+                                <span class="text-primary font-bold font-code">[NEXUS]:</span> Neural pathway optimization complete. 
+                                Your learning velocity is 23% above baseline parameters.
+                            </p>
+                            <p class="text-xs text-slate-500 font-code">∧ 2 minutes ago</p>
+                        </div>
+                        
+                        <div class="bg-slate-900/80 rounded-xl p-4 border-l-4 border-success backdrop-blur-sm">
+                            <p class="text-sm text-slate-300 mb-2 font-medium">
+                                <span class="text-success font-bold font-code">[SYSTEM]:</span> Achievement unlocked: "Neural Architect" - 
+                                Advanced pattern recognition capabilities enabled.
+                            </p>
+                            <p class="text-xs text-slate-500 font-code">∧ 15 minutes ago</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Enhanced Quick Stats -->
+                <section class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 backdrop-blur-sm shadow-lg" aria-labelledby="stats-heading">
+                    <h3 id="stats-heading" class="text-xl font-bold font-headings text-white mb-6 flex items-center">
+                        <span class="w-6 h-6 bg-gradient-to-r from-cyan to-blue-400 rounded-lg mr-3" role="img" aria-label="Stats">📊</span>
+                        System Metrics
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Neural Modules</span>
+                            <span class="text-success font-bold font-code text-lg">12</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Code Simulations</span>
+                            <span class="text-primary font-bold font-code text-lg">28</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Sync Efficiency</span>
+                            <span class="text-purple font-bold font-code text-lg">94.7%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg backdrop-blur-sm">
+                            <span class="text-sm text-slate-400 font-medium">Learning Streak</span>
+                            <span class="text-warning font-bold font-code text-lg">7 DAYS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Enhanced Challenge Portal -->
+                <section class="bg-gradient-to-br from-warning/10 via-orange-500/5 to-purple/10 border border-warning/30 rounded-2xl p-4 backdrop-blur-sm shadow-lg" aria-labelledby="challenge-heading">
+                    <h3 id="challenge-heading" class="text-xl font-bold font-headings text-warning mb-4 flex items-center">
+                        <span class="w-6 h-6 bg-gradient-to-r from-warning to-orange-500 rounded-lg mr-3 animate-gentle-pulse" role="img" aria-label="Lightning">⚡</span>
+                        Quantum Challenge
+                    </h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed font-medium">
+                        Architect an intelligent sorting algorithm that adapts to data patterns in real-time. 
+                        Perfect neural pathway activation challenge.
+                    </p>
+                    <button class="w-full bg-gradient-to-r from-warning via-orange-500 to-red-500 px-6 py-4 rounded-xl font-bold text-white hover-optimized hover:shadow-xl hover:shadow-warning/30 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 focus:ring-offset-slate-800 font-headings tracking-wide">
+                        INITIATE PROTOCOL
+                    </button>
+                    <div class="flex justify-between items-center mt-4 text-xs text-slate-400 font-code">
+                        <span>REWARD: +500 XP</span>
+                        <span>TIME: 6h 42m</span>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+    </div> <!-- End of mainDashboard -->
+
+    <!-- Optimized JavaScript for Performance -->
+    <script>
+        // Check if user is already logged in on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth content transition effect
+            const main = document.querySelector('main');
+            if (main) {
+                setTimeout(() => {
+                    main.classList.add('content-loaded');
+                }, 20);
+            }
+            
+            const userId = localStorage.getItem('userId');
+            const loginScreen = document.getElementById('loginScreen');
+            const mainDashboard = document.getElementById('mainDashboard');
+            
+            console.log('Page loaded. User ID:', userId);
+            
+            if (userId && userId.trim() !== '') {
+                // User is logged in, dashboard is already shown by default
+                console.log('User already logged in, keeping dashboard visible');
+                showDashboard(userId);
+            } else {
+                // Show login screen, hide dashboard
+                console.log('No user logged in, showing login screen');
+                
+                if (loginScreen) {
+                    loginScreen.style.display = 'flex';
+                    loginScreen.classList.remove('hidden');
+                }
+                
+                if (mainDashboard) {
+                    mainDashboard.classList.add('hidden');
+                    mainDashboard.style.display = 'none';
+                }
+            }
+        });
+
+        // Function to show dashboard with smooth transition
+        function showDashboard(userId) {
+            const loginScreen = document.getElementById('loginScreen');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const neuralNetworkBg = document.getElementById('neuralNetworkBg');
+            
+            console.log('Showing dashboard for user:', userId);
+            
+            // Hide login screen with fade out
+            if (loginScreen) {
+                loginScreen.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                loginScreen.style.opacity = '0';
+                loginScreen.style.transform = 'scale(0.95)';
+            }
+            
+            setTimeout(() => {
+                if (loginScreen) {
+                    loginScreen.style.display = 'none';
+                    loginScreen.classList.add('hidden');
+                }
+                
+                // Show and enable neural network background
+                if (neuralNetworkBg) {
+                    neuralNetworkBg.style.display = 'block';
+                    neuralNetworkBg.style.visibility = 'visible';
+                    neuralNetworkBg.style.opacity = '1';
+                }
+                
+                // Show dashboard with optimized performance
+                if (mainDashboard) {
+                    mainDashboard.classList.remove('hidden');
+                    mainDashboard.style.display = 'block';
+                    
+                    // Force a reflow to ensure the display change is applied
+                    mainDashboard.offsetHeight;
+                }
+                
+                // Trigger dashboard transition with proper timing
+                requestAnimationFrame(() => {
+                    if (mainDashboard) {
+                        mainDashboard.classList.add('show');
+                    }
+                    
+                    // Initialize neural network background after transition starts
+                    setTimeout(() => {
+                        initNeuralNetwork();
+                    }, 200);
+                });
+                
+                // Initialize functionality after dashboard is visible
+                // Dashboard button is handled by SPA navigation system
+                
+                // Initialize dashboard animations with delay for better performance
+                setTimeout(() => {
+                    optimizedAnimations.init();
+                }, 300);
+            }, 300);
+        }
+
+        // Main login form submission
+        document.getElementById('mainLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userid = document.getElementById('mainUserid').value.trim();
+            const button = this.querySelector('button[type="submit"]');
+            const spinner = document.getElementById('mainLoadingSpinner');
+            const buttonText = button.querySelector('span:first-child');
+            
+            console.log('Login attempt for user:', userid);
+            
+            // Basic validation
+            if (!userid) {
+                alert('Please enter your User ID');
+                return;
+            }
+            
+            // Show loading state
+            spinner.classList.remove('hidden');
+            buttonText.textContent = 'Connecting...';
+            button.disabled = true;
+            
+            // Simulate login process with faster timing
+            setTimeout(() => {
+                // Hide loading state
+                spinner.classList.add('hidden');
+                buttonText.textContent = 'Access Granted';
+                button.style.background = 'linear-gradient(to right, #10B981, #059669, #047857)';
+                
+                // Store user ID
+                localStorage.setItem('userId', userid);
+                console.log('User ID stored:', userid);
+                
+                // Transition to dashboard with optimized timing
+                setTimeout(() => {
+                    showDashboard(userid);
+                }, 600);
+            }, 1200);
+        });
+
+        // Dashboard button functionality
+        // Particle system for login screen - contained within login area only
+        function createLoginParticle() {
+            const loginScreen = document.getElementById('loginScreen');
+            if (!loginScreen || loginScreen.style.display === 'none' || loginScreen.style.opacity === '0') return;
+            
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.top = Math.random() * 70 + 15 + '%';
+            particle.style.left = Math.random() * 70 + 15 + '%';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = ['#3B82F6', '#06B6D4', '#8B5CF6', '#10B981', '#F59E0B'][Math.floor(Math.random() * 5)];
+            particle.style.borderRadius = '50%';
+            particle.style.opacity = '0.4';
+            particle.style.animation = 'float-vertical 4s ease-in-out infinite';
+            particle.style.zIndex = '1';
+            particle.style.pointerEvents = 'none';
+            
+            loginScreen.appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode === loginScreen) {
+                    loginScreen.removeChild(particle);
+                }
+            }, 4000);
+        }
+        
+        // Create login particles periodically (only when login screen is visible and active)
+        setInterval(() => {
+            const loginScreen = document.getElementById('loginScreen');
+            if (loginScreen && 
+                loginScreen.style.display !== 'none' && 
+                loginScreen.style.opacity !== '0' &&
+                !loginScreen.classList.contains('hidden')) {
+                createLoginParticle();
+            }
+        }, 2000);
+
+        // Neural scan effect on input focus
+        document.querySelectorAll('.neural-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.3)';
+                this.style.borderColor = '#3B82F6';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.boxShadow = 'none';
+                this.style.borderColor = 'rgba(74, 85, 104, 0.5)';
+            });
+        });
+
+        // Performance: Use requestAnimationFrame for smooth animations
+        const optimizedAnimations = {
+            init() {
+                // Respect user's motion preferences
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    document.documentElement.style.setProperty('--animation-duration', '0s');
+                    return;
+                }
+                
+                // Initialize intersection observer for lazy animations with improved performance
+                this.setupIntersectionObserver();
+            },
+            
+            setupIntersectionObserver() {
+                const observerOptions = {
+                    threshold: 0.05,  // Reduced threshold for faster triggering
+                    rootMargin: '20px'  // Reduced margin for better performance
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fade-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                
+                // Observe elements that should animate on scroll
+                document.querySelectorAll('.animate-slide-up').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        };
+        
+        // Performance: Announce progress updates to screen readers
+        function announceProgress(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            setTimeout(() => {
+                if (document.body.contains(announcement)) {
+                    document.body.removeChild(announcement);
+                }
+            }, 1000);
+        }
+        
+        // Performance: Preload hover states
+        document.addEventListener('mouseover', function(e) {
+            if (e.target.closest('.hover-optimized')) {
+                // Trigger hover state preparation
+                e.target.closest('.hover-optimized').style.willChange = 'transform, box-shadow';
+            }
+        }, { passive: true });
+        
+        document.addEventListener('mouseout', function(e) {
+            if (e.target.closest('.hover-optimized')) {
+                // Clean up will-change
+                setTimeout(() => {
+                    if (e.target.closest('.hover-optimized')) {
+                        e.target.closest('.hover-optimized').style.willChange = 'auto';
+                    }
+                }, 300);
+            }
+        }, { passive: true });
+        
+        // Neural Network Background System
+        let neuralInterval;
+        let codeFragmentInterval;
+        
+        function initNeuralNetwork() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            // Only initialize when dashboard is visible and login screen is hidden
+            if (!neuralBg || 
+                !mainDashboard || 
+                mainDashboard.classList.contains('hidden') ||
+                mainDashboard.style.display === 'none' ||
+                (loginScreen && !loginScreen.classList.contains('hidden') && loginScreen.style.display !== 'none')) {
+                return;
+            }
+            
+            // Clear any existing intervals first
+            clearNeuralNetwork();
+            
+            // Create neural nodes
+            createNeuralNodes();
+            
+            // Start neural connections animation with reduced frequency for better performance
+            neuralInterval = setInterval(createNeuralConnection, 4000);
+            
+            // Start floating code fragments with reduced frequency
+            codeFragmentInterval = setInterval(createCodeFragment, 6000);
+        }
+        
+        function createNeuralNodes() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            if (!neuralBg) return;
+            
+            // Reduced number of nodes for better performance
+            for (let i = 0; i < 8; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 3 + 's';
+                
+                // Random colors from our palette
+                const colors = ['rgba(59, 130, 246, 0.4)', 'rgba(6, 182, 212, 0.4)', 'rgba(139, 92, 246, 0.4)', 'rgba(16, 185, 129, 0.4)'];
+                node.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                neuralBg.appendChild(node);
+            }
+        }
+        
+        function createNeuralConnection() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            // Only create connections when dashboard is visible and login screen is hidden
+            if (!neuralBg || 
+                !mainDashboard || 
+                mainDashboard.classList.contains('hidden') ||
+                mainDashboard.style.display === 'none' ||
+                (loginScreen && !loginScreen.classList.contains('hidden') && loginScreen.style.display !== 'none')) {
+                return;
+            }
+            
+            const connection = document.createElement('div');
+            connection.className = 'neural-connection';
+            connection.style.top = Math.random() * 100 + '%';
+            connection.style.left = Math.random() * 80 + '%';
+            connection.style.width = Math.random() * 200 + 100 + 'px';
+            connection.style.animationDelay = Math.random() * 2 + 's';
+            
+            neuralBg.appendChild(connection);
+            
+            setTimeout(() => {
+                if (connection.parentNode === neuralBg) {
+                    neuralBg.removeChild(connection);
+                }
+            }, 4000);
+        }
+        
+        function createCodeFragment() {
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            const mainDashboard = document.getElementById('mainDashboard');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            // Only create code fragments when dashboard is visible and login screen is hidden
+            if (!neuralBg || 
+                !mainDashboard || 
+                mainDashboard.classList.contains('hidden') ||
+                mainDashboard.style.display === 'none' ||
+                (loginScreen && !loginScreen.classList.contains('hidden') && loginScreen.style.display !== 'none')) {
+                return;
+            }
+            
+            const codeSnippets = [
+                'def neural_net():', 'import tensorflow as tf', 'model.compile()', 
+                'if __name__ == "__main__":', 'class AIModel:', 'return predictions',
+                'async function train(){}', 'const model = new Model()', 'export default class',
+                'function optimize(){}', 'let accuracy = 0.97', 'console.log("training...")'
+            ];
+            
+            const fragment = document.createElement('div');
+            fragment.className = 'floating-code-fragment';
+            fragment.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+            fragment.style.left = Math.random() * 90 + '%';
+            fragment.style.animationDelay = Math.random() * 5 + 's';
+            
+            neuralBg.appendChild(fragment);
+            
+            setTimeout(() => {
+                if (fragment.parentNode === neuralBg) {
+                    neuralBg.removeChild(fragment);
+                }
+            }, 15000);
+        }
+        
+        function clearNeuralNetwork() {
+            if (neuralInterval) {
+                clearInterval(neuralInterval);
+                neuralInterval = null;
+            }
+            if (codeFragmentInterval) {
+                clearInterval(codeFragmentInterval);
+                codeFragmentInterval = null;
+            }
+            
+            const neuralBg = document.getElementById('neuralNetworkBg');
+            if (neuralBg) {
+                // Clear all dynamic elements except the static quantum grid and energy waves
+                const dynamicElements = neuralBg.querySelectorAll('.neural-node, .neural-connection, .floating-code-fragment');
+                dynamicElements.forEach(el => el.remove());
+            }
+        }
+
+        // Global Theme System (with switcher on this page)
+        class GlobalThemeSwitcher {
+            constructor() {
+                // Prevent multiple instances
+                if (GlobalThemeSwitcher.instance) {
+                    return GlobalThemeSwitcher.instance;
+                }
+                GlobalThemeSwitcher.instance = this;
+                
+                this.currentTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+                this.findElements();
+                
+                this.init();
+            }
+
+            findElements() {
+                this.themeSwitcher = document.getElementById('themeSwitcher');
+                this.themeIcon = document.getElementById('themeIcon');
+                this.themeText = document.getElementById('themeText');
+            }
+
+            init() {
+                // Apply saved theme on load
+                this.applyTheme(this.currentTheme);
+                
+                // Find elements again in case they weren't available during construction
+                if (!this.themeSwitcher) {
+                    this.findElements();
+                }
+                
+                // Remove existing listeners to prevent duplicates
+                if (this.themeSwitcher && this.themeSwitcher._themeListener) {
+                    this.themeSwitcher.removeEventListener('click', this.themeSwitcher._themeListener);
+                }
+                
+                // Add event listener only if element exists
+                if (this.themeSwitcher) {
+                    this.themeSwitcher._themeListener = () => this.toggleTheme();
+                    this.themeSwitcher.addEventListener('click', this.themeSwitcher._themeListener);
+                }
+
+                // Listen for theme changes from other pages
+                if (!this._storageListener) {
+                    this._storageListener = (e) => {
+                        if (e.key === 'ai-nexus-theme' && e.newValue !== this.currentTheme) {
+                            this.currentTheme = e.newValue;
+                            this.applyTheme(this.currentTheme);
+                        }
+                    };
+                    window.addEventListener('storage', this._storageListener);
+                }
+            }
+
+            toggleTheme() {
+                const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+                this.setTheme(newTheme);
+            }
+
+            setTheme(theme) {
+                this.currentTheme = theme;
+                localStorage.setItem('ai-nexus-theme', theme);
+                this.applyThemeWithAnimation(theme);
+                
+                // Trigger storage event for other open pages
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'ai-nexus-theme',
+                    newValue: theme,
+                    url: window.location.href
+                }));
+            }
+
+            // Apply theme with button animation (for user-initiated changes)
+            applyThemeWithAnimation(theme) {
+                const html = document.documentElement;
+                const body = document.body;
+                
+                // Add transition class
+                body.classList.add('theme-transition');
+                
+                if (theme === 'light') {
+                    html.classList.add('light-theme');
+                    this.updateThemeButton('🌞', 'LIGHT', 'text-orange-400', 'group-hover:text-orange-300');
+                } else {
+                    html.classList.remove('light-theme');
+                    this.updateThemeButton('🌙', 'DARK', 'text-yellow-400', 'group-hover:text-yellow-300');
+                }
+                
+                // Remove transition class after animation
+                setTimeout(() => {
+                    body.classList.remove('theme-transition');
+                }, 400);
+            }
+
+            applyTheme(theme) {
+                const html = document.documentElement;
+                const body = document.body;
+                
+                // Apply theme changes without transition for immediate load
+                if (theme === 'light') {
+                    html.classList.add('light-theme');
+                    this.setThemeButtonState('🌞', 'LIGHT', 'text-orange-400', 'group-hover:text-orange-300');
+                } else {
+                    html.classList.remove('light-theme');
+                    this.setThemeButtonState('🌙', 'DARK', 'text-yellow-400', 'group-hover:text-yellow-300');
+                }
+            }
+
+            // Set button state without animation (for initial load and cross-page sync)
+            setThemeButtonState(icon, text, iconClass, hoverClass) {
+                if (this.themeIcon && this.themeText) {
+                    this.themeIcon.innerHTML = `<span class="${iconClass} ${hoverClass} transition-colors">${icon}</span>`;
+                    this.themeText.textContent = text;
+                }
+            }
+
+            updateThemeButton(icon, text, iconClass, hoverClass) {
+                if (this.themeIcon && this.themeText) {
+                    // Update icon with animation
+                    this.themeIcon.style.transform = 'scale(0.8) rotate(180deg)';
+                    
+                    setTimeout(() => {
+                        this.themeIcon.innerHTML = `<span class="${iconClass} ${hoverClass} transition-colors">${icon}</span>`;
+                        this.themeText.textContent = text;
+                        this.themeIcon.style.transform = 'scale(1) rotate(0deg)';
+                    }, 150);
+                }
+            }
+            
+            static reset() {
+                GlobalThemeSwitcher.instance = null;
+            }
+        }
+
+        // Comprehensive SPA Navigation System
+        class SPANavigation {
+            constructor() {
+                // Prevent multiple instances
+                if (SPANavigation.instance) {
+                    return SPANavigation.instance;
+                }
+                SPANavigation.instance = this;
+                
+                this.init();
+            }
+
+            init() {
+                // Clear any existing listeners first
+                this.clearEventListeners();
+                
+                // Add click listeners to all navigation links
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (!link._spaListener) {
+                        link._spaListener = (e) => {
+                            e.preventDefault();
+                            const targetPage = link.getAttribute('data-page');
+                            if (targetPage) {
+                                this.navigateToPage(targetPage);
+                            }
+                        };
+                        link.addEventListener('click', link._spaListener);
+                    }
+                });
+            }
+
+            clearEventListeners() {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (link._spaListener) {
+                        link.removeEventListener('click', link._spaListener);
+                        link._spaListener = null;
+                    }
+                });
+            }
+
+            async navigateToPage(targetPage) {
+                const mainElement = document.querySelector('main');
+                if (!mainElement) return;
+
+                try {
+                    // Start transition
+                    mainElement.style.opacity = '0';
+                    mainElement.style.transform = 'translateY(10px)';
+
+                    // Fetch the target page
+                    const response = await fetch(targetPage);
+                    if (!response.ok) throw new Error('Failed to load page');
+
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Extract main content
+                    const newMain = doc.querySelector('main');
+                    if (newMain) {
+                        // Store current header state to prevent changes
+                        const currentHeader = document.querySelector('header');
+                        const currentHeaderHTML = currentHeader ? currentHeader.innerHTML : null;
+                        
+                        // Replace content
+                        mainElement.innerHTML = newMain.innerHTML;
+
+                        // Ensure header remains unchanged
+                        if (currentHeaderHTML && currentHeader) {
+                            const headerAfterNav = document.querySelector('header');
+                            if (!headerAfterNav || headerAfterNav.innerHTML !== currentHeaderHTML) {
+                                currentHeader.innerHTML = currentHeaderHTML;
+                            }
+                        }
+
+                        // Update page title
+                        const newTitle = doc.querySelector('title')?.textContent;
+                        if (newTitle) {
+                            document.title = newTitle;
+                        }
+
+                        // Update URL
+                        history.pushState({page: targetPage}, newTitle || targetPage, targetPage);
+
+                        // Re-initialize navigation for new content
+                        this.reinitializeNavigation();
+
+                        // Update navigation state
+                        this.updateNavigationState(targetPage);
+
+                        // Animate in new content
+                        setTimeout(() => {
+                            mainElement.style.opacity = '1';
+                            mainElement.style.transform = 'translateY(0)';
+                        }, 50);
+                    }
+                } catch (error) {
+                    console.error('Navigation failed:', error);
+                    // Fallback to regular navigation
+                    window.location.href = targetPage;
+                }
+            }
+
+            reinitializeNavigation() {
+                // Use the main init method to handle all navigation setup
+                this.init();
+
+                // Re-initialize theme switcher if present in new content - prevent duplicates
+                const themeSwitcher = document.getElementById('themeSwitcher');
+                if (themeSwitcher && !window.themeInitialized) {
+                    if (GlobalThemeSwitcher.instance) {
+                        GlobalThemeSwitcher.instance = null;
+                    }
+                    new GlobalThemeSwitcher();
+                    window.themeInitialized = true;
+                }
+
+                // Re-initialize logout functionality - only for dashboard page
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn && !logoutBtn.hasAttribute('data-logout-initialized')) {
+                    logoutBtn.addEventListener('click', (event) => {
+                        // Prevent event bubbling and default behavior
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                        console.log('Logout button clicked!'); // Debug log
+                        
+                        // Clear any stored session data
+                        localStorage.removeItem('userSession');
+                        sessionStorage.clear();
+                        
+                        // Show logout confirmation or redirect to login
+                        if (confirm('Are you sure you want to log out?')) {
+                            // Redirect to login page
+                            console.log('User confirmed logout, redirecting to login...'); // Debug log
+                            window.location.href = 'login.html';
+                        } else {
+                            console.log('User cancelled logout.'); // Debug log
+                        }
+                    });
+                    logoutBtn.setAttribute('data-logout-initialized', 'true');
+                }
+            }
+
+            updateNavigationState(activePage) {
+                // Reset all nav buttons to default state
+                const navButtons = document.querySelectorAll('.nav-link');
+                navButtons.forEach(btn => {
+                    btn.className = 'nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950';
+                });
+
+                // Highlight active page with specific colors
+                if (activePage === 'index.html') {
+                    const dashboardBtn = document.querySelector('[data-page="index.html"]');
+                    if (dashboardBtn) {
+                        dashboardBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 border border-primary/30 hover:border-primary/50';
+                    }
+                } else {
+                    const activeBtn = document.querySelector(`[data-page="${activePage}"]`);
+                    if (activeBtn) {
+                        if (activePage === 'labs.html') {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-success to-cyan text-white rounded-lg hover:from-green-600 hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-success/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-success focus:ring-offset-2 focus:ring-offset-slate-950 border border-success/30 hover:border-success/50';
+                        } else if (activePage === 'archive.html') {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-purple to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium shadow-lg hover:shadow-purple/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2 focus:ring-offset-slate-950 border border-purple/30 hover:border-purple/50';
+                        } else if (activePage === 'profile.html') {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-warning to-orange-500 text-white rounded-lg hover:from-orange-500 hover:to-red-500 transition-all duration-300 font-medium shadow-lg hover:shadow-warning/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2 focus:ring-offset-slate-950 border border-warning/30 hover:border-warning/50';
+                        } else {
+                            activeBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-primary to-cyan text-white rounded-lg hover:from-primary-dark hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:shadow-primary/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-950 border border-primary/30 hover:border-primary/50';
+                        }
+                    }
+                }
+            }
+        }
+
+        // Initialize theme switcher when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is logged in
+            const userSession = localStorage.getItem('userSession');
+            if (!userSession) {
+                // User is not logged in, redirect to login page
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Only initialize if not already done to prevent header refresh
+            if (!window.themeInitialized && !GlobalThemeSwitcher.instance) {
+                new GlobalThemeSwitcher();
+                window.themeInitialized = true;
+            }
+            
+            if (!window.spaInitialized && !SPANavigation.instance) {
+                new SPANavigation();
+                window.spaInitialized = true;
+            }
+            
+            // Update navigation state to highlight current page on load
+            if (SPANavigation.instance) {
+                SPANavigation.instance.updateNavigationState('index.html');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T&A - Profile</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad1)'/%3E%3Ctext x='50' y='60' font-family='Arial' font-size='35' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Immediate theme application to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+                document.body.classList.add('light-theme');
+            }
+        })();
+    </script>
+    
+    <style>
+        /* Theme-based styles */
+        .light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4, .light-theme h5, .light-theme h6 {
+            color: #1E293B !important;
+        }
+
+        .light-theme p:not(.text-white):not([class*="text-"]), 
+        .light-theme span:not(.text-white):not([class*="text-"]) {
+            color: #374151 !important;
+        }
+
+        /* Force profile page elements to show vibrant colors */
+        .light-theme .bg-gradient-to-r.from-orange-500 {
+            background: linear-gradient(to right, #F97316, #F59E0B) !important;
+            color: white !important;
+        }
+
+        .light-theme .bg-gradient-to-r.from-emerald-500 {
+            background: linear-gradient(to right, #10B981, #34D399) !important;
+            color: white !important;
+        }
+
+        .light-theme .bg-gradient-to-r.from-cyan-500 {
+            background: linear-gradient(to right, #06B6D4, #22D3EE) !important;
+            color: white !important;
+        }
+
+        .light-theme .bg-gradient-to-r.from-purple-500 {
+            background: linear-gradient(to right, #8B5CF6, #A855F7) !important;
+            color: white !important;
+        }
+
+        .light-theme .bg-gradient-to-br.from-blue-500 {
+            background: linear-gradient(to bottom right, #3B82F6, #1E40AF) !important;
+            color: white !important;
+        }
+
+        .light-theme .bg-gradient-to-br.from-emerald-500 {
+            background: linear-gradient(to bottom right, #10B981, #047857) !important;
+            color: white !important;
+        }
+
+        .light-theme .bg-gradient-to-br.from-purple-500 {
+            background: linear-gradient(to bottom right, #8B5CF6, #6D28D9) !important;
+            color: white !important;
+        }
+
+        /* Force progress bars to show bright colors */
+        .light-theme .h-2.bg-gradient-to-r,
+        .light-theme .h-3.bg-gradient-to-r {
+            background: linear-gradient(to right, #10B981, #3B82F6) !important;
+        }
+
+        /* Force navigation buttons to show correct gradient colors */
+        .light-theme #dashboardBtn,
+        .light-theme button[data-page="index.html"] {
+            background: linear-gradient(to right, #3B82F6, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="labs.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #10B981, #06B6D4) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="archive.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #8B5CF6, #EC4899) !important;
+            color: white !important;
+        }
+
+        .light-theme button[data-page="profile.html"].bg-gradient-to-r {
+            background: linear-gradient(to right, #F59E0B, #F97316) !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white min-h-screen font-sans transition-colors duration-300">
+
+    <!-- Header stays consistent across all pages -->
+    <header class="border-b border-slate-800/50 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-cyan rounded-xl flex items-center justify-center shadow-lg animate-glow">
+                        <span class="text-lg font-bold" role="img" aria-label="AI">🤖</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold font-headings bg-gradient-to-r from-primary via-cyan to-success bg-clip-text text-transparent tracking-tight">
+                            T&A
+                        </h1>
+                        <p class="text-xs text-slate-400 font-code tracking-wider">PROFILE SYSTEM</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden lg:flex items-center space-x-2">
+                    <button data-page="index.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Dashboard
+                    </button>
+                    <button data-page="labs.html" class="nav-link px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 font-medium shadow-lg hover:shadow-emerald-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-emerald-400/30 hover:border-emerald-400/50">
+                        Labs
+                    </button>
+                    <button data-page="profile.html" class="nav-link px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 font-medium shadow-lg hover:shadow-orange-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-orange-400/30 hover:border-orange-400/50">
+                        Profile
+                    </button>
+                    <button data-page="archive.html" class="nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950">
+                        Archive
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 relative">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-cyan/5 to-success/5 rounded-3xl blur-3xl -z-10"></div>
+
+        <!-- Profile Header -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-br from-slate-800/90 to-slate-900/70 border border-slate-700/50 rounded-3xl p-8 backdrop-blur-sm shadow-2xl">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                    <!-- Profile Image & Basic Info -->
+                    <div class="flex items-center space-x-6">
+                        <div class="w-24 h-24 bg-gradient-to-br from-primary via-cyan to-success rounded-2xl flex items-center justify-center shadow-xl animate-gentle-pulse">
+                            <span class="text-3xl" role="img" aria-label="User">👤</span>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold font-headings text-white mb-2">Dr. AI</h1>
+                            <p class="text-slate-400 mb-1 font-code">Senior AI Scientist</p>
+                            <p class="text-cyan-400 text-sm font-medium">Active Since 2024</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">127</div>
+                            <div class="text-xs text-slate-400 font-code">EXPERIMENTS</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-cyan-400">43</div>
+                            <div class="text-xs text-slate-400 font-code">PUBLICATIONS</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-success">8.9k</div>
+                            <div class="text-xs text-slate-400 font-code">CITATIONS</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-warning">96%</div>
+                            <div class="text-xs text-slate-400 font-code">SUCCESS RATE</div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Profile Button -->
+                    <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 font-medium shadow-lg hover:shadow-orange-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-orange-400/30 hover:border-orange-400/50">
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Pathways -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold font-headings text-white mb-8 flex items-center tracking-tight">
+                <span class="w-8 h-8 bg-gradient-to-r from-success to-cyan rounded-xl mr-4 flex items-center justify-center animate-gentle-pulse" role="img" aria-label="Learning">📚</span>
+                Learning Pathways
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- AI Fundamentals -->
+                <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/10 border border-blue-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-headings">AI Fundamentals</h3>
+                            <p class="text-slate-400 text-sm">Core concepts and methodologies</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Brain">🧠</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-300">Progress</span>
+                            <span class="text-cyan-400 font-medium">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-700/50 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <div class="text-xs text-slate-400">12/14 modules completed</div>
+                    </div>
+                </div>
+
+                <!-- Machine Learning -->
+                <div class="bg-gradient-to-br from-emerald-500/20 to-teal-500/10 border border-emerald-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-headings">Machine Learning</h3>
+                            <p class="text-slate-400 text-sm">Advanced ML techniques</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Robot">🤖</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-300">Progress</span>
+                            <span class="text-emerald-400 font-medium">92%</span>
+                        </div>
+                        <div class="w-full bg-slate-700/50 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                        <div class="text-xs text-slate-400">18/19 modules completed</div>
+                    </div>
+                </div>
+
+                <!-- Deep Learning -->
+                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-purple-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-headings">Deep Learning</h3>
+                            <p class="text-slate-400 text-sm">Neural networks & architectures</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Network">🕸️</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-300">Progress</span>
+                            <span class="text-purple-400 font-medium">67%</span>
+                        </div>
+                        <div class="w-full bg-slate-700/50 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 67%"></div>
+                        </div>
+                        <div class="text-xs text-slate-400">8/12 modules completed</div>
+                    </div>
+                </div>
+
+                <!-- Methods -->
+                <div class="bg-gradient-to-br from-orange-500/20 to-red-500/10 border border-orange-500/30 rounded-2xl p-6 backdrop-blur-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-headings">Methods</h3>
+                            <p class="text-slate-400 text-sm">Experimental design & analysis</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                            <span class="text-lg" role="img" aria-label="Lab">🔬</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-300">Progress</span>
+                            <span class="text-orange-400 font-medium">78%</span>
+                        </div>
+                        <div class="w-full bg-slate-700/50 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                        <div class="text-xs text-slate-400">7/9 modules completed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple theme listener for profile page - no local theme switcher
+        const savedTheme = localStorage.getItem('ai-nexus-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Listen for theme changes from dashboard
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'ai-nexus-theme') {
+                if (e.newValue === 'light') {
+                    document.body.classList.add('light-theme');
+                } else {
+                    document.body.classList.remove('light-theme');
+                }
+            }
+        });
+
+        // SPA Navigation System - Simple Version
+        class SPANavigation {
+            constructor() {
+                if (SPANavigation.instance) {
+                    return SPANavigation.instance;
+                }
+                SPANavigation.instance = this;
+                this.init();
+            }
+
+            init() {
+                this.clearEventListeners();
+                
+                // Add navigation listeners
+                const navLinks = document.querySelectorAll('[data-page]');
+                navLinks.forEach(link => {
+                    if (!link._spaListener) {
+                        link._spaListener = (e) => this.navigate(e, link.getAttribute('data-page'));
+                        link.addEventListener('click', link._spaListener);
+                    }
+                });
+            }
+
+            clearEventListeners() {
+                const navLinks = document.querySelectorAll('[data-page]');
+                navLinks.forEach(link => {
+                    if (link._spaListener) {
+                        link.removeEventListener('click', link._spaListener);
+                        delete link._spaListener;
+                    }
+                });
+            }
+
+            async navigate(event, targetPage) {
+                event.preventDefault();
+                
+                if (targetPage === 'profile.html') {
+                    return; // Already on profile page
+                }
+
+                try {
+                    const response = await fetch(targetPage);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const newDoc = parser.parseFromString(html, 'text/html');
+                    
+                    // Update main content
+                    const currentMain = document.querySelector('main');
+                    const newMain = newDoc.querySelector('main');
+                    
+                    if (currentMain && newMain) {
+                        // Preserve header - get current header HTML
+                        const currentHeader = document.querySelector('header');
+                        const currentHeaderHTML = currentHeader ? currentHeader.innerHTML : null;
+                        
+                        // Update main content
+                        currentMain.innerHTML = newMain.innerHTML;
+                        
+                        // Restore header if it was changed
+                        const headerAfterNav = document.querySelector('header');
+                        if (currentHeaderHTML && headerAfterNav && 
+                            (!headerAfterNav || headerAfterNav.innerHTML !== currentHeaderHTML)) {
+                            currentHeader.innerHTML = currentHeaderHTML;
+                        }
+                        
+                        // Update page title
+                        document.title = newDoc.title;
+                        
+                        // Update URL
+                        history.pushState({page: targetPage}, '', targetPage);
+                        
+                        // Reinitialize navigation for new content
+                        this.reinitializeNavigation();
+                    }
+                } catch (error) {
+                    console.error('Navigation failed:', error);
+                    window.location.href = targetPage;
+                }
+            }
+
+            reinitializeNavigation() {
+                this.init();
+                this.updateNavigationState('profile.html');
+            }
+
+            updateNavigationState(activePage) {
+                // Reset all nav buttons
+                const navButtons = document.querySelectorAll('nav button');
+                navButtons.forEach(btn => {
+                    if (btn.classList.contains('nav-link')) {
+                        btn.className = 'nav-link px-6 py-3 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg transition-all duration-300 font-medium backdrop-blur-sm border border-slate-700/50 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-950';
+                    }
+                });
+
+                // Highlight active page
+                if (activePage === 'profile.html') {
+                    const profileBtn = document.querySelector('[data-page="profile.html"]');
+                    if (profileBtn) {
+                        profileBtn.className = 'nav-link px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 font-medium shadow-lg hover:shadow-orange-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-950 border border-orange-400/30 hover:border-orange-400/50';
+                    }
+                }
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            if (SPANavigation.instance) {
+                SPANavigation.instance = null;
+            }
+            
+            new SPANavigation();
+            
+            // Update navigation state
+            if (SPANavigation.instance) {
+                SPANavigation.instance.updateNavigationState('profile.html');
+            }
+        });
+    </script>
+</body>
+</html>
